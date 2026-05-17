@@ -1,0 +1,44 @@
+###################################
+# Laravel
+###################################
+/.phpunit.cache
+/bootstrap/cache/*
+!/bootstrap/cache/.gitignore
+/node_modules
+/public/build
+/public/hot
+/public/storage
+/storage/*.key
+/storage/app/public/*
+!/storage/app/public/.gitignore
+/storage/framework/cache/data/*
+/storage/framework/sessions/*
+!/storage/framework/sessions/.gitignore
+/storage/framework/views/*.php
+/storage/logs/*.log
+/vendor
+.env
+.env.backup
+.env.production
+
+###################################
+# Dev tools / IDEs
+###################################
+Homestead.json
+Homestead.yaml
+auth.json
+/.fleet
+/.idea
+/.vscode
+/.windsurf
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+###################################
+# NPM / Build
+###################################
+npm-debug.log
+yarn-error.log
+package-lock.json

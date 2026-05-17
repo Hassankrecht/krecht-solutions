@@ -1,0 +1,196 @@
+/* =====================================================
+   InApp Admin Dashboard - Compiled Custom CSS
+   Variables resolved:
+   $primary:    #E66239
+   $gray-200:   #e5e5e5
+   $gray-800:   #262626
+   $white:      #ffffff
+===================================================== */
+
+/* ---- Base ---- */
+body {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.875rem;
+    background-color: #f5f5f5;
+}
+
+/* ---- Overlay ---- */
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.45);
+    backdrop-filter: blur(1px);
+    display: none;
+    z-index: 1030;
+}
+.overlay.show {
+    display: block;
+}
+
+/* ---- Sidebar ---- */
+.sidebar {
+    width: 240px;
+    background: #ffffff;
+    transition: width .3s, left .3s;
+    border-right: 1px solid #e5e5e5;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding-top: 60px;
+    z-index: 1030;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+.sidebar .nav-link {
+    color: #262626;
+    padding: 8px 10px;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 400;
+    gap: 12px;
+    white-space: nowrap;
+    margin: 1px 12px;
+    border-radius: 8px;
+}
+.sidebar .nav-link:hover {
+    color: #E66239;
+    background-color: rgba(230, 98, 57, 0.095);
+}
+.sidebar .nav-link.active {
+    color: #E66239;
+    background-color: rgba(230, 98, 57, 0.095);
+}
+.sidebar .nav-link .ti {
+    font-size: 18px;
+}
+.sidebar .nav-text {
+    transition: opacity .2s;
+}
+.sidebar .logo-area {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 60px;
+    width: 100%;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-left: 17px;
+    color: #262626;
+    border-bottom: 1px solid #e5e5e5;
+}
+.sidebar.collapsed {
+    width: 60px;
+}
+.sidebar.collapsed .nav-link {
+    margin: 0;
+    background-color: transparent;
+    padding: 8px 18px;
+}
+.sidebar.collapsed .nav-text {
+    display: none;
+}
+.sidebar.collapsed .logo-text {
+    display: none;
+}
+
+/* ---- Topbar ---- */
+.topbar {
+    height: 60px;
+    margin-left: 240px;
+}
+.topbar.full {
+    margin-left: 60px;
+}
+
+/* ---- Content area ---- */
+.content {
+    margin-left: 240px;
+    padding-top: 60px;
+}
+.content.full {
+    margin-left: 60px;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 992px) {
+    .sidebar {
+        left: -240px;
+    }
+    .sidebar.mobile-show {
+        left: 0;
+    }
+    .topbar {
+        margin-left: 0 !important;
+        width: 100% !important;
+    }
+    .content {
+        margin-left: 0 !important;
+    }
+}
+
+/* ---- Avatar ---- */
+.avatar {
+    position: relative;
+    display: inline-block;
+    width: 3rem;
+    height: 3rem;
+}
+.avatar-xs  { width: 1.5rem; height: 1.5rem; }
+.avatar-sm  { width: 2rem;   height: 2rem; }
+.avatar-md  { width: 2.5rem; height: 2.5rem; }
+.avatar-lg  { width: 3.5rem; height: 3.5rem; }
+.avatar-xl  { width: 5rem;   height: 5rem; }
+.avatar-xxl { width: 7.5rem; height: 7.5rem; }
+.avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.avatar-group .avatar + .avatar { margin-left: -1.2rem; }
+.avatar-group .avatar:hover { z-index: 2; }
+.avatar-group img,
+.avatar-group .avatar .avatar-initials {
+    border: 2px solid #ffffff;
+}
+
+/* ---- Button Icon ---- */
+.btn-icon {
+    position: relative;
+    display: inline-flex;
+    flex-shrink: 0;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.92969rem;
+    font-weight: 400;
+    width: 2.5rem;
+    height: 2.5rem;
+    padding: 0;
+}
+.btn-icon.btn-xs { font-size: 0.75rem;  width: 1.75rem;    height: 1.75rem; }
+.btn-icon.btn-sm { font-size: 0.875rem; width: 2.1875rem;  height: 2.1875rem; }
+.btn-icon.btn-lg { font-size: 1rem;     width: 3.36875rem; height: 3.36875rem; }
+
+/* ---- Icon Shape ---- */
+.icon-xxs  { width: 1rem;  height: 1rem;  line-height: 1rem; }
+.icon-xs   { width: 1.5rem; height: 1.5rem; line-height: 1.5rem; }
+.icon-sm   { width: 2rem;  height: 2rem;  line-height: 2rem; }
+.icon-md   { width: 2.5rem; height: 2.5rem; line-height: 2.5rem; }
+.icon-lg   { width: 3rem;  height: 3rem;  line-height: 3rem; }
+.icon-xl   { width: 3.5rem; height: 3.5rem; line-height: 3.5rem; }
+.icon-xxl  { width: 4rem;  height: 4rem;  line-height: 4rem; }
+.icon-xxxl { width: 7rem;  height: 7rem;  line-height: 7rem; }
+.icon-shape {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    vertical-align: middle;
+}
+
+/* ---- Misc utilities ---- */
+.border-dashed { border-style: dashed !important; }
+.dropdown-menu-md { min-width: 18rem; }
