@@ -9,12 +9,23 @@ class ProjectSeeder extends Seeder
 {
     public function run(): void
     {
+        $keepTitles = [
+            'Albasha Restaurant',
+            'Dashboard System',
+            'Retail POS System',
+            'Business Management System',
+            'Flutter Mobile App',
+            'Web Application Platform',
+        ];
+
+        Project::whereNotIn('title', $keepTitles)->delete();
+
         $projects = [
             [
-                'title'       => 'Albasha Restaurant',
-                'description' => 'Full-stack restaurant management platform featuring a customer-facing website with multi-language support, online table booking, food ordering, and a comprehensive admin panel with POS, kitchen management, and analytics.',
-                'category'    => 'Websites',
-                'image'       => 'assets/projects/Albasha restaurant/Screenshot 2026-05-18 150926.png',
+                'title'          => 'Albasha Restaurant',
+                'description'    => 'Full-stack restaurant management platform featuring a customer-facing website with multi-language support, online table booking, food ordering, and a comprehensive admin panel with POS, kitchen management, and real-time analytics.',
+                'category'       => 'Websites',
+                'image'          => 'assets/projects/Albasha restaurant/Screenshot 2026-05-18 150926.png',
                 'gallery_images' => [
                     'assets/projects/Albasha restaurant/Hero banner lang list.png',
                     'assets/projects/Albasha restaurant/food menu page.png',
@@ -29,109 +40,65 @@ class ProjectSeeder extends Seeder
                     'assets/projects/Albasha restaurant/contact page.png',
                     'assets/projects/Albasha restaurant/footer.png',
                 ],
-                'video'        => 'assets/projects/Albasha restaurant/Albasha videos show.mp4',
-                'technologies' => 'Laravel, Vue.js, MySQL, Bootstrap',
-                'is_active'    => true,
-                'order'        => 1,
+                'video'          => 'assets/projects/Albasha restaurant/Albasha videos show.mp4',
+                'technologies'   => 'Laravel, Vue.js, MySQL, Bootstrap',
+                'is_active'      => true,
+                'order'          => 1,
             ],
             [
-                'title'       => 'E-Commerce Platform',
-                'description' => 'Full-featured online store with payment integration and inventory management.',
-                'category'    => 'Websites',
-                'image'       => null,
+                'title'          => 'Dashboard System',
+                'description'    => 'Real-time business analytics dashboard with interactive charts, KPI tracking, and customizable reporting modules for data-driven decisions.',
+                'category'       => 'Dashboards',
+                'image'          => null,
                 'gallery_images' => null,
-                'video'       => null,
-                'technologies' => 'Laravel, Vue.js, MySQL',
-                'is_active'    => true,
-                'order'        => 2,
+                'video'          => null,
+                'technologies'   => 'Laravel, Vue.js, Chart.js, MySQL',
+                'is_active'      => true,
+                'order'          => 2,
             ],
             [
-                'title'       => 'Food Delivery App',
-                'description' => 'Cross-platform mobile app for food ordering and delivery tracking.',
-                'category'    => 'Mobile Apps',
-                'image'       => null,
+                'title'          => 'Retail POS System',
+                'description'    => 'Complete point-of-sale solution with barcode scanning, inventory management, multi-branch support, and detailed sales reporting.',
+                'category'       => 'POS Systems',
+                'image'          => null,
                 'gallery_images' => null,
-                'video'       => null,
-                'technologies' => 'React Native, Node.js',
-                'is_active'    => true,
-                'order'        => 3,
+                'video'          => null,
+                'technologies'   => 'Laravel, Vue.js, MySQL',
+                'is_active'      => true,
+                'order'          => 3,
             ],
             [
-                'title'       => 'Business Analytics Dashboard',
-                'description' => 'Real-time analytics dashboard for business performance monitoring.',
-                'category'    => 'Dashboards',
-                'image'       => null,
+                'title'          => 'Business Management System',
+                'description'    => 'Comprehensive ERP-style platform covering HR, inventory, accounting, and operations management in a single integrated system.',
+                'category'       => 'Business Systems',
+                'image'          => null,
                 'gallery_images' => null,
-                'video'       => null,
-                'technologies' => 'Laravel, Chart.js, MySQL',
-                'is_active'    => true,
-                'order'        => 4,
+                'video'          => null,
+                'technologies'   => 'Laravel, MySQL, Bootstrap',
+                'is_active'      => true,
+                'order'          => 4,
             ],
             [
-                'title'       => 'Retail POS System',
-                'description' => 'Complete point of sale system for retail stores with barcode scanning.',
-                'category'    => 'POS Systems',
-                'image'       => null,
+                'title'          => 'Flutter Mobile App',
+                'description'    => 'Cross-platform mobile application built with Flutter, delivering native-like performance and a polished UI on both iOS and Android.',
+                'category'       => 'Mobile Apps',
+                'image'          => null,
                 'gallery_images' => null,
-                'video'       => null,
-                'technologies' => 'Laravel, Vue.js',
-                'is_active'    => true,
-                'order'        => 5,
+                'video'          => null,
+                'technologies'   => 'Flutter, Dart, Firebase',
+                'is_active'      => true,
+                'order'          => 5,
             ],
             [
-                'title'       => 'Inventory Management System',
-                'description' => 'Advanced stock tracking and warehouse management solution.',
-                'category'    => 'Business Systems',
-                'image'       => null,
+                'title'          => 'Web Application Platform',
+                'description'    => 'Scalable multi-tenant web platform with role-based access control, REST API integrations, and a modern responsive interface.',
+                'category'       => 'Websites',
+                'image'          => null,
                 'gallery_images' => null,
-                'video'       => null,
-                'technologies' => 'Laravel, MySQL',
-                'is_active'    => true,
-                'order'        => 6,
-            ],
-            [
-                'title'       => 'Corporate Website',
-                'description' => 'Professional corporate website with CMS and multilingual support.',
-                'category'    => 'Websites',
-                'image'       => null,
-                'gallery_images' => null,
-                'video'       => null,
-                'technologies' => 'Laravel, TailwindCSS',
-                'is_active'    => true,
-                'order'        => 7,
-            ],
-            [
-                'title'       => 'Healthcare App',
-                'description' => 'Patient management and appointment scheduling mobile application.',
-                'category'    => 'Mobile Apps',
-                'image'       => null,
-                'gallery_images' => null,
-                'video'       => null,
-                'technologies' => 'Flutter, Firebase',
-                'is_active'    => true,
-                'order'        => 8,
-            ],
-            [
-                'title'       => 'Restaurant POS',
-                'description' => 'Specialized POS system for restaurants with table management.',
-                'category'    => 'POS Systems',
-                'image'       => null,
-                'gallery_images' => null,
-                'video'       => null,
-                'technologies' => 'Laravel, Vue.js',
-                'is_active'    => true,
-                'order'        => 9,
-            ],
-            [
-                'title'       => 'Accounting Software',
-                'description' => 'Comprehensive accounting and financial reporting system.',
-                'category'    => 'Business Systems',
-                'image'       => null,
-                'gallery_images' => null,
-                'video'       => null,
-                'technologies' => 'Laravel, MySQL',
-                'is_active'    => true,
-                'order'        => 10,
+                'video'          => null,
+                'technologies'   => 'Laravel, Vue.js, TailwindCSS',
+                'is_active'      => true,
+                'order'          => 6,
             ],
         ];
 
@@ -139,37 +106,20 @@ class ProjectSeeder extends Seeder
             $existing = Project::where('title', $project['title'])->first();
 
             if ($existing) {
-                $updateData = array_filter([
-                    'description'    => $project['description'],
-                    'category'       => $project['category'],
-                    'technologies'   => $project['technologies'],
-                    'is_active'      => $project['is_active'],
-                    'order'          => $project['order'],
-                ], fn($v) => $v !== null);
-
-                if (!$existing->image && $project['image']) {
-                    $updateData['image'] = $project['image'];
-                }
-                if (empty($existing->gallery_images) && $project['gallery_images']) {
-                    $updateData['gallery_images'] = $project['gallery_images'];
-                }
-                if (!$existing->video && $project['video']) {
-                    $updateData['video'] = $project['video'];
-                }
+                $updateData = [
+                    'description'  => $project['description'],
+                    'category'     => $project['category'],
+                    'technologies' => $project['technologies'],
+                    'is_active'    => $project['is_active'],
+                    'order'        => $project['order'],
+                    'image'        => $project['image'],
+                    'gallery_images' => $project['gallery_images'],
+                    'video'        => $project['video'],
+                ];
 
                 $existing->update($updateData);
             } else {
-                Project::create([
-                    'title'          => $project['title'],
-                    'description'    => $project['description'],
-                    'category'       => $project['category'],
-                    'image'          => $project['image'],
-                    'gallery_images' => $project['gallery_images'],
-                    'video'          => $project['video'],
-                    'technologies'   => $project['technologies'],
-                    'is_active'      => $project['is_active'],
-                    'order'          => $project['order'],
-                ]);
+                Project::create($project);
             }
         }
     }

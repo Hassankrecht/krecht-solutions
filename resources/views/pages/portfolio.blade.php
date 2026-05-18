@@ -33,9 +33,38 @@
 
             <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
                 @if($projects && $projects->count() > 0)
+                    @php
+                        $categoryIcons = [
+                            'Websites'         => 'bi-globe2',
+                            'Dashboards'       => 'bi-speedometer2',
+                            'POS Systems'      => 'bi-receipt-cutoff',
+                            'Business Systems' => 'bi-briefcase',
+                            'Mobile Apps'      => 'bi-phone',
+                        ];
+                        $categoryGradients = [
+                            'Websites'         => 'linear-gradient(135deg,#0f2027,#203a43,#2c5364)',
+                            'Dashboards'       => 'linear-gradient(135deg,#0d1b2a,#1b2838,#1b4f72)',
+                            'POS Systems'      => 'linear-gradient(135deg,#1a1a2e,#16213e,#0f3460)',
+                            'Business Systems' => 'linear-gradient(135deg,#0f1923,#1c2b3a,#274a6e)',
+                            'Mobile Apps'      => 'linear-gradient(135deg,#1a0533,#2d1157,#4a1b8c)',
+                        ];
+                    @endphp
                     @foreach($projects as $index => $project)
+                        @php
+                            $icon     = $categoryIcons[$project->category]     ?? 'bi-code-square';
+                            $gradient = $categoryGradients[$project->category] ?? 'linear-gradient(135deg,#1a1a2e,#16213e,#0f3460)';
+                        @endphp
                         <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-{{ Str::slug($project->category) }}">
-                            <img src="{{ $project->image ? asset($project->image) : asset('assets/img/portfolio/portfolio-1.webp') }}" class="img-fluid" alt="">
+                            @if($project->image)
+                                <img src="{{ asset($project->image) }}" class="img-fluid" alt="{{ $project->title }}">
+                            @else
+                                <div class="portfolio-placeholder" style="background:{{ $gradient }}">
+                                    <div class="placeholder-inner">
+                                        <i class="bi {{ $icon }}"></i>
+                                        <span class="cs-badge">Coming Soon</span>
+                                    </div>
+                                </div>
+                            @endif
                             <div class="portfolio-info">
                                 <h4>{{ $project->title }}</h4>
                                 <p>{{ $project->category }}</p>

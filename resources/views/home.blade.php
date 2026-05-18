@@ -493,9 +493,38 @@
 
           <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
             @if($projects && $projects->count() > 0)
+              @php
+                $categoryIcons = [
+                  'Websites'         => 'bi-globe2',
+                  'Dashboards'       => 'bi-speedometer2',
+                  'POS Systems'      => 'bi-receipt-cutoff',
+                  'Business Systems' => 'bi-briefcase',
+                  'Mobile Apps'      => 'bi-phone',
+                ];
+                $categoryGradients = [
+                  'Websites'         => 'linear-gradient(135deg,#0f2027,#203a43,#2c5364)',
+                  'Dashboards'       => 'linear-gradient(135deg,#0d1b2a,#1b2838,#1b4f72)',
+                  'POS Systems'      => 'linear-gradient(135deg,#1a1a2e,#16213e,#0f3460)',
+                  'Business Systems' => 'linear-gradient(135deg,#0f1923,#1c2b3a,#274a6e)',
+                  'Mobile Apps'      => 'linear-gradient(135deg,#1a0533,#2d1157,#4a1b8c)',
+                ];
+              @endphp
               @foreach($projects as $index => $project)
+                @php
+                  $icon     = $categoryIcons[$project->category]     ?? 'bi-code-square';
+                  $gradient = $categoryGradients[$project->category] ?? 'linear-gradient(135deg,#1a1a2e,#16213e,#0f3460)';
+                @endphp
                 <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-{{ Str::slug($project->category) }}">
-                  <img src="{{ $project->image ? asset($project->image) : asset('assets/img/portfolio/portfolio-1.webp') }}" class="img-fluid" alt="">
+                  @if($project->image)
+                    <img src="{{ asset($project->image) }}" class="img-fluid" alt="{{ $project->title }}">
+                  @else
+                    <div class="portfolio-placeholder" style="background:{{ $gradient }}">
+                      <div class="placeholder-inner">
+                        <i class="bi {{ $icon }}"></i>
+                        <span class="cs-badge">Coming Soon</span>
+                      </div>
+                    </div>
+                  @endif
                   <div class="portfolio-info">
                     <h4>{{ $project->title }}</h4>
                     <p>{{ $project->category }}</p>
@@ -530,32 +559,61 @@
       </div><!-- End Section Title -->
 
       <div class="container">
+        @if($pricingPackages && $pricingPackages->count() > 0)
+          @php
+            $categories = [
+              'Web Solutions',
+              'Mobile Applications',
+              'POS & Business Systems',
+              'Support & Maintenance'
+            ];
+          @endphp
 
-        <div class="row gy-4">
-          @if($pricingPackages && $pricingPackages->count() > 0)
-            @foreach($pricingPackages as $index => $package)
-              <div class="col-lg-4" data-aos="zoom-in" data-aos-delay="{{ ($index + 1) * 100 }}">
-                <div class="pricing-item {{ $package->is_featured ? 'featured' : '' }}">
-                  <h3>{{ $package->name }}</h3>
-                  <h4>{{ $package->price }}</h4>
-                  <ul>
-                    @if(is_array($package->features))
-                      @foreach($package->features as $feature)
-                        <li><i class="bi bi-check"></i> <span>{{ $feature }}</span></li>
-                      @endforeach
-                    @endif
-                  </ul>
-                  <a href="{{ route('contact') }}" class="buy-btn">Get Started</a>
+          @foreach($categories as $category)
+            @php
+              $categoryPackages = $pricingPackages->where('category', $category)->sortBy('order');
+            @endphp
+
+            @if($categoryPackages->count() > 0)
+              <div class="category-section mb-5">
+                <h3 class="category-title text-center mb-4">{{ $category }}</h3>
+                <div class="row gy-4">
+                  @foreach($categoryPackages as $index => $package)
+                    <div class="col-lg-4" data-aos="zoom-in" data-aos-delay="{{ ($index + 1) * 100 }}">
+                      <div class="pricing-item {{ $package->is_featured ? 'featured' : '' }} {{ $package->price === 'Coming Soon' ? 'coming-soon' : '' }}">
+                        <h3>{{ $package->name }}</h3>
+                        <h4>{{ $package->price }}</h4>
+                        <ul>
+                          @if(is_array($package->features))
+                            @foreach($package->features as $feature)
+                              <li><i class="bi bi-check"></i> <span>{{ $feature }}</span></li>
+                            @endforeach
+                          @endif
+                        </ul>
+                        @if($package->price === 'Coming Soon')
+                          <a href="{{ route('contact') }}" class="buy-btn">Notify Me</a>
+                        @else
+                          <a href="{{ route('contact') }}" class="buy-btn">Get Started</a>
+                        @endif
+                      </div>
+                    </div><!-- End Pricing Item -->
+                  @endforeach
                 </div>
-              </div><!-- End Pricing Item -->
-            @endforeach
-          @else
-            <div class="col-12 text-center">
-              <p>No pricing packages available yet. Contact us for a custom quote.</p>
-            </div>
-          @endif
-        </div>
+              </div>
+            @endif
+          @endforeach
 
+          <!-- Support Note -->
+          <div class="support-note mt-5 text-center">
+            <p class="text-muted small mb-0">
+              <em>All projects include an initial support period after delivery. Clients may also choose optional monthly or annual maintenance plans for ongoing updates, monitoring, and technical support.</em>
+            </p>
+          </div>
+        @else
+          <div class="col-12 text-center">
+            <p>No pricing packages available yet. Contact us for a custom quote.</p>
+          </div>
+        @endif
       </div>
 
     </section><!-- /Pricing Section -->
