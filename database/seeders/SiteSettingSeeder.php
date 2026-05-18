@@ -31,13 +31,33 @@ class SiteSettingSeeder extends Seeder
                 'type' => 'text',
             ],
             [
+                'key' => 'contact_notification_email',
+                'value' => env('MAIL_USERNAME', 'info@krecht-solutions.com'),
+                'type' => 'text',
+            ],
+            [
                 'key' => 'contact_phone',
-                'value' => '+1 555 123 4567',
+                'value' => '78768725',
                 'type' => 'text',
             ],
             [
                 'key' => 'contact_address',
-                'value' => '123 Business Avenue, Tech City, TC 12345',
+                'value' => 'Sour, Lebanon',
+                'type' => 'text',
+            ],
+            [
+                'key' => 'contact_whatsapp',
+                'value' => 'Available',
+                'type' => 'text',
+            ],
+            [
+                'key' => 'contact_working_hours',
+                'value' => 'Monday - Sunday, 9:00 AM - 5:00 PM',
+                'type' => 'text',
+            ],
+            [
+                'key' => 'footer_working_hours',
+                'value' => 'Mon - Sun | 9 AM - 5 PM',
                 'type' => 'text',
             ],
             [

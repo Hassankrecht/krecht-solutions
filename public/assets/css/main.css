@@ -575,7 +575,7 @@ h6 {
 }
 
 .footer .footer-top {
-  padding-top: 50px;
+  padding-top: 44px;
 }
 
 .footer .social-links a {
@@ -650,7 +650,7 @@ h6 {
 }
 
 .footer .footer-contact p {
-  margin-bottom: 5px;
+  margin-bottom: 6px;
 }
 
 .footer .copyright {
@@ -1964,6 +1964,34 @@ section,
 
 .testimonials .swiper-pagination .swiper-pagination-bullet-active {
   background-color: var(--accent-color);
+}
+
+.testimonials .testimonial-submit {
+  border-top: 1px solid color-mix(in srgb, var(--default-color), transparent 88%);
+  padding-top: 40px;
+}
+
+.testimonials .testimonial-form .form-control,
+.testimonials .testimonial-form .form-select {
+  border-radius: 4px;
+  box-shadow: none;
+  font-size: 14px;
+  padding: 10px 15px;
+}
+
+.testimonials .btn-submit-testimonial {
+  background: var(--accent-color);
+  border: 0;
+  border-radius: 50px;
+  color: var(--contrast-color);
+  font-family: var(--heading-font);
+  font-weight: 500;
+  padding: 10px 32px;
+  transition: 0.3s;
+}
+
+.testimonials .btn-submit-testimonial:hover {
+  background: color-mix(in srgb, var(--accent-color), transparent 15%);
 }
 
 @media (min-width: 992px) {

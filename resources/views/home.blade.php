@@ -595,28 +595,30 @@
 
       <div class="container" data-aos="fade-up" data-aos-delay="100">
 
-        <div class="swiper init-swiper">
-          <script type="application/json" class="swiper-config">
-            {
-              "loop": true,
-              "speed": 600,
-              "autoplay": {
-                "delay": 5000
-              },
-              "slidesPerView": "auto",
-              "pagination": {
-                "el": ".swiper-pagination",
-                "type": "bullets",
-                "clickable": true
+        @if($testimonials && $testimonials->count() > 0)
+          <div class="swiper init-swiper">
+            <script type="application/json" class="swiper-config">
+              {
+                "loop": true,
+                "speed": 600,
+                "autoplay": {
+                  "delay": 5000
+                },
+                "slidesPerView": "auto",
+                "pagination": {
+                  "el": ".swiper-pagination",
+                  "type": "bullets",
+                  "clickable": true
+                }
               }
-            }
-          </script>
-          <div class="swiper-wrapper">
-            @if($testimonials && $testimonials->count() > 0)
+            </script>
+            <div class="swiper-wrapper">
               @foreach($testimonials as $testimonial)
                 <div class="swiper-slide">
                   <div class="testimonial-item">
-                    <img src="{{ $testimonial->image ? asset($testimonial->image) : asset('assets/img/person/person-m-9.webp') }}" class="testimonial-img" alt="">
+                    @if($testimonial->image)
+                      <img src="{{ asset($testimonial->image) }}" class="testimonial-img" alt="{{ $testimonial->name }}">
+                    @endif
                     <h3>{{ $testimonial->name }}</h3>
                     <h4>{{ $testimonial->position }}{{ $testimonial->company ? ' at ' . $testimonial->company : '' }}</h4>
                     <div class="stars">
@@ -632,25 +634,89 @@
                   </div>
                 </div><!-- End testimonial item -->
               @endforeach
-            @else
-              <div class="swiper-slide">
-                <div class="testimonial-item">
-                  <img src="{{ asset('assets/img/person/person-m-9.webp') }}" class="testimonial-img" alt="">
-                  <h3>Client Name</h3>
-                  <h4>Position at Company</h4>
-                  <div class="stars">
-                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                  </div>
-                  <p>
-                    <i class="bi bi-quote quote-icon-left"></i>
-                    <span>No testimonials available yet. Be the first to share your experience!</span>
-                    <i class="bi bi-quote quote-icon-right"></i>
-                  </p>
-                </div>
-              </div>
-            @endif
+            </div>
+            <div class="swiper-pagination"></div>
           </div>
-          <div class="swiper-pagination"></div>
+        @else
+          <div class="text-center text-muted mb-5">
+            <p class="mb-0">No approved testimonials are available yet.</p>
+          </div>
+        @endif
+
+        <div class="testimonial-submit mt-5">
+          <div class="row justify-content-center">
+            <div class="col-lg-8">
+              <div class="text-center mb-4">
+                <button class="btn-submit-testimonial" type="button" data-bs-toggle="collapse" data-bs-target="#testimonialForm" aria-expanded="{{ $errors->any() || session('testimonial_success') ? 'true' : 'false' }}" aria-controls="testimonialForm">
+                  Add Your Testimonial
+                </button>
+              </div>
+
+              @if(session('testimonial_success'))
+                <div class="alert alert-success" role="alert">
+                  {{ session('testimonial_success') }}
+                </div>
+              @endif
+
+              <div class="collapse {{ $errors->any() || session('testimonial_success') ? 'show' : '' }}" id="testimonialForm">
+                <form action="{{ route('testimonials.store') }}" method="POST" enctype="multipart/form-data" class="testimonial-form">
+                  @csrf
+                  <div class="row gy-3">
+                    <div class="col-md-6">
+                      <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" placeholder="Client name" required>
+                      @error('name')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                      @enderror
+                    </div>
+                    <div class="col-md-6">
+                      <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}" placeholder="Email" required>
+                      @error('email')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                      @enderror
+                    </div>
+                    <div class="col-md-6">
+                      <input type="text" name="position" class="form-control @error('position') is-invalid @enderror" value="{{ old('position') }}" placeholder="Position">
+                      @error('position')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                      @enderror
+                    </div>
+                    <div class="col-md-6">
+                      <input type="text" name="company" class="form-control @error('company') is-invalid @enderror" value="{{ old('company') }}" placeholder="Company">
+                      @error('company')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                      @enderror
+                    </div>
+                    <div class="col-md-6">
+                      <select name="rating" class="form-select @error('rating') is-invalid @enderror" required>
+                        <option value="">Rating</option>
+                        @for($i = 5; $i >= 1; $i--)
+                          <option value="{{ $i }}" @selected(old('rating') == $i)>{{ $i }} Star{{ $i > 1 ? 's' : '' }}</option>
+                        @endfor
+                      </select>
+                      @error('rating')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                      @enderror
+                    </div>
+                    <div class="col-md-6">
+                      <input type="file" name="image" class="form-control @error('image') is-invalid @enderror" accept="image/jpeg,image/png,image/webp">
+                      @error('image')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                      @enderror
+                    </div>
+                    <div class="col-12">
+                      <textarea name="message" rows="5" class="form-control @error('message') is-invalid @enderror" placeholder="Testimonial message" required>{{ old('message') }}</textarea>
+                      @error('message')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                      @enderror
+                    </div>
+                    <div class="col-12 text-center">
+                      <button type="submit" class="btn-submit-testimonial">Submit Testimonial</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
         </div>
 
       </div>
@@ -678,7 +744,7 @@
                 <i class="bi bi-geo-alt flex-shrink-0"></i>
                 <div>
                   <h3>Address</h3>
-                  <p>{{ \App\Models\SiteSetting::get('contact_address', '123 Business Avenue, Tech City, TC 12345') }}</p>
+                  <p>{{ \App\Models\SiteSetting::get('contact_address', 'Sour, Lebanon') }}</p>
                 </div>
               </div><!-- End Info Item -->
 
@@ -686,24 +752,31 @@
                 <i class="bi bi-telephone flex-shrink-0"></i>
                 <div>
                   <h3>Call Us</h3>
-                  <p>{{ \App\Models\SiteSetting::get('contact_phone', '+1 555 123 4567') }}</p>
+                  <p>{{ \App\Models\SiteSetting::get('contact_phone', '78768725') }}</p>
                 </div>
               </div><!-- End Info Item -->
 
               <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="400">
-                <i class="bi bi-envelope flex-shrink-0"></i>
+                <i class="bi bi-whatsapp flex-shrink-0"></i>
                 <div>
-                  <h3>Email Us</h3>
-                  <p>{{ \App\Models\SiteSetting::get('contact_email', 'info@krecht-solutions.com') }}</p>
+                  <h3>WhatsApp</h3>
+                  <p>{{ \App\Models\SiteSetting::get('contact_whatsapp', 'Available') }}</p>
                 </div>
               </div><!-- End Info Item -->
 
               <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="500">
                 <i class="bi bi-clock flex-shrink-0"></i>
                 <div>
-                  <h3>Open Hours</h3>
-                  <p><strong>Mon-Fri:</strong> 9AM - 6PM;
-                  <strong>Sat-Sun:</strong> Closed</p>
+                  <h3>Working Hours</h3>
+                  <p>{{ \App\Models\SiteSetting::get('contact_working_hours', 'Monday - Sunday, 9:00 AM - 5:00 PM') }}</p>
+                </div>
+              </div><!-- End Info Item -->
+
+              <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="600">
+                <i class="bi bi-envelope flex-shrink-0"></i>
+                <div>
+                  <h3>Email Us</h3>
+                  <p>{{ \App\Models\SiteSetting::get('contact_email', config('mail.from.address')) }}</p>
                 </div>
               </div><!-- End Info Item -->
 

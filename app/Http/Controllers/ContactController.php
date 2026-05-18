@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\ContactMessage;
 use App\Models\SiteSetting;
+use App\Mail\ContactMessageNotification;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 
 class ContactController extends Controller
 {
@@ -12,16 +15,20 @@ class ContactController extends Controller
     {
         $siteName = SiteSetting::get('site_name', 'Krecht Solutions');
         $siteTagline = SiteSetting::get('site_tagline', 'Software & IT Services');
-        $contactEmail = SiteSetting::get('contact_email', 'info@krecht-solutions.com');
-        $contactPhone = SiteSetting::get('contact_phone', '+1 555 123 4567');
-        $contactAddress = SiteSetting::get('contact_address', '123 Business Avenue, Tech City, TC 12345');
+        $contactEmail = SiteSetting::get('contact_email', config('mail.from.address'));
+        $contactPhone = SiteSetting::get('contact_phone', '78768725');
+        $contactAddress = SiteSetting::get('contact_address', 'Sour, Lebanon');
+        $contactWhatsapp = SiteSetting::get('contact_whatsapp', 'Available');
+        $contactWorkingHours = SiteSetting::get('contact_working_hours', 'Monday - Sunday, 9:00 AM - 5:00 PM');
         
         return view('pages.contact', compact(
             'siteName',
             'siteTagline',
             'contactEmail',
             'contactPhone',
-            'contactAddress'
+            'contactAddress',
+            'contactWhatsapp',
+            'contactWorkingHours'
         ));
     }
 
@@ -35,8 +42,24 @@ class ContactController extends Controller
             'message' => 'required|string|max:5000',
         ]);
 
-        ContactMessage::create($validated);
+        $contactMessage = ContactMessage::create($validated);
 
-        return redirect()->back()->with('success', 'Thank you for your message! We will get back to you soon.');
+        try {
+            $recipient = SiteSetting::get(
+                'contact_notification_email',
+                config('mail.mailers.smtp.username') ?: SiteSetting::get('contact_email', config('mail.from.address'))
+            );
+
+            if ($recipient) {
+                Mail::to($recipient)->send(new ContactMessageNotification($contactMessage));
+            }
+        } catch (\Throwable $exception) {
+            Log::error('Contact message email notification failed.', [
+                'contact_message_id' => $contactMessage->id,
+                'error' => $exception->getMessage(),
+            ]);
+        }
+
+        return redirect()->back()->with('success', 'Your message has been sent successfully.');
     }
 }

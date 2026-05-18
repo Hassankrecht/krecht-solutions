@@ -10,7 +10,11 @@ class TestimonialController extends Controller
 {
     public function index()
     {
-        $testimonials = Testimonial::orderBy('order')->orderBy('id')->paginate(15);
+        $testimonials = Testimonial::orderByRaw("CASE status WHEN 'pending' THEN 0 WHEN 'approved' THEN 1 ELSE 2 END")
+            ->ordered()
+            ->orderBy('id', 'desc')
+            ->paginate(15);
+
         return view('admin.testimonials.index', compact('testimonials'));
     }
 
@@ -25,21 +29,29 @@ class TestimonialController extends Controller
             'name'      => 'required|string|max:255',
             'position'  => 'nullable|string|max:255',
             'company'   => 'nullable|string|max:255',
+            'email'     => 'nullable|email|max:255',
             'content'   => 'required|string',
-            'rating'    => 'integer|min:1|max:5',
+            'rating'    => 'required|integer|min:1|max:5',
             'image'     => 'nullable|string|max:500',
+            'status'    => 'required|in:pending,approved,rejected',
             'is_active' => 'boolean',
             'order'     => 'integer|min:0',
+            'sort_order' => 'integer|min:0',
         ]);
 
         $validated['is_active'] = $request->boolean('is_active');
-        $validated['rating']    = $validated['rating'] ?? 5;
         $validated['order']     = $validated['order'] ?? 0;
+        $validated['sort_order'] = $validated['sort_order'] ?? $validated['order'];
 
         Testimonial::create($validated);
 
         return redirect()->route('admin.testimonials.index')
             ->with('success', 'Testimonial created successfully.');
+    }
+
+    public function show(Testimonial $testimonial)
+    {
+        return view('admin.testimonials.show', compact('testimonial'));
     }
 
     public function edit(Testimonial $testimonial)
@@ -53,21 +65,40 @@ class TestimonialController extends Controller
             'name'      => 'required|string|max:255',
             'position'  => 'nullable|string|max:255',
             'company'   => 'nullable|string|max:255',
+            'email'     => 'nullable|email|max:255',
             'content'   => 'required|string',
-            'rating'    => 'integer|min:1|max:5',
+            'rating'    => 'required|integer|min:1|max:5',
             'image'     => 'nullable|string|max:500',
+            'status'    => 'required|in:pending,approved,rejected',
             'is_active' => 'boolean',
             'order'     => 'integer|min:0',
+            'sort_order' => 'integer|min:0',
         ]);
 
         $validated['is_active'] = $request->boolean('is_active');
-        $validated['rating']    = $validated['rating'] ?? 5;
         $validated['order']     = $validated['order'] ?? 0;
+        $validated['sort_order'] = $validated['sort_order'] ?? $validated['order'];
 
         $testimonial->update($validated);
 
         return redirect()->route('admin.testimonials.index')
             ->with('success', 'Testimonial updated successfully.');
+    }
+
+    public function approve(Testimonial $testimonial)
+    {
+        $testimonial->approve();
+
+        return redirect()->back()
+            ->with('success', 'Testimonial approved successfully.');
+    }
+
+    public function reject(Testimonial $testimonial)
+    {
+        $testimonial->reject();
+
+        return redirect()->back()
+            ->with('success', 'Testimonial rejected successfully.');
     }
 
     public function destroy(Testimonial $testimonial)

@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\TestimonialSubmissionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +26,7 @@ Route::get('/portfolio', [PageController::class, 'portfolio'])->name('portfolio'
 Route::get('/portfolio/{project}', [PageController::class, 'portfolioShow'])->name('portfolio.show');
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 Route::post('/contact', [ContactController::class, 'store'])->middleware('throttle:5,1')->name('contact.store');
+Route::post('/testimonials', [TestimonialSubmissionController::class, 'store'])->middleware('throttle:3,1')->name('testimonials.store');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

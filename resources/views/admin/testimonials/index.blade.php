@@ -30,10 +30,10 @@
                     <th>#</th>
                     <th>Name</th>
                     <th>Position / Company</th>
+                    <th>Email</th>
                     <th>Content</th>
                     <th>Rating</th>
                     <th>Status</th>
-                    <th>Order</th>
                     <th class="text-end">Actions</th>
                 </tr>
             </thead>
@@ -43,9 +43,16 @@
                         <td class="text-muted small">{{ $testimonial->id }}</td>
                         <td class="fw-semibold">{{ $testimonial->name }}</td>
                         <td class="small text-muted">
-                            {{ $testimonial->position }}
+                            {{ $testimonial->position ?: '—' }}
                             @if($testimonial->company)
                                 <br>{{ $testimonial->company }}
+                            @endif
+                        </td>
+                        <td class="small">
+                            @if($testimonial->email)
+                                <a href="mailto:{{ $testimonial->email }}">{{ $testimonial->email }}</a>
+                            @else
+                                <span class="text-muted">—</span>
                             @endif
                         </td>
                         <td class="small text-muted">{{ Str::limit($testimonial->content, 80) }}</td>
@@ -55,12 +62,34 @@
                             @endfor
                         </td>
                         <td>
-                            <span class="badge {{ $testimonial->is_active ? 'bg-success' : 'bg-secondary' }}">
-                                {{ $testimonial->is_active ? 'Active' : 'Inactive' }}
+                            <span class="badge @class([
+                                'bg-warning text-dark' => $testimonial->status === \App\Models\Testimonial::STATUS_PENDING,
+                                'bg-success' => $testimonial->status === \App\Models\Testimonial::STATUS_APPROVED,
+                                'bg-danger' => $testimonial->status === \App\Models\Testimonial::STATUS_REJECTED,
+                                'bg-secondary' => ! in_array($testimonial->status, array_keys(\App\Models\Testimonial::statuses())),
+                            ])">
+                                {{ \App\Models\Testimonial::statuses()[$testimonial->status] ?? ucfirst($testimonial->status) }}
                             </span>
+                            @unless($testimonial->is_active)
+                                <span class="badge bg-secondary">Inactive</span>
+                            @endunless
                         </td>
-                        <td>{{ $testimonial->order }}</td>
                         <td class="text-end">
+                            <a href="{{ route('admin.testimonials.show', $testimonial) }}" class="btn btn-sm btn-outline-secondary">View</a>
+                            @if($testimonial->status !== \App\Models\Testimonial::STATUS_APPROVED)
+                                <form action="{{ route('admin.testimonials.approve', $testimonial) }}" method="POST" class="d-inline">
+                                    @csrf
+                                    @method('PATCH')
+                                    <button type="submit" class="btn btn-sm btn-outline-success">Approve</button>
+                                </form>
+                            @endif
+                            @if($testimonial->status !== \App\Models\Testimonial::STATUS_REJECTED)
+                                <form action="{{ route('admin.testimonials.reject', $testimonial) }}" method="POST" class="d-inline">
+                                    @csrf
+                                    @method('PATCH')
+                                    <button type="submit" class="btn btn-sm btn-outline-warning">Reject</button>
+                                </form>
+                            @endif
                             <a href="{{ route('admin.testimonials.edit', $testimonial) }}" class="btn btn-sm btn-outline-primary">Edit</a>
                             <form action="{{ route('admin.testimonials.destroy', $testimonial) }}" method="POST" class="d-inline">
                                 @csrf

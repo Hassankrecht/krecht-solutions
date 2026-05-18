@@ -28,7 +28,7 @@
                         <i class="bi bi-geo-alt flex-shrink-0"></i>
                         <div>
                             <h3>Address</h3>
-                            <p>{{ $contactAddress ?? '123 Business Avenue, Tech City, TC 12345' }}</p>
+                            <p>{{ $contactAddress }}</p>
                         </div>
                     </div>
 
@@ -36,24 +36,31 @@
                         <i class="bi bi-telephone flex-shrink-0"></i>
                         <div>
                             <h3>Call Us</h3>
-                            <p>{{ $contactPhone ?? '+1 555 123 4567' }}</p>
+                            <p>{{ $contactPhone }}</p>
                         </div>
                     </div>
 
                     <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="400">
-                        <i class="bi bi-envelope flex-shrink-0"></i>
+                        <i class="bi bi-whatsapp flex-shrink-0"></i>
                         <div>
-                            <h3>Email Us</h3>
-                            <p>{{ $contactEmail ?? 'info@krecht-solutions.com' }}</p>
+                            <h3>WhatsApp</h3>
+                            <p>{{ $contactWhatsapp }}</p>
                         </div>
                     </div>
 
                     <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="500">
                         <i class="bi bi-clock flex-shrink-0"></i>
                         <div>
-                            <h3>Open Hours</h3>
-                            <p><strong>Mon-Fri:</strong> 9AM - 6PM;
-                            <strong>Sat-Sun:</strong> Closed</p>
+                            <h3>Working Hours</h3>
+                            <p>{{ $contactWorkingHours }}</p>
+                        </div>
+                    </div>
+
+                    <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="600">
+                        <i class="bi bi-envelope flex-shrink-0"></i>
+                        <div>
+                            <h3>Email Us</h3>
+                            <p>{{ $contactEmail }}</p>
                         </div>
                     </div>
                 </div>

@@ -16,7 +16,7 @@ class HomeController extends Controller
         $services = Service::active()->ordered()->get();
         $pricingPackages = PricingPackage::active()->ordered()->get();
         $projects = Project::active()->ordered()->take(6)->get();
-        $testimonials = Testimonial::active()->ordered()->get();
+        $testimonials = Testimonial::approved()->active()->ordered()->get();
         $faqs = Faq::active()->ordered()->take(3)->get();
         
         $siteName = SiteSetting::get('site_name', 'Krecht Solutions');

@@ -65,7 +65,7 @@
           <a href="{{ route('home') }}" class="logo d-flex align-items-center">
             <img src="{{ asset('assets/img/logo/logo-solution.png') }}" alt="Krecht Solutions" style="max-height: 80px; height: auto; width: auto; filter: brightness(0) invert(1);">
           </a>
-          <p class="mt-3">Professional software development and IT solutions. We build modern, scalable systems tailored to your business needs.</p>
+          <p class="mt-3">Krecht Solutions builds modern software, mobile applications, dashboards, and business systems designed to help companies grow efficiently.</p>
           <div class="social-links d-flex mt-4">
             <a href="#"><i class="bi bi-twitter-x"></i></a>
             <a href="#"><i class="bi bi-facebook"></i></a>
@@ -86,23 +86,26 @@
         <div class="col-lg-2 col-6 footer-links">
           <h4>Our Services</h4>
           <ul>
-            <li><a href="{{ route('services') }}">Web Development</a></li>
-            <li><a href="{{ route('services') }}">Mobile Apps</a></li>
-            <li><a href="{{ route('services') }}">API Development</a></li>
+            <li><a href="{{ route('services') }}">Laravel Dashboards</a></li>
+            <li><a href="{{ route('services') }}">Flutter Mobile Apps</a></li>
+            <li><a href="{{ route('services') }}">API Integration</a></li>
             <li><a href="{{ route('services') }}">POS Systems</a></li>
-            <li><a href="{{ route('services') }}">IT Support</a></li>
+            <li><a href="{{ route('services') }}">Business Systems</a></li>
           </ul>
         </div>
         <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
           <h4>Contact Us</h4>
-          <p>{{ \App\Models\SiteSetting::get('contact_address', '123 Business Avenue, Tech City') }}</p>
-          <p class="mt-3"><strong>Phone:</strong> <span>{{ \App\Models\SiteSetting::get('contact_phone', '+1 555 123 4567') }}</span></p>
-          <p><strong>Email:</strong> <span>{{ \App\Models\SiteSetting::get('contact_email', 'info@krecht-solutions.com') }}</span></p>
+          <p>{{ \App\Models\SiteSetting::get('contact_address', 'Sour, Lebanon') }}</p>
+          <p class="mt-3"><strong>Phone:</strong> <span>{{ \App\Models\SiteSetting::get('contact_phone', '78768725') }}</span></p>
+          <p><strong>WhatsApp:</strong> <span>{{ \App\Models\SiteSetting::get('contact_whatsapp', 'Available') }}</span></p>
+          <p><strong>Hours:</strong> <span>{{ \App\Models\SiteSetting::get('footer_working_hours', 'Mon - Sun | 9 AM - 5 PM') }}</span></p>
+          <p><strong>Email:</strong> <span>{{ \App\Models\SiteSetting::get('contact_email', config('mail.from.address')) }}</span></p>
         </div>
       </div>
     </div>
     <div class="container copyright text-center mt-4">
-      <p>© <span>Copyright</span> <strong class="px-1 sitename">Krecht Solutions</strong> <span>All Rights Reserved</span></p>
+      <p>© 2026 <strong class="px-1 sitename">Krecht Solutions</strong>. All Rights Reserved.</p>
+      <div class="credits">Built with Laravel &amp; Flutter</div>
     </div>
   </footer>
 
@@ -128,6 +131,20 @@
   <script src="{{ asset('assets/js/main.js') }}"></script>
 
   @stack('scripts')
+
+  <!--Start of Tawk.to Script-->
+  <script type="text/javascript">
+  var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+  (function(){
+  var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+  s1.async=true;
+  s1.src='https://embed.tawk.to/6a0b6b8ff155db1c33ef7828/1jou9oc34';
+  s1.charset='UTF-8';
+  s1.setAttribute('crossorigin','*');
+  s0.parentNode.insertBefore(s1,s0);
+  })();
+  </script>
+  <!--End of Tawk.to Script-->
 
 </body>
 

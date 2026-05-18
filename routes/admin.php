@@ -23,7 +23,9 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
 
     Route::resource('pricing-packages', PricingPackageController::class)->except(['show']);
 
-    Route::resource('testimonials', TestimonialController::class)->except(['show']);
+    Route::patch('testimonials/{testimonial}/approve', [TestimonialController::class, 'approve'])->name('testimonials.approve');
+    Route::patch('testimonials/{testimonial}/reject', [TestimonialController::class, 'reject'])->name('testimonials.reject');
+    Route::resource('testimonials', TestimonialController::class);
 
     Route::resource('faqs', FaqController::class)->except(['show']);
 
