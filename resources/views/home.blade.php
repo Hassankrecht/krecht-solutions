@@ -124,9 +124,9 @@
           <div class="col-lg-7 d-flex flex-column justify-content-center order-2 order-lg-1">
 
             <div class="content px-xl-5" data-aos="fade-up" data-aos-delay="100">
-              <h3><span>Eum ipsam laborum deleniti </span><strong>velit pariatur architecto aut nihil</strong></h3>
+              <h3><span>Why Businesses </span><strong>Choose Krecht Solutions</strong></h3>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit
+                We build custom software that fits your business — from Laravel-powered web systems and Flutter mobile apps to dashboards, APIs, and integrations. Every solution is designed to scale, with long-term support so your team is never left behind.
               </p>
             </div>
 
@@ -143,23 +143,37 @@
                 @endforeach
               @else
                 <div class="faq-item faq-active">
-                  <h3><span>01</span> What services do you offer?</h3>
+                  <h3><span>01</span> What technologies do you build with?</h3>
                   <div class="faq-content">
-                    <p>We offer web development, mobile apps, dashboards, APIs, POS systems, and more.</p>
+                    <p>We specialise in Laravel for backend and web applications, and Flutter for cross-platform mobile apps. We also work with MySQL, REST APIs, Bootstrap, and Vue.js — chosen for reliability, performance, and long-term maintainability.</p>
                   </div>
                   <i class="faq-toggle bi bi-chevron-right"></i>
                 </div>
                 <div class="faq-item">
-                  <h3><span>02</span> How long does a project take?</h3>
+                  <h3><span>02</span> How long does a typical project take?</h3>
                   <div class="faq-content">
-                    <p>Project timelines vary based on complexity. Contact us for a detailed estimate.</p>
+                    <p>Timelines depend on scope. A focused landing page or simple system is typically 1–2 weeks, while a full business dashboard or mobile app runs 4–10 weeks. We provide a detailed estimate after our initial discovery session.</p>
                   </div>
                   <i class="faq-toggle bi bi-chevron-right"></i>
                 </div>
                 <div class="faq-item">
-                  <h3><span>03</span> Do you provide support?</h3>
+                  <h3><span>03</span> Can you build a custom dashboard or admin panel?</h3>
                   <div class="faq-content">
-                    <p>Yes, we provide ongoing support and maintenance for all our projects.</p>
+                    <p>Yes. We build role-based admin dashboards tailored to your workflow — including reporting, data management, user permissions, and real-time analytics. Every dashboard is built custom, not from a generic template.</p>
+                  </div>
+                  <i class="faq-toggle bi bi-chevron-right"></i>
+                </div>
+                <div class="faq-item">
+                  <h3><span>04</span> Do you provide support after launch?</h3>
+                  <div class="faq-content">
+                    <p>Absolutely. We offer ongoing maintenance and support packages covering bug fixes, feature updates, performance monitoring, and security patches — so your system stays reliable as your business grows.</p>
+                  </div>
+                  <i class="faq-toggle bi bi-chevron-right"></i>
+                </div>
+                <div class="faq-item">
+                  <h3><span>05</span> Can you integrate with our existing systems or third-party APIs?</h3>
+                  <div class="faq-content">
+                    <p>Yes. API integration is a core part of what we do — whether connecting to payment gateways, ERP platforms, logistics providers, or any REST-based service. We can also build the API layer that your mobile app or external partners consume.</p>
                   </div>
                   <i class="faq-toggle bi bi-chevron-right"></i>
                 </div>
@@ -169,7 +183,7 @@
           </div>
 
           <div class="col-lg-5 order-1 order-lg-2 why-us-img">
-            <img src="{{ asset('assets/img/why-us.png') }}" class="img-fluid" alt="" data-aos="zoom-in" data-aos-delay="100">
+            <img src="{{ asset('assets/img/faq/faq-illustration.svg') }}" class="img-fluid" alt="Krecht Solutions software development team collaboration" data-aos="zoom-in" data-aos-delay="100">
           </div>
         </div>
 
@@ -192,7 +206,7 @@
 
             <h3>Our Expertise</h3>
             <p>
-              We build custom web applications, mobile apps, and business systems using a focused stack of proven technologies. Every solution is engineered for reliability, scalability, and long-term maintainability — so your software grows with your business.
+              Krecht Solutions specialises in Laravel-powered web systems, Flutter mobile apps, custom business dashboards, and REST API integrations. We architect scalable databases and write clean, maintainable code — delivering software built to grow with your business.
             </p>
 
             <div class="skills-content skills-animation">
@@ -200,35 +214,35 @@
               <div class="progress">
                 <span class="skill"><span>Laravel Development</span></span>
                 <div class="progress-bar-wrap">
-                  <div class="progress-bar" role="progressbar" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"></div>
+                  <div class="progress-bar" role="progressbar" aria-valuenow="92" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
               </div><!-- End Skills Item -->
 
               <div class="progress">
                 <span class="skill"><span>Flutter Applications</span></span>
                 <div class="progress-bar-wrap">
-                  <div class="progress-bar" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
+                  <div class="progress-bar" role="progressbar" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
               </div><!-- End Skills Item -->
 
               <div class="progress">
                 <span class="skill"><span>Business Dashboards</span></span>
                 <div class="progress-bar-wrap">
-                  <div class="progress-bar" role="progressbar" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100"></div>
+                  <div class="progress-bar" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
               </div><!-- End Skills Item -->
 
               <div class="progress">
                 <span class="skill"><span>REST API Integration</span></span>
                 <div class="progress-bar-wrap">
-                  <div class="progress-bar" role="progressbar" aria-valuenow="92" aria-valuemin="0" aria-valuemax="100"></div>
+                  <div class="progress-bar" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
               </div><!-- End Skills Item -->
 
               <div class="progress">
                 <span class="skill"><span>POS &amp; Management Systems</span></span>
                 <div class="progress-bar-wrap">
-                  <div class="progress-bar" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
+                  <div class="progress-bar" role="progressbar" aria-valuenow="86" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
               </div><!-- End Skills Item -->
 
@@ -265,38 +279,66 @@
               <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="{{ ($index + 1) * 100 }}">
                 <div class="service-item position-relative">
                   <div class="icon"><i class="{{ $service->icon }} icon"></i></div>
-                  <h4><a href="{{ route('services') }}" class="stretched-link">{{ $service->name }}</a></h4>
-                  <p>{{ Str::limit($service->description, 100) }}</p>
+                  <h4><a href="{{ route('services') }}" class="stretched-link">{{ $service->title }}</a></h4>
+                  <p>{{ $service->short_description }}</p>
                 </div>
               </div><!-- End Service Item -->
             @endforeach
           @else
             <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="100">
               <div class="service-item position-relative">
-                <div class="icon"><i class="bi bi-globe icon"></i></div>
-                <h4><a href="{{ route('services') }}" class="stretched-link">Web Development</a></h4>
-                <p>Custom websites and web applications</p>
+                <div class="icon"><i class="bi bi-window-stack icon"></i></div>
+                <h4><a href="{{ route('services') }}" class="stretched-link">Website Development</a></h4>
+                <p>Responsive, fast, and secure websites tailored to your business needs.</p>
               </div>
             </div>
             <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="200">
               <div class="service-item position-relative">
-                <div class="icon"><i class="bi bi-phone icon"></i></div>
-                <h4><a href="{{ route('services') }}" class="stretched-link">Mobile Apps</a></h4>
-                <p>Cross-platform mobile applications</p>
+                <div class="icon"><i class="bi bi-phone-landscape icon"></i></div>
+                <h4><a href="{{ route('services') }}" class="stretched-link">Flutter Mobile Applications</a></h4>
+                <p>Cross-platform mobile apps for iOS and Android from a single codebase.</p>
               </div>
             </div>
             <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="300">
               <div class="service-item position-relative">
-                <div class="icon"><i class="bi bi-speedometer2 icon"></i></div>
-                <h4><a href="{{ route('services') }}" class="stretched-link">Dashboards</a></h4>
-                <p>Admin dashboards and management systems</p>
+                <div class="icon"><i class="bi bi-layout-sidebar icon"></i></div>
+                <h4><a href="{{ route('services') }}" class="stretched-link">Laravel Dashboards</a></h4>
+                <p>Feature-rich admin dashboards and management systems built with Laravel.</p>
               </div>
             </div>
             <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="400">
               <div class="service-item position-relative">
-                <div class="icon"><i class="bi bi-code-slash icon"></i></div>
+                <div class="icon"><i class="bi bi-braces-asterisk icon"></i></div>
                 <h4><a href="{{ route('services') }}" class="stretched-link">API Development</a></h4>
-                <p>RESTful APIs and integrations</p>
+                <p>Robust, secure, and well-documented APIs for your applications.</p>
+              </div>
+            </div>
+            <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="500">
+              <div class="service-item position-relative">
+                <div class="icon"><i class="bi bi-receipt-cutoff icon"></i></div>
+                <h4><a href="{{ route('services') }}" class="stretched-link">POS Systems</a></h4>
+                <p>Complete POS solutions with inventory, sales tracking, and reporting.</p>
+              </div>
+            </div>
+            <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="600">
+              <div class="service-item position-relative">
+                <div class="icon"><i class="bi bi-graph-up-arrow icon"></i></div>
+                <h4><a href="{{ route('services') }}" class="stretched-link">Stock &amp; Accounting Systems</a></h4>
+                <p>Track inventory, manage finances, and generate detailed business reports.</p>
+              </div>
+            </div>
+            <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="700">
+              <div class="service-item position-relative">
+                <div class="icon"><i class="bi bi-qr-code-scan icon"></i></div>
+                <h4><a href="{{ route('services') }}" class="stretched-link">QR Menu Systems</a></h4>
+                <p>Contactless digital menus for restaurants and cafes.</p>
+              </div>
+            </div>
+            <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="800">
+              <div class="service-item position-relative">
+                <div class="icon"><i class="bi bi-wrench-adjustable-circle icon"></i></div>
+                <h4><a href="{{ route('services') }}" class="stretched-link">Technical Support &amp; Maintenance</a></h4>
+                <p>Expert support to keep your systems running smoothly and reliably.</p>
               </div>
             </div>
           @endif
@@ -312,22 +354,22 @@
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
         <h2>Work Process</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+        <p>From initial discovery through to deployment, we follow a clear process that keeps projects on track and stakeholders informed.</p>
       </div><!-- End Section Title -->
 
       <div class="container" data-aos="fade-up" data-aos-delay="100">
 
-        <div class="row gy-5">
+        <div class="row gy-4">
 
           <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
             <div class="steps-item">
               <div class="steps-image">
-                <img src="{{ asset('assets/img/steps/steps-1.webp') }}" alt="Step 1" class="img-fluid" loading="lazy">
+                <img src="{{ asset('assets/img/steps/steps-1.webp') }}" alt="Research and analysis – understanding your business goals and requirements" class="img-fluid" loading="lazy">
               </div>
               <div class="steps-content">
                 <div class="steps-number">01</div>
                 <h3>Research &amp; Analysis</h3>
-                <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione.</p>
+                <p>We start by understanding your business, your users, and your goals — mapping every requirement before a single line of code is written.</p>
                 <div class="steps-features">
                   <div class="feature-item">
                     <i class="bi bi-check-circle"></i>
@@ -349,12 +391,12 @@
           <div class="col-lg-4" data-aos="fade-up" data-aos-delay="300">
             <div class="steps-item">
               <div class="steps-image">
-                <img src="{{ asset('assets/img/steps/steps-2.webp') }}" alt="Step 2" class="img-fluid" loading="lazy">
+                <img src="{{ asset('assets/img/steps/steps-2.webp') }}" alt="Design and planning – wireframes, UI/UX design and technical architecture" class="img-fluid" loading="lazy">
               </div>
               <div class="steps-content">
                 <div class="steps-number">02</div>
                 <h3>Design &amp; Planning</h3>
-                <p>Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur.</p>
+                <p>We produce clean wireframes and define the technical architecture — aligning the solution with your workflow before development begins.</p>
                 <div class="steps-features">
                   <div class="feature-item">
                     <i class="bi bi-check-circle"></i>
@@ -376,12 +418,12 @@
           <div class="col-lg-4" data-aos="fade-up" data-aos-delay="400">
             <div class="steps-item">
               <div class="steps-image">
-                <img src="{{ asset('assets/img/steps/steps-3.webp') }}" alt="Step 3" class="img-fluid" loading="lazy">
+                <img src="{{ asset('assets/img/steps/steps-3.webp') }}" alt="Development and launch – building, testing and deploying your solution" class="img-fluid" loading="lazy">
               </div>
               <div class="steps-content">
                 <div class="steps-number">03</div>
                 <h3>Development &amp; Launch</h3>
-                <p>Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil.</p>
+                <p>We build, test, and deploy your solution — then remain available for ongoing support and iterations as your business grows.</p>
                 <div class="steps-features">
                   <div class="feature-item">
                     <i class="bi bi-check-circle"></i>

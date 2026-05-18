@@ -1248,25 +1248,28 @@ section,
 --------------------------------------------------------------*/
 .work-process .steps-item {
   background: var(--surface-color);
-  border-radius: 20px;
+  border-radius: 16px;
   height: 100%;
-  transition: all 0.3s ease-in-out;
-  box-shadow: 0 5px 20px color-mix(in srgb, var(--default-color), transparent 92%);
+  transition: all 0.35s ease;
+  box-shadow: 0 2px 8px color-mix(in srgb, var(--default-color), transparent 94%),
+              0 8px 28px color-mix(in srgb, var(--default-color), transparent 89%);
 }
 
 .work-process .steps-item .steps-image {
-  border-radius: 20px 20px 0 0;
+  border-radius: 16px 16px 0 0;
   overflow: hidden;
 }
 
 .work-process .steps-item:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 15px 30px color-mix(in srgb, var(--accent-color), transparent 85%);
+  transform: translateY(-6px);
+  box-shadow: 0 4px 14px color-mix(in srgb, var(--default-color), transparent 91%),
+              0 16px 42px color-mix(in srgb, var(--accent-color), transparent 84%);
 }
 
 .work-process .steps-item:hover .steps-number {
   background: var(--accent-color);
   color: var(--contrast-color);
+  border-color: var(--accent-color);
 }
 
 .work-process .steps-item:hover .steps-image img {
@@ -1275,7 +1278,7 @@ section,
 
 .work-process .steps-image {
   position: relative;
-  height: 280px;
+  height: 220px;
 }
 
 .work-process .steps-image img {
@@ -1294,36 +1297,41 @@ section,
   position: absolute;
   left: 30px;
   top: -30px;
-  width: 60px;
-  height: 60px;
-  background: var(--accent-color);
-  color: var(--contrast-color);
+  width: 56px;
+  height: 56px;
+  background: color-mix(in srgb, var(--accent-color), transparent 88%);
+  color: var(--accent-color);
+  border: 2px solid color-mix(in srgb, var(--accent-color), transparent 55%);
   border-radius: 50%;
   font-family: var(--heading-font);
-  font-size: 24px;
+  font-size: 22px;
   font-weight: 700;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.35s ease;
 }
 
 .work-process .steps-content h3 {
-  font-size: 24px;
+  font-size: 22px;
   font-weight: 700;
-  margin-bottom: 15px;
+  margin-top: 10px;
+  margin-bottom: 12px;
+  letter-spacing: -0.01em;
 }
 
 .work-process .steps-content p {
   font-size: 15px;
-  color: color-mix(in srgb, var(--default-color), transparent 20%);
-  margin-bottom: 25px;
+  line-height: 1.65;
+  color: color-mix(in srgb, var(--default-color), transparent 25%);
+  margin-bottom: 20px;
 }
 
 .work-process .steps-features .feature-item {
   display: flex;
   align-items: center;
-  margin-bottom: 12px;
+  gap: 10px;
+  margin-bottom: 11px;
 }
 
 .work-process .steps-features .feature-item:last-child {
@@ -1332,36 +1340,37 @@ section,
 
 .work-process .steps-features .feature-item i {
   color: var(--accent-color);
-  font-size: 18px;
-  margin-right: 10px;
+  font-size: 16px;
+  flex-shrink: 0;
 }
 
 .work-process .steps-features .feature-item span {
-  font-size: 14px;
-  color: color-mix(in srgb, var(--default-color), transparent 15%);
+  font-size: 13.5px;
+  font-weight: 500;
+  color: color-mix(in srgb, var(--default-color), transparent 20%);
 }
 
 @media (max-width: 1199px) {
   .work-process .steps-image {
-    height: 240px;
+    height: 200px;
   }
 
   .work-process .steps-content {
-    padding: 35px 25px 25px;
+    padding: 35px 24px 24px;
   }
 
   .work-process .steps-content h3 {
-    font-size: 22px;
+    font-size: 21px;
   }
 }
 
 @media (max-width: 991px) {
   .work-process .steps-item {
-    margin-bottom: 30px;
+    margin-bottom: 24px;
   }
 
   .work-process .steps-image {
-    height: 220px;
+    height: 200px;
   }
 
   .work-process .steps-content {
@@ -1369,21 +1378,32 @@ section,
   }
 
   .work-process .steps-content .steps-number {
-    width: 50px;
-    height: 50px;
-    font-size: 20px;
-    left: 25px;
-    top: -25px;
+    width: 48px;
+    height: 48px;
+    font-size: 19px;
+    left: 22px;
+    top: -24px;
   }
 
   .work-process .steps-content h3 {
-    font-size: 20px;
-    margin-bottom: 12px;
+    font-size: 19px;
+    margin-top: 8px;
+    margin-bottom: 10px;
   }
 
   .work-process .steps-content p {
     font-size: 14px;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
+  }
+}
+
+@media (max-width: 575px) {
+  .work-process .steps-image {
+    height: 210px;
+  }
+
+  .work-process .steps-content h3 {
+    font-size: 18px;
   }
 }
 

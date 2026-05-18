@@ -42,3 +42,10 @@ Thumbs.db
 npm-debug.log
 yarn-error.log
 package-lock.json
+
+###################################
+# Public media assets (images, videos, uploads)
+###################################
+/public/assets/img/
+/public/assets/projects/
+/public/uploads/

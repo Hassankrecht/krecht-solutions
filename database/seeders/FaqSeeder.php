@@ -11,40 +11,46 @@ class FaqSeeder extends Seeder
     {
         $faqs = [
             [
-                'question' => 'What technologies do you use for web development?',
-                'answer' => 'We primarily use Laravel for backend development, combined with modern frontend technologies like React, Vue.js, and Bootstrap 5. This ensures your website is fast, secure, and scalable.',
+                'question' => 'What technologies do you build with?',
+                'answer' => 'We specialise in Laravel for backend and web applications, and Flutter for cross-platform mobile apps. We also work with MySQL, REST APIs, Bootstrap, and Vue.js — chosen for reliability, performance, and long-term maintainability.',
                 'is_active' => true,
                 'order' => 1,
             ],
             [
-                'question' => 'Do you provide ongoing support and maintenance?',
-                'answer' => 'Yes, we offer comprehensive support and maintenance packages. Our team is available to handle updates, bug fixes, and technical support to ensure your systems run smoothly.',
+                'question' => 'How long does a typical project take?',
+                'answer' => 'Timelines depend on scope. A focused landing page or simple system is typically 1–2 weeks, while a full business dashboard or mobile app runs 4–10 weeks. We provide a detailed estimate after our initial discovery session.',
                 'is_active' => true,
                 'order' => 2,
             ],
             [
-                'question' => 'How long does it take to complete a project?',
-                'answer' => 'Project timelines vary based on complexity. A simple landing page may take 1-2 weeks, while complex business systems can take 2-4 months. We provide detailed timelines during our initial consultation.',
+                'question' => 'Can you build a custom dashboard or admin panel?',
+                'answer' => 'Yes. We build role-based admin dashboards tailored to your workflow — including reporting, data management, user permissions, and real-time analytics. Every dashboard is built custom, not from a generic template.',
                 'is_active' => true,
                 'order' => 3,
             ],
             [
-                'question' => 'Can you integrate with existing systems?',
-                'answer' => 'Absolutely! We specialize in API development and can integrate our solutions with your existing systems, third-party services, and legacy applications seamlessly.',
+                'question' => 'Do you provide support after the project launches?',
+                'answer' => 'Absolutely. We offer ongoing maintenance and support packages covering bug fixes, feature updates, performance monitoring, and security patches — so your system stays reliable as your business grows.',
                 'is_active' => true,
                 'order' => 4,
             ],
             [
-                'question' => 'Do you offer mobile app development?',
-                'answer' => 'Yes, we develop cross-platform mobile applications using Flutter. This allows us to build apps that work on both iOS and Android from a single codebase, saving time and cost.',
+                'question' => 'Can you integrate with our existing systems or third-party APIs?',
+                'answer' => 'Yes. API integration is a core part of what we do — whether connecting to payment gateways, ERP platforms, logistics providers, or any REST-based service. We can also build the API layer that your mobile app or external partners consume.',
                 'is_active' => true,
                 'order' => 5,
             ],
             [
-                'question' => 'What is your pricing structure?',
-                'answer' => 'We offer flexible pricing packages including Starter, Business, and Enterprise plans. Each package is designed to meet different business needs and budgets. Contact us for a custom quote.',
+                'question' => 'Do you build mobile apps for both iOS and Android?',
+                'answer' => 'We use Flutter to deliver a single, high-quality codebase that runs natively on both iOS and Android. This reduces development time and cost while ensuring a consistent, polished user experience across all devices.',
                 'is_active' => true,
                 'order' => 6,
+            ],
+            [
+                'question' => 'What does your development process look like?',
+                'answer' => 'We follow a structured process: discovery and requirements, wireframing and design sign-off, iterative development with regular client updates, thorough testing, then deployment and handover. You stay informed and in control at every stage.',
+                'is_active' => true,
+                'order' => 7,
             ],
         ];
 
