@@ -21,71 +21,7 @@
     </div>
 
     <div class="container">
-        <div class="row gy-4">
-            @if($packages && $packages->count() > 0)
-                @foreach($packages as $index => $package)
-                    <div class="col-lg-4" data-aos="zoom-in" data-aos-delay="{{ ($index + 1) * 100 }}">
-                        <div class="pricing-item {{ $package->is_featured ? 'featured' : '' }}">
-                            <h3>{{ $package->name }}</h3>
-                            <h4>{{ $package->price }}</h4>
-                            <ul>
-                                @if(is_array($package->features))
-                                    @foreach($package->features as $feature)
-                                        <li><i class="bi bi-check"></i> <span>{{ $feature }}</span></li>
-                                    @endforeach
-                                @endif
-                            </ul>
-                            <a href="{{ route('contact') }}" class="buy-btn">Get Started</a>
-                        </div>
-                    </div>
-                @endforeach
-            @else
-                <div class="col-lg-4" data-aos="zoom-in" data-aos-delay="100">
-                    <div class="pricing-item">
-                        <h3>Starter Package</h3>
-                        <h4>$499</h4>
-                        <ul>
-                            <li><i class="bi bi-check"></i> <span>Landing page</span></li>
-                            <li><i class="bi bi-check"></i> <span>Responsive design</span></li>
-                            <li><i class="bi bi-check"></i> <span>Contact form</span></li>
-                            <li><i class="bi bi-check"></i> <span>Basic SEO</span></li>
-                            <li><i class="bi bi-check"></i> <span>1 month support</span></li>
-                        </ul>
-                        <a href="{{ route('contact') }}" class="buy-btn">Get Started</a>
-                    </div>
-                </div>
-
-                <div class="col-lg-4" data-aos="zoom-in" data-aos-delay="200">
-                    <div class="pricing-item featured">
-                        <h3>Business Package</h3>
-                        <h4>$1,499</h4>
-                        <ul>
-                            <li><i class="bi bi-check"></i> <span>Multi-page website (5-10 pages)</span></li>
-                            <li><i class="bi bi-check"></i> <span>Admin dashboard</span></li>
-                            <li><i class="bi bi-check"></i> <span>Authentication system</span></li>
-                            <li><i class="bi bi-check"></i> <span>API integration</span></li>
-                            <li><i class="bi bi-check"></i> <span>3 months support</span></li>
-                        </ul>
-                        <a href="{{ route('contact') }}" class="buy-btn">Get Started</a>
-                    </div>
-                </div>
-
-                <div class="col-lg-4" data-aos="zoom-in" data-aos-delay="300">
-                    <div class="pricing-item">
-                        <h3>Enterprise Package</h3>
-                        <h4>$4,999</h4>
-                        <ul>
-                            <li><i class="bi bi-check"></i> <span>Custom business system</span></li>
-                            <li><i class="bi bi-check"></i> <span>Mobile application (Flutter)</span></li>
-                            <li><i class="bi bi-check"></i> <span>Advanced dashboard</span></li>
-                            <li><i class="bi bi-check"></i> <span>APIs and database</span></li>
-                            <li><i class="bi bi-check"></i> <span>6 months support</span></li>
-                        </ul>
-                        <a href="{{ route('contact') }}" class="buy-btn">Get Started</a>
-                    </div>
-                </div>
-            @endif
-        </div>
+        @include('partials.pricing-packages', ['pricingPackages' => $packages])
     </div>
 </section>
 

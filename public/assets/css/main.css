@@ -1769,7 +1769,31 @@ section,
 
 .pricing h4 span {
   color: color-mix(in srgb, var(--default-color), transparent 50%);
+  display: block;
   font-size: 18px;
+}
+
+.pricing h4.price-label {
+  font-size: 30px;
+  line-height: 1.2;
+}
+
+.pricing .pricing-category-nav {
+  gap: 10px;
+}
+
+.pricing .pricing-category-nav .nav-link {
+  border: 1px solid color-mix(in srgb, var(--accent-color), transparent 65%);
+  color: var(--accent-color);
+  font-family: var(--heading-font);
+  font-weight: 500;
+  padding: 9px 18px;
+}
+
+.pricing .pricing-category-nav .nav-link.active,
+.pricing .pricing-category-nav .nav-link:hover {
+  background: var(--accent-color);
+  color: var(--contrast-color);
 }
 
 .pricing ul {

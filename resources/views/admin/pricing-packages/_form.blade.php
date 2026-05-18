@@ -23,13 +23,32 @@
     </div>
 </div>
 
-<div class="mb-3">
-    <label for="price" class="form-label fw-semibold">Price <span class="text-danger">*</span></label>
-    <input id="price" name="price" type="text" class="form-control @error('price') is-invalid @enderror"
-        value="{{ old('price', $pricingPackage->price ?? '') }}" required placeholder="e.g. $99/mo, Free, Contact Us">
-    @error('price')
-        <div class="invalid-feedback">{{ $message }}</div>
-    @enderror
+<div class="row">
+    <div class="col-md-6">
+        <div class="mb-3">
+            <label for="category" class="form-label fw-semibold">Category <span class="text-danger">*</span></label>
+            <select id="category" name="category" class="form-select @error('category') is-invalid @enderror" required>
+                @foreach($categories ?? \App\Models\PricingPackage::categories() as $category)
+                    <option value="{{ $category }}" @selected(old('category', $pricingPackage->category ?? '') === $category)>
+                        {{ $category }}
+                    </option>
+                @endforeach
+            </select>
+            @error('category')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="mb-3">
+            <label for="price" class="form-label fw-semibold">Price <span class="text-danger">*</span></label>
+            <input id="price" name="price" type="text" class="form-control @error('price') is-invalid @enderror"
+                value="{{ old('price', $pricingPackage->price ?? '') }}" required placeholder="e.g. Starting from $999, Coming Soon">
+            @error('price')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+        </div>
+    </div>
 </div>
 
 <div class="mb-3">

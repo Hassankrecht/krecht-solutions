@@ -10,19 +10,22 @@ class PricingPackageController extends Controller
 {
     public function index()
     {
-        $pricingPackages = PricingPackage::orderBy('order')->orderBy('id')->paginate(15);
+        $pricingPackages = PricingPackage::ordered()->orderBy('id')->paginate(15);
         return view('admin.pricing-packages.index', compact('pricingPackages'));
     }
 
     public function create()
     {
-        return view('admin.pricing-packages.create');
+        $categories = PricingPackage::categories();
+
+        return view('admin.pricing-packages.create', compact('categories'));
     }
 
     public function store(Request $request)
     {
         $validated = $request->validate([
             'name'        => 'required|string|max:255',
+            'category'    => 'required|string|max:255',
             'price'       => 'required|string|max:100',
             'features'    => 'nullable|string',
             'is_featured' => 'boolean',
@@ -43,13 +46,16 @@ class PricingPackageController extends Controller
 
     public function edit(PricingPackage $pricingPackage)
     {
-        return view('admin.pricing-packages.edit', compact('pricingPackage'));
+        $categories = PricingPackage::categories();
+
+        return view('admin.pricing-packages.edit', compact('pricingPackage', 'categories'));
     }
 
     public function update(Request $request, PricingPackage $pricingPackage)
     {
         $validated = $request->validate([
             'name'        => 'required|string|max:255',
+            'category'    => 'required|string|max:255',
             'price'       => 'required|string|max:100',
             'features'    => 'nullable|string',
             'is_featured' => 'boolean',

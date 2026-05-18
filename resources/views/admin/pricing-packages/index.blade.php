@@ -29,6 +29,7 @@
                 <tr>
                     <th>#</th>
                     <th>Name</th>
+                    <th>Category</th>
                     <th>Price</th>
                     <th>Features</th>
                     <th>Featured</th>
@@ -42,6 +43,7 @@
                     <tr>
                         <td class="text-muted small">{{ $package->id }}</td>
                         <td class="fw-semibold">{{ $package->name }}</td>
+                        <td>{{ $package->category }}</td>
                         <td>{{ $package->price }}</td>
                         <td class="small text-muted">
                             {{ is_array($package->features) ? count($package->features) . ' feature(s)' : '—' }}
@@ -73,7 +75,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="8" class="text-center py-5 text-muted">
+                        <td colspan="9" class="text-center py-5 text-muted">
                             <i class="ti ti-inbox fs-2 d-block mb-2"></i>
                             No pricing packages found. <a href="{{ route('admin.pricing-packages.create') }}">Add one now.</a>
                         </td>
