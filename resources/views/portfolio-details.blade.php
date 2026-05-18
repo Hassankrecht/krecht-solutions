@@ -1,88 +1,126 @@
 @extends('layouts.app')
 @section('content')
- <!-- Page Title -->
+
+    <!-- Page Title -->
     <div class="page-title" data-aos="fade">
-      <div class="container">
-        <nav class="breadcrumbs">
-          <ol>
-            <li><a href="index.html">Home</a></li>
-            <li class="current">Portfolio Details</li>
-          </ol>
-        </nav>
-        <h1>Portfolio Details</h1>
-      </div>
+        <div class="container">
+            <nav class="breadcrumbs">
+                <ol>
+                    <li><a href="{{ route('home') }}">Home</a></li>
+                    <li><a href="{{ route('portfolio') }}">Portfolio</a></li>
+                    <li class="current">{{ $project->title }}</li>
+                </ol>
+            </nav>
+            <h1>{{ $project->title }}</h1>
+        </div>
     </div><!-- End Page Title -->
 
     <!-- Portfolio Details Section -->
     <section id="portfolio-details" class="portfolio-details section">
+        <div class="container" data-aos="fade-up" data-aos-delay="100">
+            <div class="row gy-4">
 
-      <div class="container" data-aos="fade-up" data-aos-delay="100">
+                <!-- Left column: slider / video -->
+                <div class="col-lg-8">
 
-        <div class="row gy-4">
+                    @php
+                        $slides = $project->gallery_images ?? [];
+                        if (empty($slides) && $project->image) {
+                            $slides = [$project->image];
+                        }
+                    @endphp
 
-          <div class="col-lg-8">
-            <div class="portfolio-details-slider swiper init-swiper">
+                    @if(count($slides) > 0)
+                        <div class="portfolio-details-slider swiper init-swiper">
+                            <script type="application/json" class="swiper-config">
+                            {
+                                "loop": {{ count($slides) > 1 ? 'true' : 'false' }},
+                                "speed": 600,
+                                "autoplay": { "delay": 5000 },
+                                "slidesPerView": "auto",
+                                "pagination": {
+                                    "el": ".swiper-pagination",
+                                    "type": "bullets",
+                                    "clickable": true
+                                }
+                            }
+                            </script>
+                            <div class="swiper-wrapper align-items-center">
+                                @foreach($slides as $slide)
+                                    <div class="swiper-slide">
+                                        <img src="{{ asset($slide) }}" alt="{{ $project->title }}"
+                                             style="width:100%;max-height:480px;object-fit:cover;">
+                                    </div>
+                                @endforeach
+                            </div>
+                            <div class="swiper-pagination"></div>
+                        </div>
+                    @endif
 
-              <script type="application/json" class="swiper-config">
-                {
-                  "loop": true,
-                  "speed": 600,
-                  "autoplay": {
-                    "delay": 5000
-                  },
-                  "slidesPerView": "auto",
-                  "pagination": {
-                    "el": ".swiper-pagination",
-                    "type": "bullets",
-                    "clickable": true
-                  }
-                }
-              </script>
+                    @if($project->video)
+                        <div class="mt-4">
+                            @php
+                                $videoPath = $project->video;
+                                $isExternal = str_starts_with($videoPath, 'http://') || str_starts_with($videoPath, 'https://');
+                                $ext = strtolower(pathinfo($videoPath, PATHINFO_EXTENSION));
+                                $isYoutube = str_contains($videoPath, 'youtube.com') || str_contains($videoPath, 'youtu.be');
+                                $isVimeo   = str_contains($videoPath, 'vimeo.com');
+                            @endphp
 
-              <div class="swiper-wrapper align-items-center">
+                            @if($isYoutube || $isVimeo)
+                                <div class="ratio ratio-16x9">
+                                    <iframe src="{{ $videoPath }}" allowfullscreen></iframe>
+                                </div>
+                            @else
+                                <video controls class="w-100 rounded" style="max-height:360px;">
+                                    <source src="{{ $isExternal ? $videoPath : asset($videoPath) }}" type="video/{{ $ext === 'mp4' ? 'mp4' : ($ext === 'webm' ? 'webm' : 'mp4') }}">
+                                    Your browser does not support the video tag.
+                                </video>
+                            @endif
+                        </div>
+                    @endif
 
-                <div class="swiper-slide">
-                  <img src="assets/img/portfolio/portfolio-1.webp" alt="">
-                </div>
+                </div><!-- End left column -->
 
-                <div class="swiper-slide">
-                  <img src="assets/img/portfolio/portfolio-10.webp" alt="">
-                </div>
+                <!-- Right column: project info -->
+                <div class="col-lg-4">
 
-                <div class="swiper-slide">
-                  <img src="assets/img/portfolio/portfolio-7.webp" alt="">
-                </div>
+                    <div class="portfolio-info" data-aos="fade-up" data-aos-delay="200">
+                        <h3>Project information</h3>
+                        <ul>
+                            <li><strong>Category</strong>: {{ $project->category }}</li>
+                            @if($project->technologies)
+                                <li><strong>Technologies</strong>: {{ $project->technologies }}</li>
+                            @endif
+                        </ul>
+                    </div>
 
-                <div class="swiper-slide">
-                  <img src="assets/img/portfolio/portfolio-4.webp" alt="">
-                </div>
+                    <div class="portfolio-description" data-aos="fade-up" data-aos-delay="300">
+                        <h2>{{ $project->title }}</h2>
+                        @if($project->description)
+                            <p>{{ $project->description }}</p>
+                        @endif
+                    </div>
 
-              </div>
-              <div class="swiper-pagination"></div>
+                    @if($project->gallery_images && count($project->gallery_images) > 1)
+                        <div class="mt-3" data-aos="fade-up" data-aos-delay="350">
+                            <p class="small text-muted mb-2">
+                                <i class="bi bi-images me-1"></i>
+                                {{ count($project->gallery_images) }} screenshots in gallery
+                            </p>
+                        </div>
+                    @endif
+
+                    <div class="mt-4" data-aos="fade-up" data-aos-delay="400">
+                        <a href="{{ route('portfolio') }}" class="btn btn-outline-secondary btn-sm">
+                            <i class="bi bi-arrow-left me-1"></i> Back to Portfolio
+                        </a>
+                    </div>
+
+                </div><!-- End right column -->
+
             </div>
-          </div>
-
-          <div class="col-lg-4">
-            <div class="portfolio-info" data-aos="fade-up" data-aos-delay="200">
-              <h3>Project information</h3>
-              <ul>
-                <li><strong>Category</strong>: Web design</li>
-                <li><strong>Client</strong>: ASU Company</li>
-                <li><strong>Project date</strong>: 01 March, 2020</li>
-                <li><strong>Project URL</strong>: <a href="#">www.example.com</a></li>
-              </ul>
-            </div>
-            <div class="portfolio-description" data-aos="fade-up" data-aos-delay="300">
-              <h2>Exercitationem repudiandae officiis neque suscipit</h2>
-              <p>
-                Autem ipsum nam porro corporis rerum. Quis eos dolorem eos itaque inventore commodi labore quia quia. Exercitationem repudiandae officiis neque suscipit non officia eaque itaque enim. Voluptatem officia accusantium nesciunt est omnis tempora consectetur dignissimos. Sequi nulla at esse enim cum deserunt eius.
-              </p>
-            </div>
-          </div>
-
         </div>
-
-      </div>
-
     </section><!-- /Portfolio Details Section -->
+
 @endsection

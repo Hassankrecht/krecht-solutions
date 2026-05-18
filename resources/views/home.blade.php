@@ -1,5 +1,4 @@
 @extends('layouts.app')
-@section('body_class', 'index-page')
 @section('content')
 
  <section id="hero" class="hero section dark-background">
@@ -7,15 +6,15 @@
       <div class="container">
         <div class="row gy-4">
           <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center" data-aos="zoom-out">
-            <h1>{{ $siteTagline ?? 'Software & IT Services' }}</h1>
-            <p>{{ $siteName ?? 'Krecht Solutions' }} - Professional software development and IT solutions for your business needs</p>
+            <h1>{{ $siteTagline ?? 'Custom Software Solutions for Modern Businesses' }}</h1>
+            <p>We build modern websites, mobile apps, dashboards, and business systems tailored to your workflow.</p>
             <div class="d-flex">
               <a href="{{ route('services') }}" class="btn-get-started">Get Started</a>
               <a href="{{ route('portfolio') }}" class="glightbox btn-watch-video d-flex align-items-center"><i class="bi bi-play-circle"></i><span>View Portfolio</span></a>
             </div>
           </div>
           <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-out" data-aos-delay="200">
-            <img src="{{ asset('assets/img/hero-img.png') }}" class="img-fluid animated" alt="">
+            <img src="{{ asset('assets/img/hero/hero-it.svg') }}" class="img-fluid animated" alt="Custom software development illustration – Krecht Solutions">
           </div>
         </div>
       </div>
@@ -186,43 +185,57 @@
         <div class="row">
 
           <div class="col-lg-6 d-flex align-items-center">
-            <img src="{{ asset('assets/img/illustration/illustration-10.webp') }}" class="img-fluid" alt="">
+            <img src="{{ asset('assets/img/expertise/expertise-dashboard.svg') }}" class="img-fluid" alt="Software analytics dashboard – Krecht Solutions">
           </div>
 
           <div class="col-lg-6 pt-4 pt-lg-0 content">
 
             <h3>Our Expertise</h3>
-            <p class="fst-italic">
-              We specialize in modern software development technologies and best practices to deliver exceptional results.
+            <p>
+              We build custom web applications, mobile apps, and business systems using a focused stack of proven technologies. Every solution is engineered for reliability, scalability, and long-term maintainability — so your software grows with your business.
             </p>
 
             <div class="skills-content skills-animation">
 
               <div class="progress">
-                <span class="skill"><span>Laravel</span> <i class="val">95%</i></span>
+                <span class="skill"><span>Laravel Development</span></span>
                 <div class="progress-bar-wrap">
                   <div class="progress-bar" role="progressbar" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
               </div><!-- End Skills Item -->
 
               <div class="progress">
-                <span class="skill"><span>Flutter</span> <i class="val">90%</i></span>
+                <span class="skill"><span>Flutter Applications</span></span>
                 <div class="progress-bar-wrap">
                   <div class="progress-bar" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
               </div><!-- End Skills Item -->
 
               <div class="progress">
-                <span class="skill"><span>React / Vue</span> <i class="val">85%</i></span>
+                <span class="skill"><span>Business Dashboards</span></span>
+                <div class="progress-bar-wrap">
+                  <div class="progress-bar" role="progressbar" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+              </div><!-- End Skills Item -->
+
+              <div class="progress">
+                <span class="skill"><span>REST API Integration</span></span>
+                <div class="progress-bar-wrap">
+                  <div class="progress-bar" role="progressbar" aria-valuenow="92" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+              </div><!-- End Skills Item -->
+
+              <div class="progress">
+                <span class="skill"><span>POS &amp; Management Systems</span></span>
                 <div class="progress-bar-wrap">
                   <div class="progress-bar" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
               </div><!-- End Skills Item -->
 
               <div class="progress">
-                <span class="skill"><span>API Development</span> <i class="val">92%</i></span>
+                <span class="skill"><span>Database Architecture</span></span>
                 <div class="progress-bar-wrap">
-                  <div class="progress-bar" role="progressbar" aria-valuenow="92" aria-valuemin="0" aria-valuemax="100"></div>
+                  <div class="progress-bar" role="progressbar" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
               </div><!-- End Skills Item -->
 
@@ -252,8 +265,8 @@
               <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="{{ ($index + 1) * 100 }}">
                 <div class="service-item position-relative">
                   <div class="icon"><i class="{{ $service->icon }} icon"></i></div>
-                  <h4><a href="{{ route('services') }}" class="stretched-link">{{ $service->title }}</a></h4>
-                  <p>{{ $service->short_description ?: Str::limit($service->description, 100) }}</p>
+                  <h4><a href="{{ route('services') }}" class="stretched-link">{{ $service->name }}</a></h4>
+                  <p>{{ Str::limit($service->description, 100) }}</p>
                 </div>
               </div><!-- End Service Item -->
             @endforeach

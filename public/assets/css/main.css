@@ -147,7 +147,7 @@ h6 {
   --heading-color: #ffffff;
   color: var(--default-color);
   background-color: var(--background-color);
-  padding: 15px 0;
+  padding: 8px 0;
   transition: all 0.5s;
   z-index: 997;
 }
@@ -157,8 +157,16 @@ h6 {
 }
 
 .header .logo img {
-  max-height: 36px;
+  max-height: 60px;
+  height: auto;
+  width: auto;
   margin-right: 8px;
+}
+
+@media (max-width: 768px) {
+  .header .logo img {
+    max-height: 46px;
+  }
 }
 
 .header .logo h1 {
@@ -783,7 +791,7 @@ section,
   color: var(--default-color);
   background-color: var(--background-color);
   padding: 60px 0;
-  scroll-margin-top: 88px;
+  scroll-margin-top: 116px;
   overflow: clip;
 }
 
@@ -791,7 +799,7 @@ section,
 
   section,
   .section {
-    scroll-margin-top: 66px;
+    scroll-margin-top: 116px;
   }
 }
 

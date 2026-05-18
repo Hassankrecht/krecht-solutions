@@ -8,7 +8,7 @@
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
   <!-- Favicons -->
-  <link href="{{ asset('assets/img/favicon.png') }}" rel="icon">
+  <link href="{{ asset('assets/img/logo/logo-solution.png') }}" rel="icon" type="image/png">
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com" rel="preconnect">
@@ -34,7 +34,7 @@
     <div class="container-fluid container-xl position-relative d-flex align-items-center">
 
       <a href="{{ route('home') }}" class="logo d-flex align-items-center me-auto">
-        <h1 class="sitename">Krecht Solutions</h1>
+        <img src="{{ asset('assets/img/logo/logo-solution.png') }}" alt="Krecht Solutions">
       </a>
 
       <nav id="navmenu" class="navmenu">
@@ -63,7 +63,7 @@
       <div class="row gy-4">
         <div class="col-lg-5 col-md-12 footer-about">
           <a href="{{ route('home') }}" class="logo d-flex align-items-center">
-            <span class="sitename">Krecht Solutions</span>
+            <img src="{{ asset('assets/img/logo/logo-solution.png') }}" alt="Krecht Solutions" style="max-height: 80px; height: auto; width: auto; filter: brightness(0) invert(1);">
           </a>
           <p class="mt-3">Professional software development and IT solutions. We build modern, scalable systems tailored to your business needs.</p>
           <div class="social-links d-flex mt-4">

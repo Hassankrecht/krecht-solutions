@@ -17,7 +17,7 @@ class SiteSettingSeeder extends Seeder
             ],
             [
                 'key' => 'site_tagline',
-                'value' => 'Software & IT Services',
+                'value' => 'Custom Software Solutions for Modern Businesses',
                 'type' => 'text',
             ],
             [

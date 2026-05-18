@@ -5,10 +5,7 @@
   <meta charset="UTF-8" />
   <title>Admin Dashboard - Krecht Solutions</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('assets/admin/images/favicon_io/apple-touch-icon.png') }}">
-  <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('assets/admin/images/favicon_io/favicon-32x32.png') }}">
-  <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/admin/images/favicon_io/favicon-16x16.png') }}">
-  <link rel="manifest" href="{{ asset('assets/admin/images/favicon_io/site.webmanifest') }}">
+  <link rel="icon" type="image/png" href="{{ asset('assets/img/logo/logo-solution.png') }}">
   <!-- Google Fonts: Poppins -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -146,8 +143,8 @@
   <!-- SIDEBAR -->
   <aside id="sidebar" class="sidebar">
     <div class="logo-area">
-     <a href="{{ route('admin.dashboard') }}" class="d-inline-flex"><img src="{{ asset('assets/admin/images/logo-icon.svg') }}" alt="" width="24">
-        <span class="logo-text ms-2"> <img src="{{ asset('assets/admin/images/logo.svg') }}" alt=""></span>
+      <a href="{{ route('admin.dashboard') }}" class="d-inline-flex align-items-center">
+        <img src="{{ asset('assets/img/logo/logo-solution.png') }}" alt="Krecht Solutions" style="max-height: 50px; width: auto; max-width: 200px;">
       </a>
     </div>
     <ul class="nav flex-column">

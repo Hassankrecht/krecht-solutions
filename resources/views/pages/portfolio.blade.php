@@ -42,7 +42,7 @@
                                 @if($project->image)
                                     <a href="{{ asset($project->image) }}" title="{{ $project->title }}" data-gallery="portfolio-gallery" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
                                 @endif
-                                <a href="#" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+                                <a href="{{ route('portfolio.show', $project) }}" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
                             </div>
                         </div>
                     @endforeach

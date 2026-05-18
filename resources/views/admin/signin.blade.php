@@ -4,8 +4,8 @@
   <div class="card " style="max-width:420px; width:100%;">
     <div class="card-body p-5">
       <div class="text-center mb-3">
-      <a href="{{ route('home') }}" class="mb-4 d-inline-block"><img src="{{ asset('assets/admin/images/logo-icon.svg') }}" alt="" width="36">
-      <span class=" ms-2"> <img src="{{ asset('assets/admin/images/logo.svg') }}" alt=""></span>
+      <a href="{{ route('home') }}" class="mb-4 d-inline-block">
+        <img src="{{ asset('assets/img/logo/logo-solution.png') }}" alt="Krecht Solutions" style="max-height: 70px; width: auto;">
       </a>
         <h1 class="card-title mb-5 h5">Sign in to your account</h1>
 

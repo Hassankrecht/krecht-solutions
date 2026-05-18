@@ -14,13 +14,16 @@ class Project extends Model
         'description',
         'category',
         'image',
+        'gallery_images',
+        'video',
         'technologies',
         'is_active',
         'order',
     ];
 
     protected $casts = [
-        'is_active' => 'boolean',
+        'is_active'      => 'boolean',
+        'gallery_images' => 'array',
     ];
 
     public function scopeActive($query)

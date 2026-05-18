@@ -44,4 +44,14 @@ class PageController extends Controller
         
         return view('pages.portfolio', compact('projects', 'categories', 'siteName', 'siteTagline'));
     }
+
+    public function portfolioShow(Project $project)
+    {
+        abort_unless($project->is_active, 404);
+
+        $siteName    = SiteSetting::get('site_name', 'Krecht Solutions');
+        $siteTagline = SiteSetting::get('site_tagline', 'Software & IT Services');
+
+        return view('portfolio-details', compact('project', 'siteName', 'siteTagline'));
+    }
 }

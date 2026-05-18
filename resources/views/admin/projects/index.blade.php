@@ -28,6 +28,7 @@
             <thead class="table-light">
                 <tr>
                     <th>#</th>
+                    <th style="width:70px;">Image</th>
                     <th>Title</th>
                     <th>Category</th>
                     <th>Technologies</th>
@@ -40,6 +41,14 @@
                 @forelse($projects as $project)
                     <tr>
                         <td class="text-muted small">{{ $project->id }}</td>
+                        <td>
+                            @if($project->image)
+                                <img src="{{ asset($project->image) }}" alt=""
+                                     style="width:60px;height:44px;object-fit:cover;" class="rounded border">
+                            @else
+                                <span class="text-muted small">—</span>
+                            @endif
+                        </td>
                         <td>
                             <div class="fw-semibold">{{ $project->title }}</div>
                             @if($project->description)
@@ -68,7 +77,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="7" class="text-center py-5 text-muted">
+                        <td colspan="8" class="text-center py-5 text-muted">
                             <i class="ti ti-inbox fs-2 d-block mb-2"></i>
                             No projects found. <a href="{{ route('admin.projects.create') }}">Add one now.</a>
                         </td>
