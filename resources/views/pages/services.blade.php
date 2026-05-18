@@ -6,8 +6,8 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
-                <h1>Our Services</h1>
-                <p>Comprehensive software solutions for your business needs</p>
+                <h1>{{ __('messages.services_hero_title') }}</h1>
+                <p>{{ __('messages.services_hero_subtitle') }}</p>
             </div>
         </div>
     </div>
@@ -16,8 +16,8 @@
 <!-- Services Section -->
 <section class="services section light-background">
     <div class="container section-title" data-aos="fade-up">
-        <h2>What We Offer</h2>
-        <p>Professional software development services tailored to your needs</p>
+        <h2>{{ __('messages.services_offer_title') }}</h2>
+        <p>{{ __('messages.services_offer_subtitle') }}</p>
     </div>
 
     <div class="container">
@@ -101,11 +101,11 @@
     <div class="container">
         <div class="row" data-aos="zoom-in" data-aos-delay="100">
             <div class="col-xl-9 text-center text-xl-start">
-                <h3>Need a Custom Solution?</h3>
-                <p>Contact us to discuss your specific requirements and get a custom quote.</p>
+                <h3>{{ __('messages.cta_custom_title') }}</h3>
+                <p>{{ __('messages.cta_custom_desc') }}</p>
             </div>
             <div class="col-xl-3 cta-btn-container text-center">
-                <a class="cta-btn align-middle" href="{{ route('contact') }}">Get a Quote</a>
+                <a class="cta-btn align-middle" href="{{ route('contact') }}">{{ __('messages.cta_custom_button') }}</a>
             </div>
         </div>
     </div>

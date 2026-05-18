@@ -6,11 +6,11 @@
       <div class="container">
         <div class="row gy-4">
           <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center" data-aos="zoom-out">
-            <h1>{{ $siteTagline ?? 'Custom Software Solutions for Modern Businesses' }}</h1>
-            <p>We build modern websites, mobile apps, dashboards, and business systems tailored to your workflow.</p>
+            <h1>{{ $siteTagline ?? __('messages.hero_title') }}</h1>
+            <p>{{ __('messages.hero_description') }}</p>
             <div class="d-flex">
-              <a href="{{ route('services') }}" class="btn-get-started">Get Started</a>
-              <a href="{{ route('portfolio') }}" class="glightbox btn-watch-video d-flex align-items-center"><i class="bi bi-play-circle"></i><span>View Portfolio</span></a>
+              <a href="{{ route('services') }}" class="btn-get-started">{{ __('messages.hero_get_started') }}</a>
+              <a href="{{ route('portfolio') }}" class="glightbox btn-watch-video d-flex align-items-center"><i class="bi bi-play-circle"></i><span>{{ __('messages.hero_view_portfolio') }}</span></a>
             </div>
           </div>
           <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-out" data-aos-delay="200">
@@ -85,7 +85,7 @@
 
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
-        <h2>About Us</h2>
+        <h2>{{ __('messages.about_title') }}</h2>
       </div><!-- End Section Title -->
 
       <div class="container">
@@ -94,18 +94,18 @@
 
           <div class="col-lg-6 content" data-aos="fade-up" data-aos-delay="100">
             <p>
-              {{ $siteName ?? 'Krecht Solutions' }} is a leading software development company specializing in custom web and mobile applications, business systems, and IT solutions.
+              {{ $siteName ?? 'Krecht Solutions' }} {{ __('messages.about_description') }}
             </p>
             <ul>
-              <li><i class="bi bi-check2-circle"></i> <span>Expert team with years of experience in software development</span></li>
-              <li><i class="bi bi-check2-circle"></i> <span>Custom solutions tailored to your business needs</span></li>
-              <li><i class="bi bi-check2-circle"></i> <span>Modern technologies and best practices</span></li>
+              <li><i class="bi bi-check2-circle"></i> <span>{{ __('messages.about_point_1') }}</span></li>
+              <li><i class="bi bi-check2-circle"></i> <span>{{ __('messages.about_point_2') }}</span></li>
+              <li><i class="bi bi-check2-circle"></i> <span>{{ __('messages.about_point_3') }}</span></li>
             </ul>
           </div>
 
           <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
-            <p>We deliver high-quality software solutions that help businesses grow and succeed in the digital age. From websites and mobile apps to complex business systems, we have the expertise to bring your vision to life.</p>
-            <a href="{{ route('about') }}" class="read-more"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
+            <p>{{ __('messages.about_more_description') }}</p>
+            <a href="{{ route('about') }}" class="read-more"><span>{{ __('messages.about_read_more') }}</span><i class="bi bi-arrow-right"></i></a>
           </div>
 
         </div>
@@ -124,9 +124,9 @@
           <div class="col-lg-7 d-flex flex-column justify-content-center order-2 order-lg-1">
 
             <div class="content px-xl-5" data-aos="fade-up" data-aos-delay="100">
-              <h3><span>Why Businesses </span><strong>Choose Krecht Solutions</strong></h3>
+              <h3><span>{{ __('messages.why_us_title') }} </span><strong>{{ __('messages.why_us_title_highlight') }}</strong></h3>
               <p>
-                We build custom software that fits your business — from Laravel-powered web systems and Flutter mobile apps to dashboards, APIs, and integrations. Every solution is designed to scale, with long-term support so your team is never left behind.
+                {{ __('messages.why_us_description') }}
               </p>
             </div>
 
@@ -143,37 +143,37 @@
                 @endforeach
               @else
                 <div class="faq-item faq-active">
-                  <h3><span>01</span> What technologies do you build with?</h3>
+                  <h3><span>01</span> {{ __('messages.faq_default_1_question') }}</h3>
                   <div class="faq-content">
-                    <p>We specialise in Laravel for backend and web applications, and Flutter for cross-platform mobile apps. We also work with MySQL, REST APIs, Bootstrap, and Vue.js — chosen for reliability, performance, and long-term maintainability.</p>
+                    <p>{{ __('messages.faq_default_1_answer') }}</p>
                   </div>
                   <i class="faq-toggle bi bi-chevron-right"></i>
                 </div>
                 <div class="faq-item">
-                  <h3><span>02</span> How long does a typical project take?</h3>
+                  <h3><span>02</span> {{ __('messages.faq_default_2_question') }}</h3>
                   <div class="faq-content">
-                    <p>Timelines depend on scope. A focused landing page or simple system is typically 1–2 weeks, while a full business dashboard or mobile app runs 4–10 weeks. We provide a detailed estimate after our initial discovery session.</p>
+                    <p>{{ __('messages.faq_default_2_answer') }}</p>
                   </div>
                   <i class="faq-toggle bi bi-chevron-right"></i>
                 </div>
                 <div class="faq-item">
-                  <h3><span>03</span> Can you build a custom dashboard or admin panel?</h3>
+                  <h3><span>03</span> {{ __('messages.faq_default_3_question') }}</h3>
                   <div class="faq-content">
-                    <p>Yes. We build role-based admin dashboards tailored to your workflow — including reporting, data management, user permissions, and real-time analytics. Every dashboard is built custom, not from a generic template.</p>
+                    <p>{{ __('messages.faq_default_3_answer') }}</p>
                   </div>
                   <i class="faq-toggle bi bi-chevron-right"></i>
                 </div>
                 <div class="faq-item">
-                  <h3><span>04</span> Do you provide support after launch?</h3>
+                  <h3><span>04</span> {{ __('messages.faq_default_4_question') }}</h3>
                   <div class="faq-content">
-                    <p>Absolutely. We offer ongoing maintenance and support packages covering bug fixes, feature updates, performance monitoring, and security patches — so your system stays reliable as your business grows.</p>
+                    <p>{{ __('messages.faq_default_4_answer') }}</p>
                   </div>
                   <i class="faq-toggle bi bi-chevron-right"></i>
                 </div>
                 <div class="faq-item">
-                  <h3><span>05</span> Can you integrate with our existing systems or third-party APIs?</h3>
+                  <h3><span>05</span> {{ __('messages.faq_default_5_question') }}</h3>
                   <div class="faq-content">
-                    <p>Yes. API integration is a core part of what we do — whether connecting to payment gateways, ERP platforms, logistics providers, or any REST-based service. We can also build the API layer that your mobile app or external partners consume.</p>
+                    <p>{{ __('messages.faq_default_5_answer') }}</p>
                   </div>
                   <i class="faq-toggle bi bi-chevron-right"></i>
                 </div>
@@ -204,50 +204,50 @@
 
           <div class="col-lg-6 pt-4 pt-lg-0 content">
 
-            <h3>Our Expertise</h3>
+            <h3>{{ __('messages.expertise_title') }}</h3>
             <p>
-              Krecht Solutions specialises in Laravel-powered web systems, Flutter mobile apps, custom business dashboards, and REST API integrations. We architect scalable databases and write clean, maintainable code — delivering software built to grow with your business.
+              {{ __('messages.expertise_description') }}
             </p>
 
             <div class="skills-content skills-animation">
 
               <div class="progress">
-                <span class="skill"><span>Laravel Development</span></span>
+                <span class="skill"><span>{{ __('messages.skill_laravel') }}</span></span>
                 <div class="progress-bar-wrap">
                   <div class="progress-bar" role="progressbar" aria-valuenow="92" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
               </div><!-- End Skills Item -->
 
               <div class="progress">
-                <span class="skill"><span>Flutter Applications</span></span>
+                <span class="skill"><span>{{ __('messages.skill_flutter') }}</span></span>
                 <div class="progress-bar-wrap">
                   <div class="progress-bar" role="progressbar" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
               </div><!-- End Skills Item -->
 
               <div class="progress">
-                <span class="skill"><span>Business Dashboards</span></span>
+                <span class="skill"><span>{{ __('messages.skill_dashboards') }}</span></span>
                 <div class="progress-bar-wrap">
                   <div class="progress-bar" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
               </div><!-- End Skills Item -->
 
               <div class="progress">
-                <span class="skill"><span>REST API Integration</span></span>
+                <span class="skill"><span>{{ __('messages.skill_api') }}</span></span>
                 <div class="progress-bar-wrap">
                   <div class="progress-bar" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
               </div><!-- End Skills Item -->
 
               <div class="progress">
-                <span class="skill"><span>POS &amp; Management Systems</span></span>
+                <span class="skill"><span>{{ __('messages.skill_pos') }}</span></span>
                 <div class="progress-bar-wrap">
                   <div class="progress-bar" role="progressbar" aria-valuenow="86" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
               </div><!-- End Skills Item -->
 
               <div class="progress">
-                <span class="skill"><span>Database Architecture</span></span>
+                <span class="skill"><span>{{ __('messages.skill_database') }}</span></span>
                 <div class="progress-bar-wrap">
                   <div class="progress-bar" role="progressbar" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
@@ -267,8 +267,8 @@
 
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
-        <h2>Services</h2>
-        <p>Comprehensive software solutions for your business needs</p>
+        <h2>{{ __('messages.services_title') }}</h2>
+        <p>{{ __('messages.services_subtitle') }}</p>
       </div><!-- End Section Title -->
 
       <div class="container">
@@ -288,57 +288,57 @@
             <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="100">
               <div class="service-item position-relative">
                 <div class="icon"><i class="bi bi-window-stack icon"></i></div>
-                <h4><a href="{{ route('services') }}" class="stretched-link">Website Development</a></h4>
-                <p>Responsive, fast, and secure websites tailored to your business needs.</p>
+                <h4><a href="{{ route('services') }}" class="stretched-link">{{ __('messages.service_website_title') }}</a></h4>
+                <p>{{ __('messages.service_website_desc') }}</p>
               </div>
             </div>
             <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="200">
               <div class="service-item position-relative">
                 <div class="icon"><i class="bi bi-phone-landscape icon"></i></div>
-                <h4><a href="{{ route('services') }}" class="stretched-link">Flutter Mobile Applications</a></h4>
-                <p>Cross-platform mobile apps for iOS and Android from a single codebase.</p>
+                <h4><a href="{{ route('services') }}" class="stretched-link">{{ __('messages.service_mobile_title') }}</a></h4>
+                <p>{{ __('messages.service_mobile_desc') }}</p>
               </div>
             </div>
             <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="300">
               <div class="service-item position-relative">
                 <div class="icon"><i class="bi bi-layout-sidebar icon"></i></div>
-                <h4><a href="{{ route('services') }}" class="stretched-link">Laravel Dashboards</a></h4>
-                <p>Feature-rich admin dashboards and management systems built with Laravel.</p>
+                <h4><a href="{{ route('services') }}" class="stretched-link">{{ __('messages.service_dashboard_title') }}</a></h4>
+                <p>{{ __('messages.service_dashboard_desc') }}</p>
               </div>
             </div>
             <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="400">
               <div class="service-item position-relative">
                 <div class="icon"><i class="bi bi-braces-asterisk icon"></i></div>
-                <h4><a href="{{ route('services') }}" class="stretched-link">API Development</a></h4>
-                <p>Robust, secure, and well-documented APIs for your applications.</p>
+                <h4><a href="{{ route('services') }}" class="stretched-link">{{ __('messages.service_api_title') }}</a></h4>
+                <p>{{ __('messages.service_api_desc') }}</p>
               </div>
             </div>
             <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="500">
               <div class="service-item position-relative">
                 <div class="icon"><i class="bi bi-receipt-cutoff icon"></i></div>
-                <h4><a href="{{ route('services') }}" class="stretched-link">POS Systems</a></h4>
-                <p>Complete POS solutions with inventory, sales tracking, and reporting.</p>
+                <h4><a href="{{ route('services') }}" class="stretched-link">{{ __('messages.service_pos_title') }}</a></h4>
+                <p>{{ __('messages.service_pos_desc') }}</p>
               </div>
             </div>
             <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="600">
               <div class="service-item position-relative">
                 <div class="icon"><i class="bi bi-graph-up-arrow icon"></i></div>
-                <h4><a href="{{ route('services') }}" class="stretched-link">Stock &amp; Accounting Systems</a></h4>
-                <p>Track inventory, manage finances, and generate detailed business reports.</p>
+                <h4><a href="{{ route('services') }}" class="stretched-link">{{ __('messages.service_stock_title') }}</a></h4>
+                <p>{{ __('messages.service_stock_desc') }}</p>
               </div>
             </div>
             <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="700">
               <div class="service-item position-relative">
                 <div class="icon"><i class="bi bi-qr-code-scan icon"></i></div>
-                <h4><a href="{{ route('services') }}" class="stretched-link">QR Menu Systems</a></h4>
-                <p>Contactless digital menus for restaurants and cafes.</p>
+                <h4><a href="{{ route('services') }}" class="stretched-link">{{ __('messages.service_qr_title') }}</a></h4>
+                <p>{{ __('messages.service_qr_desc') }}</p>
               </div>
             </div>
             <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="800">
               <div class="service-item position-relative">
                 <div class="icon"><i class="bi bi-wrench-adjustable-circle icon"></i></div>
-                <h4><a href="{{ route('services') }}" class="stretched-link">Technical Support &amp; Maintenance</a></h4>
-                <p>Expert support to keep your systems running smoothly and reliably.</p>
+                <h4><a href="{{ route('services') }}" class="stretched-link">{{ __('messages.service_support_title') }}</a></h4>
+                <p>{{ __('messages.service_support_desc') }}</p>
               </div>
             </div>
           @endif
@@ -353,8 +353,8 @@
 
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
-        <h2>Work Process</h2>
-        <p>From initial discovery through to deployment, we follow a clear process that keeps projects on track and stakeholders informed.</p>
+        <h2>{{ __('messages.process_title') }}</h2>
+        <p>{{ __('messages.process_subtitle') }}</p>
       </div><!-- End Section Title -->
 
       <div class="container" data-aos="fade-up" data-aos-delay="100">
@@ -368,20 +368,20 @@
               </div>
               <div class="steps-content">
                 <div class="steps-number">01</div>
-                <h3>Research &amp; Analysis</h3>
-                <p>We start by understanding your business, your users, and your goals — mapping every requirement before a single line of code is written.</p>
+                <h3>{{ __('messages.process_step_1_title') }}</h3>
+                <p>{{ __('messages.process_step_1_desc') }}</p>
                 <div class="steps-features">
                   <div class="feature-item">
                     <i class="bi bi-check-circle"></i>
-                    <span>Market Research</span>
+                    <span>{{ __('messages.process_step_1_feature_1') }}</span>
                   </div>
                   <div class="feature-item">
                     <i class="bi bi-check-circle"></i>
-                    <span>Data Analysis</span>
+                    <span>{{ __('messages.process_step_1_feature_2') }}</span>
                   </div>
                   <div class="feature-item">
                     <i class="bi bi-check-circle"></i>
-                    <span>User Feedback</span>
+                    <span>{{ __('messages.process_step_1_feature_3') }}</span>
                   </div>
                 </div>
               </div>
@@ -395,20 +395,20 @@
               </div>
               <div class="steps-content">
                 <div class="steps-number">02</div>
-                <h3>Design &amp; Planning</h3>
-                <p>We produce clean wireframes and define the technical architecture — aligning the solution with your workflow before development begins.</p>
+                <h3>{{ __('messages.process_step_2_title') }}</h3>
+                <p>{{ __('messages.process_step_2_desc') }}</p>
                 <div class="steps-features">
                   <div class="feature-item">
                     <i class="bi bi-check-circle"></i>
-                    <span>Wireframing</span>
+                    <span>{{ __('messages.process_step_2_feature_1') }}</span>
                   </div>
                   <div class="feature-item">
                     <i class="bi bi-check-circle"></i>
-                    <span>UI/UX Design</span>
+                    <span>{{ __('messages.process_step_2_feature_2') }}</span>
                   </div>
                   <div class="feature-item">
                     <i class="bi bi-check-circle"></i>
-                    <span>Prototyping</span>
+                    <span>{{ __('messages.process_step_2_feature_3') }}</span>
                   </div>
                 </div>
               </div>
@@ -422,20 +422,20 @@
               </div>
               <div class="steps-content">
                 <div class="steps-number">03</div>
-                <h3>Development &amp; Launch</h3>
-                <p>We build, test, and deploy your solution — then remain available for ongoing support and iterations as your business grows.</p>
+                <h3>{{ __('messages.process_step_3_title') }}</h3>
+                <p>{{ __('messages.process_step_3_desc') }}</p>
                 <div class="steps-features">
                   <div class="feature-item">
                     <i class="bi bi-check-circle"></i>
-                    <span>Development</span>
+                    <span>{{ __('messages.process_step_3_feature_1') }}</span>
                   </div>
                   <div class="feature-item">
                     <i class="bi bi-check-circle"></i>
-                    <span>Testing</span>
+                    <span>{{ __('messages.process_step_3_feature_2') }}</span>
                   </div>
                   <div class="feature-item">
                     <i class="bi bi-check-circle"></i>
-                    <span>Deployment</span>
+                    <span>{{ __('messages.process_step_3_feature_3') }}</span>
                   </div>
                 </div>
               </div>
@@ -457,11 +457,11 @@
 
         <div class="row" data-aos="zoom-in" data-aos-delay="100">
           <div class="col-xl-9 text-center text-xl-start">
-            <h3>Ready to Start Your Project?</h3>
-            <p>Contact us today to discuss your software development needs and let us help you bring your vision to life.</p>
+            <h3>{{ __('messages.cta_title') }}</h3>
+            <p>{{ __('messages.cta_description') }}</p>
           </div>
           <div class="col-xl-3 cta-btn-container text-center">
-            <a class="cta-btn align-middle" href="{{ route('contact') }}">Contact Us</a>
+            <a class="cta-btn align-middle" href="{{ route('contact') }}">{{ __('messages.cta_button') }}</a>
           </div>
         </div>
 
@@ -474,8 +474,8 @@
 
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
-        <h2>Portfolio</h2>
-        <p>Check out some of our recent projects</p>
+        <h2>{{ __('messages.portfolio_title') }}</h2>
+        <p>{{ __('messages.portfolio_subtitle') }}</p>
       </div><!-- End Section Title -->
 
       <div class="container">
@@ -483,7 +483,7 @@
         <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
 
           <ul class="portfolio-filters isotope-filters" data-aos="fade-up" data-aos-delay="100">
-            <li data-filter="*" class="filter-active">All</li>
+            <li data-filter="*" class="filter-active">{{ __('messages.portfolio_filter_all') }}</li>
             @if($projects && $projects->count() > 0)
               @foreach($projects->pluck('category')->unique() as $category)
                 <li data-filter=".filter-{{ Str::slug($category) }}">{{ $category }}</li>
@@ -541,7 +541,7 @@
                     <div class="portfolio-placeholder" style="background:{{ $gradient }}">
                       <div class="placeholder-inner">
                         <i class="bi {{ $icon }}"></i>
-                        <span class="cs-badge">Coming Soon</span>
+                        <span class="cs-badge">{{ __('messages.portfolio_coming_soon') }}</span>
                       </div>
                     </div>
                   @endif
@@ -551,13 +551,13 @@
                     @if($project->image)
                       <a href="{{ asset($project->image) }}" title="{{ $project->title }}" data-gallery="portfolio-gallery" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
                     @endif
-                    <a href="{{ route('portfolio') }}" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+                    <a href="{{ route('portfolio') }}" title="{{ __('messages.portfolio_more_details') }}" class="details-link"><i class="bi bi-link-45deg"></i></a>
                   </div>
                 </div><!-- End Portfolio Item -->
               @endforeach
             @else
               <div class="col-12 text-center">
-                <p>No projects available yet. Check back soon!</p>
+                <p>{{ __('messages.portfolio_no_projects') }}</p>
               </div>
             @endif
           </div><!-- End Portfolio Container -->
@@ -574,8 +574,8 @@
 
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
-        <h2>Pricing</h2>
-        <p>Choose the package that fits your needs</p>
+        <h2>{{ __('messages.pricing_title') }}</h2>
+        <p>{{ __('messages.pricing_subtitle') }}</p>
       </div><!-- End Section Title -->
 
       <div class="container">
@@ -589,8 +589,8 @@
 
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
-        <h2>Testimonials</h2>
-        <p>What our clients say about us</p>
+        <h2>{{ __('messages.testimonials_title') }}</h2>
+        <p>{{ __('messages.testimonials_subtitle') }}</p>
       </div><!-- End Section Title -->
 
       <div class="container" data-aos="fade-up" data-aos-delay="100">
@@ -639,7 +639,7 @@
           </div>
         @else
           <div class="text-center text-muted mb-5">
-            <p class="mb-0">No approved testimonials are available yet.</p>
+            <p class="mb-0">{{ __('messages.testimonials_no_testimonials') }}</p>
           </div>
         @endif
 
@@ -648,7 +648,7 @@
             <div class="col-lg-8">
               <div class="text-center mb-4">
                 <button class="btn-submit-testimonial" type="button" data-bs-toggle="collapse" data-bs-target="#testimonialForm" aria-expanded="{{ $errors->any() || session('testimonial_success') ? 'true' : 'false' }}" aria-controls="testimonialForm">
-                  Add Your Testimonial
+                  {{ __('messages.testimonials_add_yours') }}
                 </button>
               </div>
 
@@ -663,32 +663,32 @@
                   @csrf
                   <div class="row gy-3">
                     <div class="col-md-6">
-                      <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" placeholder="Client name" required>
+                      <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" placeholder="{{ __('messages.testimonials_form_name') }}" required>
                       @error('name')
                         <div class="invalid-feedback">{{ $message }}</div>
                       @enderror
                     </div>
                     <div class="col-md-6">
-                      <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}" placeholder="Email" required>
+                      <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}" placeholder="{{ __('messages.testimonials_form_email') }}" required>
                       @error('email')
                         <div class="invalid-feedback">{{ $message }}</div>
                       @enderror
                     </div>
                     <div class="col-md-6">
-                      <input type="text" name="position" class="form-control @error('position') is-invalid @enderror" value="{{ old('position') }}" placeholder="Position">
+                      <input type="text" name="position" class="form-control @error('position') is-invalid @enderror" value="{{ old('position') }}" placeholder="{{ __('messages.testimonials_form_position') }}">
                       @error('position')
                         <div class="invalid-feedback">{{ $message }}</div>
                       @enderror
                     </div>
                     <div class="col-md-6">
-                      <input type="text" name="company" class="form-control @error('company') is-invalid @enderror" value="{{ old('company') }}" placeholder="Company">
+                      <input type="text" name="company" class="form-control @error('company') is-invalid @enderror" value="{{ old('company') }}" placeholder="{{ __('messages.testimonials_form_company') }}">
                       @error('company')
                         <div class="invalid-feedback">{{ $message }}</div>
                       @enderror
                     </div>
                     <div class="col-md-6">
                       <select name="rating" class="form-select @error('rating') is-invalid @enderror" required>
-                        <option value="">Rating</option>
+                        <option value="">{{ __('messages.testimonials_form_rating') }}</option>
                         @for($i = 5; $i >= 1; $i--)
                           <option value="{{ $i }}" @selected(old('rating') == $i)>{{ $i }} Star{{ $i > 1 ? 's' : '' }}</option>
                         @endfor
@@ -704,13 +704,13 @@
                       @enderror
                     </div>
                     <div class="col-12">
-                      <textarea name="message" rows="5" class="form-control @error('message') is-invalid @enderror" placeholder="Testimonial message" required>{{ old('message') }}</textarea>
-                      @error('message')
+                      <textarea name="content" class="form-control @error('content') is-invalid @enderror" rows="4" placeholder="{{ __('messages.testimonials_form_message') }}" required>{{ old('content') }}</textarea>
+                      @error('content')
                         <div class="invalid-feedback">{{ $message }}</div>
                       @enderror
                     </div>
-                    <div class="col-12 text-center">
-                      <button type="submit" class="btn-submit-testimonial">Submit Testimonial</button>
+                    <div class="col-12 text-center mt-3">
+                      <button type="submit" class="btn btn-primary">{{ __('messages.testimonials_form_submit') }}</button>
                     </div>
                   </div>
                 </form>
@@ -729,8 +729,8 @@
 
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
-        <h2>Contact</h2>
-        <p>Get in touch with us for your software development needs</p>
+        <h2>{{ __('messages.contact_title') }}</h2>
+        <p>{{ __('messages.contact_subtitle') }}</p>
       </div><!-- End Section Title -->
 
       <div class="container" data-aos="fade-up" data-aos-delay="100">
@@ -743,7 +743,7 @@
               <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="200">
                 <i class="bi bi-geo-alt flex-shrink-0"></i>
                 <div>
-                  <h3>Address</h3>
+                  <h3>{{ __('messages.contact_address') }}</h3>
                   <p>{{ \App\Models\SiteSetting::get('contact_address', 'Sour, Lebanon') }}</p>
                 </div>
               </div><!-- End Info Item -->
@@ -751,7 +751,7 @@
               <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="300">
                 <i class="bi bi-telephone flex-shrink-0"></i>
                 <div>
-                  <h3>Call Us</h3>
+                  <h3>{{ __('messages.contact_call') }}</h3>
                   <p>{{ \App\Models\SiteSetting::get('contact_phone', '78768725') }}</p>
                 </div>
               </div><!-- End Info Item -->
@@ -759,7 +759,7 @@
               <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="400">
                 <i class="bi bi-whatsapp flex-shrink-0"></i>
                 <div>
-                  <h3>WhatsApp</h3>
+                  <h3>{{ __('messages.contact_whatsapp_label') }}</h3>
                   <p>{{ \App\Models\SiteSetting::get('contact_whatsapp', 'Available') }}</p>
                 </div>
               </div><!-- End Info Item -->
@@ -767,7 +767,7 @@
               <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="500">
                 <i class="bi bi-clock flex-shrink-0"></i>
                 <div>
-                  <h3>Working Hours</h3>
+                  <h3>{{ __('messages.contact_hours') }}</h3>
                   <p>{{ \App\Models\SiteSetting::get('contact_working_hours', 'Monday - Sunday, 9:00 AM - 5:00 PM') }}</p>
                 </div>
               </div><!-- End Info Item -->
@@ -775,7 +775,7 @@
               <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="600">
                 <i class="bi bi-envelope flex-shrink-0"></i>
                 <div>
-                  <h3>Email Us</h3>
+                  <h3>{{ __('messages.contact_email_label') }}</h3>
                   <p>{{ \App\Models\SiteSetting::get('contact_email', config('mail.from.address')) }}</p>
                 </div>
               </div><!-- End Info Item -->
@@ -789,28 +789,28 @@
               <div class="row gy-4">
 
                 <div class="col-md-6">
-                  <input type="text" name="name" class="form-control" placeholder="Your Name" required="">
+                  <input type="text" name="name" class="form-control" placeholder="{{ __('messages.contact_name') }}" required="">
                   @error('name')
                     <div class="text-danger">{{ $message }}</div>
                   @enderror
                 </div>
 
                 <div class="col-md-6 ">
-                  <input type="email" name="email" class="form-control" placeholder="Your Email" required="">
+                  <input type="email" name="email" class="form-control" placeholder="{{ __('messages.contact_email') }}" required="">
                   @error('email')
                     <div class="text-danger">{{ $message }}</div>
                   @enderror
                 </div>
 
                 <div class="col-md-12">
-                  <input type="text" name="subject" class="form-control" placeholder="Subject">
+                  <input type="text" name="subject" class="form-control" placeholder="{{ __('messages.contact_subject') }}">
                   @error('subject')
                     <div class="text-danger">{{ $message }}</div>
                   @enderror
                 </div>
 
                 <div class="col-md-12">
-                  <textarea class="form-control" name="message" rows="5" placeholder="Message" required=""></textarea>
+                  <textarea class="form-control" name="message" rows="5" placeholder="{{ __('messages.contact_message') }}" required=""></textarea>
                   @error('message')
                     <div class="text-danger">{{ $message }}</div>
                   @enderror
@@ -820,7 +820,7 @@
                   @if(session('success'))
                     <div class="sent-message">{{ session('success') }}</div>
                   @endif
-                  <button type="submit">Send Message</button>
+                  <button type="submit" class="btn-contact-submit">{{ __('messages.contact_send') }}</button>
                 </div>
 
               </div>
@@ -829,6 +829,23 @@
 
         </div>
 
+      </div>
+
+      <!-- Map Section -->
+      <div class="container" data-aos="fade-up" data-aos-delay="300">
+        <div class="row">
+          <div class="col-12">
+            <iframe
+              src="https://maps.google.com/maps?q=Sour,Lebanon&t=&z=13&ie=UTF8&iwloc=&output=embed"
+              width="100%"
+              height="400"
+              style="border:0;"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+          </div>
+        </div>
       </div>
 
     </section><!-- /Contact Section -->

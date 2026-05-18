@@ -24,16 +24,25 @@ class PricingPackageController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'name'        => 'required|string|max:255',
-            'category'    => 'required|string|max:255',
-            'price'       => 'required|string|max:100',
-            'features'    => 'nullable|string',
-            'is_featured' => 'boolean',
-            'is_active'   => 'boolean',
-            'order'       => 'integer|min:0',
+            'name_en'        => 'required|string|max:255',
+            'name_ar'        => 'nullable|string|max:255',
+            'category_en'    => 'required|string|max:255',
+            'category_ar'    => 'nullable|string|max:255',
+            'price'          => 'required|string|max:100',
+            'features_en'    => 'nullable|string',
+            'features_ar'    => 'nullable|string',
+            'is_featured'    => 'boolean',
+            'is_active'      => 'boolean',
+            'order'          => 'integer|min:0',
         ]);
 
-        $validated['features']    = $this->parseFeatures($request->input('features'));
+        // Copy English values to original fields for backward compatibility
+        $validated['name'] = $validated['name_en'];
+        $validated['category'] = $validated['category_en'];
+        $validated['features'] = $this->parseFeatures($request->input('features_en'));
+        $validated['features_en'] = $this->parseFeatures($request->input('features_en'));
+        $validated['features_ar'] = $this->parseFeatures($request->input('features_ar'));
+        
         $validated['is_featured'] = $request->boolean('is_featured');
         $validated['is_active']   = $request->boolean('is_active');
         $validated['order']       = $validated['order'] ?? 0;
@@ -54,16 +63,25 @@ class PricingPackageController extends Controller
     public function update(Request $request, PricingPackage $pricingPackage)
     {
         $validated = $request->validate([
-            'name'        => 'required|string|max:255',
-            'category'    => 'required|string|max:255',
-            'price'       => 'required|string|max:100',
-            'features'    => 'nullable|string',
-            'is_featured' => 'boolean',
-            'is_active'   => 'boolean',
-            'order'       => 'integer|min:0',
+            'name_en'        => 'required|string|max:255',
+            'name_ar'        => 'nullable|string|max:255',
+            'category_en'    => 'required|string|max:255',
+            'category_ar'    => 'nullable|string|max:255',
+            'price'          => 'required|string|max:100',
+            'features_en'    => 'nullable|string',
+            'features_ar'    => 'nullable|string',
+            'is_featured'    => 'boolean',
+            'is_active'      => 'boolean',
+            'order'          => 'integer|min:0',
         ]);
 
-        $validated['features']    = $this->parseFeatures($request->input('features'));
+        // Copy English values to original fields for backward compatibility
+        $validated['name'] = $validated['name_en'];
+        $validated['category'] = $validated['category_en'];
+        $validated['features'] = $this->parseFeatures($request->input('features_en'));
+        $validated['features_en'] = $this->parseFeatures($request->input('features_en'));
+        $validated['features_ar'] = $this->parseFeatures($request->input('features_ar'));
+        
         $validated['is_featured'] = $request->boolean('is_featured');
         $validated['is_active']   = $request->boolean('is_active');
         $validated['order']       = $validated['order'] ?? 0;

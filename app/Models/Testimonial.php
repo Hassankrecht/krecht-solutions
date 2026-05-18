@@ -16,9 +16,15 @@ class Testimonial extends Model
     protected $fillable = [
         'name',
         'position',
+        'position_en',
+        'position_ar',
         'company',
+        'company_en',
+        'company_ar',
         'email',
         'content',
+        'content_en',
+        'content_ar',
         'rating',
         'image',
         'status',
@@ -31,6 +37,33 @@ class Testimonial extends Model
         'is_active' => 'boolean',
         'rating' => 'integer',
     ];
+
+    public function getPositionAttribute($value)
+    {
+        return $this->getLocalizedField('position', $value);
+    }
+
+    public function getCompanyAttribute($value)
+    {
+        return $this->getLocalizedField('company', $value);
+    }
+
+    public function getContentAttribute($value)
+    {
+        return $this->getLocalizedField('content', $value);
+    }
+
+    private function getLocalizedField($field, $value)
+    {
+        $locale = app()->getLocale();
+        $localizedField = $field . '_' . $locale;
+        
+        if ($this->attributes[$localizedField] ?? null) {
+            return $this->attributes[$localizedField];
+        }
+        
+        return $value;
+    }
 
     public function scopeActive($query)
     {

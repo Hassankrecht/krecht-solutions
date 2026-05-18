@@ -1477,6 +1477,30 @@ section,
 }
 
 /*--------------------------------------------------------------
+# Contact Button Style
+--------------------------------------------------------------*/
+.btn-contact-submit {
+  font-family: var(--heading-font);
+  font-weight: 500;
+  font-size: 16px;
+  letter-spacing: 1px;
+  display: inline-block;
+  padding: 12px 40px;
+  border-radius: 50px;
+  transition: 0.5s;
+  border: 2px solid var(--accent-color);
+  color: var(--contrast-color);
+  background: var(--accent-color);
+  cursor: pointer;
+}
+
+.btn-contact-submit:hover {
+  background: color-mix(in srgb, var(--accent-color), transparent 15%);
+  border: 2px solid var(--accent-color);
+  color: var(--contrast-color);
+}
+
+/*--------------------------------------------------------------
 # Portfolio Section
 --------------------------------------------------------------*/
 .portfolio .portfolio-filters {

@@ -26,18 +26,26 @@ class TestimonialController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'name'      => 'required|string|max:255',
-            'position'  => 'nullable|string|max:255',
-            'company'   => 'nullable|string|max:255',
-            'email'     => 'nullable|email|max:255',
-            'content'   => 'required|string',
-            'rating'    => 'required|integer|min:1|max:5',
-            'image'     => 'nullable|string|max:500',
-            'status'    => 'required|in:pending,approved,rejected',
-            'is_active' => 'boolean',
-            'order'     => 'integer|min:0',
-            'sort_order' => 'integer|min:0',
+            'name'         => 'required|string|max:255',
+            'position_en'  => 'nullable|string|max:255',
+            'position_ar'  => 'nullable|string|max:255',
+            'company_en'   => 'nullable|string|max:255',
+            'company_ar'   => 'nullable|string|max:255',
+            'email'        => 'nullable|email|max:255',
+            'content_en'   => 'required|string',
+            'content_ar'   => 'nullable|string',
+            'rating'       => 'required|integer|min:1|max:5',
+            'image'        => 'nullable|string|max:500',
+            'status'       => 'required|in:pending,approved,rejected',
+            'is_active'    => 'boolean',
+            'order'        => 'integer|min:0',
+            'sort_order'   => 'integer|min:0',
         ]);
+
+        // Copy English values to original fields for backward compatibility
+        $validated['position'] = $validated['position_en'] ?? '';
+        $validated['company'] = $validated['company_en'] ?? '';
+        $validated['content'] = $validated['content_en'];
 
         $validated['is_active'] = $request->boolean('is_active');
         $validated['order']     = $validated['order'] ?? 0;
@@ -62,18 +70,26 @@ class TestimonialController extends Controller
     public function update(Request $request, Testimonial $testimonial)
     {
         $validated = $request->validate([
-            'name'      => 'required|string|max:255',
-            'position'  => 'nullable|string|max:255',
-            'company'   => 'nullable|string|max:255',
-            'email'     => 'nullable|email|max:255',
-            'content'   => 'required|string',
-            'rating'    => 'required|integer|min:1|max:5',
-            'image'     => 'nullable|string|max:500',
-            'status'    => 'required|in:pending,approved,rejected',
-            'is_active' => 'boolean',
-            'order'     => 'integer|min:0',
-            'sort_order' => 'integer|min:0',
+            'name'         => 'required|string|max:255',
+            'position_en'  => 'nullable|string|max:255',
+            'position_ar'  => 'nullable|string|max:255',
+            'company_en'   => 'nullable|string|max:255',
+            'company_ar'   => 'nullable|string|max:255',
+            'email'        => 'nullable|email|max:255',
+            'content_en'   => 'required|string',
+            'content_ar'   => 'nullable|string',
+            'rating'       => 'required|integer|min:1|max:5',
+            'image'        => 'nullable|string|max:500',
+            'status'       => 'required|in:pending,approved,rejected',
+            'is_active'    => 'boolean',
+            'order'        => 'integer|min:0',
+            'sort_order'   => 'integer|min:0',
         ]);
+
+        // Copy English values to original fields for backward compatibility
+        $validated['position'] = $validated['position_en'] ?? '';
+        $validated['company'] = $validated['company_en'] ?? '';
+        $validated['content'] = $validated['content_en'];
 
         $validated['is_active'] = $request->boolean('is_active');
         $validated['order']     = $validated['order'] ?? 0;

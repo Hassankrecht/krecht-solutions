@@ -6,8 +6,8 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
-                <h1>Pricing Packages</h1>
-                <p>Choose the package that fits your business needs</p>
+                <h1>{{ __('messages.pricing_hero_title') }}</h1>
+                <p>{{ __('messages.pricing_hero_subtitle') }}</p>
             </div>
         </div>
     </div>
@@ -16,8 +16,8 @@
 <!-- Pricing Section -->
 <section class="pricing section light-background">
     <div class="container section-title" data-aos="fade-up">
-        <h2>Our Pricing</h2>
-        <p>Flexible pricing options for businesses of all sizes</p>
+        <h2>{{ __('messages.pricing_section_title') }}</h2>
+        <p>{{ __('messages.pricing_section_subtitle') }}</p>
     </div>
 
     <div class="container">
@@ -32,11 +32,11 @@
     <div class="container">
         <div class="row" data-aos="zoom-in" data-aos-delay="100">
             <div class="col-xl-9 text-center text-xl-start">
-                <h3>Need a Custom Quote?</h3>
-                <p>Contact us for a personalized quote based on your specific requirements.</p>
+                <h3>{{ __('messages.cta_quote_title') }}</h3>
+                <p>{{ __('messages.cta_quote_desc') }}</p>
             </div>
             <div class="col-xl-3 cta-btn-container text-center">
-                <a class="cta-btn align-middle" href="{{ route('contact') }}">Contact Us</a>
+                <a class="cta-btn align-middle" href="{{ route('contact') }}">{{ __('messages.cta_button') }}</a>
             </div>
         </div>
     </div>

@@ -22,13 +22,22 @@ class ServiceController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'title'             => 'required|string|max:255',
-            'icon'              => 'required|string|max:255',
-            'short_description' => 'nullable|string|max:500',
-            'description'       => 'required|string',
-            'is_active'         => 'boolean',
-            'sort_order'        => 'integer|min:0',
+            'title_en'               => 'required|string|max:255',
+            'title_ar'               => 'nullable|string|max:255',
+            'icon'                   => 'required|string|max:255',
+            'short_description_en'   => 'nullable|string|max:500',
+            'short_description_ar'   => 'nullable|string|max:500',
+            'description_en'         => 'required|string',
+            'description_ar'         => 'nullable|string',
+            'is_active'              => 'boolean',
+            'sort_order'             => 'integer|min:0',
         ]);
+        
+        // Copy English values to original fields for backward compatibility
+        $validated['title'] = $validated['title_en'];
+        $validated['short_description'] = $validated['short_description_en'] ?? '';
+        $validated['description'] = $validated['description_en'];
+        
         $validated['is_active']   = $request->boolean('is_active');
         $validated['sort_order']  = $validated['sort_order'] ?? 0;
 
@@ -46,13 +55,22 @@ class ServiceController extends Controller
     public function update(Request $request, Service $service)
     {
         $validated = $request->validate([
-            'title'             => 'required|string|max:255',
-            'icon'              => 'required|string|max:255',
-            'short_description' => 'nullable|string|max:500',
-            'description'       => 'required|string',
-            'is_active'         => 'boolean',
-            'sort_order'        => 'integer|min:0',
+            'title_en'               => 'required|string|max:255',
+            'title_ar'               => 'nullable|string|max:255',
+            'icon'                   => 'required|string|max:255',
+            'short_description_en'   => 'nullable|string|max:500',
+            'short_description_ar'   => 'nullable|string|max:500',
+            'description_en'         => 'required|string',
+            'description_ar'         => 'nullable|string',
+            'is_active'              => 'boolean',
+            'sort_order'             => 'integer|min:0',
         ]);
+        
+        // Copy English values to original fields for backward compatibility
+        $validated['title'] = $validated['title_en'];
+        $validated['short_description'] = $validated['short_description_en'] ?? '';
+        $validated['description'] = $validated['description_en'];
+        
         $validated['is_active']  = $request->boolean('is_active');
         $validated['sort_order'] = $validated['sort_order'] ?? 0;
 

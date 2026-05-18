@@ -54,9 +54,9 @@
                 <h3>{{ $package->name }}</h3>
                 <h4 class="{{ $isPriceLabel ? 'price-label' : '' }}">
                   @if($startsFrom)
-                    <span>Starting from</span>{{ $amount }}
+                    <span>{{ __('messages.pricing_choose_plan') }}</span>{{ $amount }}
                   @else
-                    {{ $isComingSoon ? 'Coming Soon' : $package->price }}
+                    {{ $isComingSoon ? __('messages.portfolio_coming_soon') : $package->price }}
                   @endif
                 </h4>
 
@@ -68,7 +68,7 @@
                   </ul>
                 @endif
 
-                <a href="{{ route('contact') }}" class="buy-btn">{{ $isComingSoon ? 'Contact Us' : 'Get Started' }}</a>
+                <a href="{{ route('contact') }}" class="buy-btn">{{ $isComingSoon ? __('messages.cta_button') : __('messages.nav_get_started') }}</a>
               </div>
             </div>
           @endforeach
@@ -81,13 +81,13 @@
 
   <div class="support-note mt-5 text-center">
     <p class="text-muted small mb-0">
-      <em>All projects include an initial support period after delivery. Clients may also choose optional monthly or annual maintenance plans for ongoing updates, monitoring, and technical support.</em>
+      <em>{{ __('messages.pricing_support_note') }}</em>
     </p>
   </div>
 @else
   <div class="row">
     <div class="col-12 text-center">
-      <p>No pricing packages available yet. Contact us for a custom quote.</p>
+      <p>{{ __('messages.pricing_no_packages') }}</p>
     </div>
   </div>
 @endif

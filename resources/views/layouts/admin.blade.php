@@ -37,6 +37,7 @@
         <!-- Pages link -->
 
         <!-- Bell icon -->
+        @if(auth()->check())
         <li>
           <a class="position-relative btn-icon btn-sm btn-light btn rounded-circle" data-bs-toggle="dropdown"
             aria-expanded="false" href="#" role="button">
@@ -47,51 +48,46 @@
               <path d="M10 5a2 2 0 1 1 4 0a7 7 0 0 1 4 6v3a4 4 0 0 0 2 3h-16a4 4 0 0 0 2 -3v-3a7 7 0 0 1 4 -6" />
               <path d="M9 17v1a3 3 0 0 0 6 0v-1" />
             </svg>
+            @php $unreadCount = \App\Models\ContactMessage::where('is_read', false)->count(); @endphp
+            @if($unreadCount > 0)
             <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger mt-2 ms-n2">
-              2
+              {{ $unreadCount }}
               <span class="visually-hidden">unread messages</span>
             </span>
+            @endif
           </a>
           <div class="dropdown-menu dropdown-menu-end dropdown-menu-md p-0">
             <ul class="list-unstyled p-0 m-0">
-              <li class="p-3 border-bottom ">
-                <div class="d-flex gap-3">
-                  <img src="{{ asset('assets/admin/images/avatar/avatar-1.jpg') }}" alt="" class="avatar avatar-sm rounded-circle" />
-                  <div class="flex-grow-1 small">
-                    <p class="mb-0">New order received</p>
-                    <p class="mb-1">Order #12345 has been placed</p>
-                    <div class="text-secondary">5 minutes ago</div>
-                  </div>
-                </div>
-              </li>
-              <li class="p-3 border-bottom ">
-                <div class="d-flex gap-3">
-                  <img src="{{ asset('assets/admin/images/avatar/avatar-4.jpg') }}" alt="" class="avatar avatar-sm rounded-circle" />
-                  <div class="flex-grow-1 small">
-                    <p class="mb-0">New user registered</p>
-                    <p class="mb-1">User @john_doe has signed up</p>
-                    <div class="text-secondary">30 minutes ago</div>
-                  </div>
-                </div>
-              </li>
-
-              <li class="p-3 border-bottom">
-                <div class="d-flex gap-3">
-                  <img src="{{ asset('assets/admin/images/avatar/avatar-2.jpg') }}" alt="" class="avatar avatar-sm rounded-circle" />
-                  <div class="flex-grow-1 small">
-                    <p class="mb-0">Payment confirmed</p>
-                    <p class="mb-1">Payment of $299 has been received</p>
-                    <div class="text-secondary">1 hour ago</div>
-                  </div>
-                </div>
-              </li>
+              @php $recentMessages = \App\Models\ContactMessage::latest()->take(3)->get(); @endphp
+              @if($recentMessages->count() > 0)
+                @foreach($recentMessages as $message)
+                  <li class="p-3 border-bottom {{ $message->is_read ? 'opacity-75' : '' }}">
+                    <div class="d-flex gap-3">
+                      <div class="avatar avatar-sm rounded-circle bg-primary text-white d-flex align-items-center justify-content-center">
+                        {{ substr($message->name, 0, 1) }}
+                      </div>
+                      <div class="flex-grow-1 small">
+                        <p class="mb-0 fw-bold">{{ $message->name }}</p>
+                        <p class="mb-1">{{ Str::limit($message->message, 50) }}</p>
+                        <div class="text-secondary">{{ $message->created_at ? $message->created_at->diffForHumans() : 'N/A' }}</div>
+                      </div>
+                    </div>
+                  </li>
+                @endforeach
+              @else
+                <li class="p-3 text-center text-muted">
+                  No messages yet
+                </li>
+              @endif
               <li class="px-4 py-3 text-center">
-                <a href="#" class="text-primary ">View all notifications</a>
+                <a href="{{ route('admin.contact-messages.index') }}" class="text-primary">View all messages</a>
               </li>
             </ul>
           </div>
         </li>
+        @endif
         <!-- Dropdown -->
+        @if(auth()->check())
         <li class="ms-3 dropdown">
           <a href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             <img src="{{ asset('assets/admin/images/avatar/avatar-1.jpg') }}" alt="" class="avatar avatar-sm rounded-circle" />
@@ -101,8 +97,8 @@
               <div class="d-flex gap-3 align-items-center border-dashed border-bottom px-3 py-3">
                 <img src="{{ asset('assets/admin/images/avatar/avatar-1.jpg') }}" alt="" class="avatar avatar-md rounded-circle" />
                 <div>
-                  <h4 class="mb-0 small">{{ auth()->check() ? auth()->user()->name : 'Admin User' }}</h4>
-                  <p class="mb-0  small">@{{ auth()->check() ? auth()->user()->email : 'admin' }}</p>
+                  <h4 class="mb-0 small">{{ optional(auth()->user())->name ?? 'Admin User' }}</h4>
+                  <p class="mb-0  small">&commat;{{ optional(auth()->user())->email ?? 'admin' }}</p>
                 </div>
               </div>
               <div class="p-3 d-flex flex-column gap-1 small lh-lg">
@@ -114,6 +110,10 @@
 
                   <span> Inbox</span>
                 </a>
+                <a href="{{ route('admin.profile.edit') }}" class="">
+
+                  <span>Edit Profile</span>
+                </a>
                 <a href="#" class="">
 
                   <span> Chat</span>
@@ -122,19 +122,18 @@
 
                   <span> Activity</span>
                 </a>
-                @if(auth()->check())
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
                     <button type="submit" class="btn btn-link text-decoration-none p-0 text-start w-100">
                         <span>Logout</span>
                     </button>
                 </form>
-                @endif
               </div>
 
             </div>
           </div>
         </li>
+        @endif
       </ul>
     </div>
 
@@ -165,6 +164,8 @@
 
       <li class="px-4 pt-4 pb-2"><small class="nav-text">Account</small></li>
       @if(auth()->check())
+      <li><a class="nav-link {{ request()->routeIs('admin.profile.edit') ? 'active' : '' }}" href="{{ route('admin.profile.edit') }}"><i class="ti ti-user"></i><span class="nav-text">Edit Profile</span></a></li>
+      <li><a class="nav-link {{ request()->routeIs('admin.admin-users.index') ? 'active' : '' }}" href="{{ route('admin.admin-users.index') }}"><i class="ti ti-users"></i><span class="nav-text">Admin Management</span></a></li>
       <li>
         <form method="POST" action="{{ route('logout') }}">
             @csrf
@@ -187,7 +188,10 @@
   <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
   <!-- Admin Sidebar JS -->
   <script src="{{ asset('assets/admin/js/sidebar.js') }}"></script>
-
+  <!-- ApexCharts CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+  <!-- Admin Charts JS -->
+  <script src="{{ asset('assets/admin/js/chart.js') }}"></script>
 
   </body>
 

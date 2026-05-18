@@ -6,8 +6,8 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
-                <h1>Our Portfolio</h1>
-                <p>Check out some of our recent projects</p>
+                <h1>{{ __('messages.portfolio_hero_title') }}</h1>
+                <p>{{ __('messages.portfolio_hero_subtitle') }}</p>
             </div>
         </div>
     </div>
@@ -16,14 +16,14 @@
 <!-- Portfolio Section -->
 <section class="portfolio section">
     <div class="container section-title" data-aos="fade-up">
-        <h2>Portfolio</h2>
-        <p>Explore our recent work and success stories</p>
+        <h2>{{ __('messages.portfolio_section_title') }}</h2>
+        <p>{{ __('messages.portfolio_section_subtitle') }}</p>
     </div>
 
     <div class="container">
         <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
             <ul class="portfolio-filters isotope-filters" data-aos="fade-up" data-aos-delay="100">
-                <li data-filter="*" class="filter-active">All</li>
+                <li data-filter="*" class="filter-active">{{ __('messages.portfolio_filter_all') }}</li>
                 @if($categories && $categories->count() > 0)
                     @foreach($categories as $category)
                         <li data-filter=".filter-{{ Str::slug($category) }}">{{ $category }}</li>
@@ -61,7 +61,7 @@
                                 <div class="portfolio-placeholder" style="background:{{ $gradient }}">
                                     <div class="placeholder-inner">
                                         <i class="bi {{ $icon }}"></i>
-                                        <span class="cs-badge">Coming Soon</span>
+                                        <span class="cs-badge">{{ __('messages.portfolio_coming_soon') }}</span>
                                     </div>
                                 </div>
                             @endif
@@ -71,13 +71,13 @@
                                 @if($project->image)
                                     <a href="{{ asset($project->image) }}" title="{{ $project->title }}" data-gallery="portfolio-gallery" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
                                 @endif
-                                <a href="{{ route('portfolio.show', $project) }}" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+                                <a href="{{ route('portfolio.show', $project) }}" title="{{ __('messages.portfolio_more_details') }}" class="details-link"><i class="bi bi-link-45deg"></i></a>
                             </div>
                         </div>
                     @endforeach
                 @else
                     <div class="col-12 text-center">
-                        <p>No projects available yet. Check back soon!</p>
+                        <p>{{ __('messages.portfolio_no_projects') }}</p>
                     </div>
                 @endif
             </div>
@@ -92,11 +92,11 @@
     <div class="container">
         <div class="row" data-aos="zoom-in" data-aos-delay="100">
             <div class="col-xl-9 text-center text-xl-start">
-                <h3>Have a Project in Mind?</h3>
-                <p>Let's discuss how we can help bring your vision to life.</p>
+                <h3>{{ __('messages.cta_start_title') }}</h3>
+                <p>{{ __('messages.cta_start_desc') }}</p>
             </div>
             <div class="col-xl-3 cta-btn-container text-center">
-                <a class="cta-btn align-middle" href="{{ route('contact') }}">Start a Project</a>
+                <a class="cta-btn align-middle" href="{{ route('contact') }}">{{ __('messages.cta_start_button') }}</a>
             </div>
         </div>
     </div>

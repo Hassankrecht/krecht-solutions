@@ -23,19 +23,31 @@ class ProjectController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'title'              => 'required|string|max:255',
-            'description'        => 'nullable|string',
-            'category'           => 'required|string|max:255',
-            'image'              => 'nullable|string|max:500',
-            'image_upload'       => 'nullable|image|max:10240',
-            'gallery_upload.*'   => 'nullable|image|max:10240',
-            'video'              => 'nullable|string|max:500',
-            'video_upload'       => 'nullable|mimes:mp4,avi,mov,webm,ogg|max:204800',
-            'technologies'       => 'nullable|string|max:500',
-            'is_active'          => 'boolean',
-            'order'              => 'integer|min:0',
+            'title_en'            => 'required|string|max:255',
+            'title_ar'            => 'nullable|string|max:255',
+            'description_en'      => 'nullable|string',
+            'description_ar'      => 'nullable|string',
+            'category_en'         => 'required|string|max:255',
+            'category_ar'         => 'nullable|string|max:255',
+            'image'               => 'nullable|string|max:500',
+            'image_upload'        => 'nullable|image|max:10240',
+            'gallery_upload.*'    => 'nullable|image|max:10240',
+            'video'               => 'nullable|string|max:500',
+            'video_upload'        => 'nullable|mimes:mp4,avi,mov,webm,ogg|max:204800',
+            'technologies_en'     => 'nullable|string|max:500',
+            'technologies_ar'     => 'nullable|string|max:500',
+            'is_active'           => 'boolean',
+            'order'               => 'integer|min:0',
         ]);
 
+        // Copy English values to original fields for backward compatibility
+        $validated['title'] = $validated['title_en'];
+        $validated['description'] = $validated['description_en'] ?? '';
+        $validated['category'] = $validated['category_en'];
+        $validated['technologies'] = $this->parseTechnologies($request->input('technologies_en'));
+        $validated['technologies_en'] = $this->parseTechnologies($request->input('technologies_en'));
+        $validated['technologies_ar'] = $this->parseTechnologies($request->input('technologies_ar'));
+        
         $validated['is_active'] = $request->boolean('is_active');
         $validated['order']     = $validated['order'] ?? 0;
 
@@ -57,19 +69,31 @@ class ProjectController extends Controller
     public function update(Request $request, Project $project)
     {
         $validated = $request->validate([
-            'title'              => 'required|string|max:255',
-            'description'        => 'nullable|string',
-            'category'           => 'required|string|max:255',
-            'image'              => 'nullable|string|max:500',
-            'image_upload'       => 'nullable|image|max:10240',
-            'gallery_upload.*'   => 'nullable|image|max:10240',
-            'video'              => 'nullable|string|max:500',
-            'video_upload'       => 'nullable|mimes:mp4,avi,mov,webm,ogg|max:204800',
-            'technologies'       => 'nullable|string|max:500',
-            'is_active'          => 'boolean',
-            'order'              => 'integer|min:0',
+            'title_en'            => 'required|string|max:255',
+            'title_ar'            => 'nullable|string|max:255',
+            'description_en'      => 'nullable|string',
+            'description_ar'      => 'nullable|string',
+            'category_en'         => 'required|string|max:255',
+            'category_ar'         => 'nullable|string|max:255',
+            'image'               => 'nullable|string|max:500',
+            'image_upload'        => 'nullable|image|max:10240',
+            'gallery_upload.*'    => 'nullable|image|max:10240',
+            'video'               => 'nullable|string|max:500',
+            'video_upload'        => 'nullable|mimes:mp4,avi,mov,webm,ogg|max:204800',
+            'technologies_en'     => 'nullable|string|max:500',
+            'technologies_ar'     => 'nullable|string|max:500',
+            'is_active'           => 'boolean',
+            'order'               => 'integer|min:0',
         ]);
 
+        // Copy English values to original fields for backward compatibility
+        $validated['title'] = $validated['title_en'];
+        $validated['description'] = $validated['description_en'] ?? '';
+        $validated['category'] = $validated['category_en'];
+        $validated['technologies'] = $this->parseTechnologies($request->input('technologies_en'));
+        $validated['technologies_en'] = $this->parseTechnologies($request->input('technologies_en'));
+        $validated['technologies_ar'] = $this->parseTechnologies($request->input('technologies_ar'));
+        
         $validated['is_active'] = $request->boolean('is_active');
         $validated['order']     = $validated['order'] ?? 0;
 
@@ -81,6 +105,14 @@ class ProjectController extends Controller
 
         return redirect()->route('admin.projects.index')
             ->with('success', 'Project updated successfully.');
+    }
+
+    private function parseTechnologies(?string $input): array
+    {
+        if (empty($input)) {
+            return [];
+        }
+        return array_values(array_filter(array_map('trim', explode(',', $input))));
     }
 
     public function destroy(Project $project)

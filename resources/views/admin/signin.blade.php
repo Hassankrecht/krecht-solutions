@@ -1,5 +1,20 @@
-@extends('layouts.admin')
-@section('content')
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Admin Login - Krecht Solutions</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/png" href="{{ asset('assets/img/logo/logo-solution.png') }}">
+  <!-- Google Fonts: Poppins -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="{{ asset('assets/vendor/bootstrap/css/bootstrap.min.css') }}">
+</head>
+
+<body>
 <div class="container d-flex align-items-center justify-content-center min-vh-100">
   <div class="card " style="max-width:420px; width:100%;">
     <div class="card-body p-5">
@@ -47,4 +62,6 @@
     </div>
   </div>
 </div>
-@endsection
+</body>
+
+</html>

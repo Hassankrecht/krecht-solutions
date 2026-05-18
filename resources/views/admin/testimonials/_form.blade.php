@@ -39,27 +39,86 @@
     </div>
 </div>
 
+<ul class="nav nav-tabs mb-3" id="languageTabs" role="tablist">
+    <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="en-tab" data-bs-toggle="tab" data-bs-target="#en" type="button" role="tab" aria-selected="true">English</button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="ar-tab" data-bs-toggle="tab" data-bs-target="#ar" type="button" role="tab" aria-selected="false">Arabic</button>
+    </li>
+</ul>
+
+<div class="tab-content" id="languageTabsContent">
+    <div class="tab-pane fade show active" id="en" role="tabpanel">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label for="position_en" class="form-label fw-semibold">Position / Role (English)</label>
+                    <input id="position_en" name="position_en" type="text" class="form-control @error('position_en') is-invalid @enderror"
+                        value="{{ old('position_en', $testimonial->position_en ?? '') }}" placeholder="e.g. CEO, Marketing Manager">
+                    @error('position_en')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label for="company_en" class="form-label fw-semibold">Company (English)</label>
+                    <input id="company_en" name="company_en" type="text" class="form-control @error('company_en') is-invalid @enderror"
+                        value="{{ old('company_en', $testimonial->company_en ?? '') }}" placeholder="e.g. Acme Corp">
+                    @error('company_en')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="content_en" class="form-label fw-semibold">Testimonial Content (English) <span class="text-danger">*</span></label>
+            <textarea id="content_en" name="content_en" class="form-control @error('content_en') is-invalid @enderror"
+                rows="5" required placeholder="What the client said...">{{ old('content_en', $testimonial->content_en ?? '') }}</textarea>
+            @error('content_en')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+        </div>
+    </div>
+
+    <div class="tab-pane fade" id="ar" role="tabpanel">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label for="position_ar" class="form-label fw-semibold">Position / Role (Arabic)</label>
+                    <input id="position_ar" name="position_ar" type="text" class="form-control @error('position_ar') is-invalid @enderror"
+                        value="{{ old('position_ar', $testimonial->position_ar ?? '') }}" placeholder="مثال: المدير التنفيذي، مدير التسويق" dir="rtl">
+                    @error('position_ar')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label for="company_ar" class="form-label fw-semibold">Company (Arabic)</label>
+                    <input id="company_ar" name="company_ar" type="text" class="form-control @error('company_ar') is-invalid @enderror"
+                        value="{{ old('company_ar', $testimonial->company_ar ?? '') }}" placeholder="مثال: شركة أكيم" dir="rtl">
+                    @error('company_ar')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="content_ar" class="form-label fw-semibold">Testimonial Content (Arabic)</label>
+            <textarea id="content_ar" name="content_ar" class="form-control @error('content_ar') is-invalid @enderror"
+                rows="5" placeholder="ما قاله العميل..." dir="rtl">{{ old('content_ar', $testimonial->content_ar ?? '') }}</textarea>
+            @error('content_ar')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+        </div>
+    </div>
+</div>
+
 <div class="row">
-    <div class="col-md-4">
-        <div class="mb-3">
-            <label for="position" class="form-label fw-semibold">Position / Role</label>
-            <input id="position" name="position" type="text" class="form-control @error('position') is-invalid @enderror"
-                value="{{ old('position', $testimonial->position ?? '') }}" placeholder="e.g. CEO, Marketing Manager">
-            @error('position')
-                <div class="invalid-feedback">{{ $message }}</div>
-            @enderror
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="mb-3">
-            <label for="company" class="form-label fw-semibold">Company</label>
-            <input id="company" name="company" type="text" class="form-control @error('company') is-invalid @enderror"
-                value="{{ old('company', $testimonial->company ?? '') }}" placeholder="e.g. Acme Corp">
-            @error('company')
-                <div class="invalid-feedback">{{ $message }}</div>
-            @enderror
-        </div>
-    </div>
     <div class="col-md-4">
         <div class="mb-3">
             <label for="email" class="form-label fw-semibold">Client Email</label>
@@ -70,19 +129,7 @@
             @enderror
         </div>
     </div>
-</div>
-
-<div class="mb-3">
-    <label for="content" class="form-label fw-semibold">Testimonial Content <span class="text-danger">*</span></label>
-    <textarea id="content" name="content" class="form-control @error('content') is-invalid @enderror"
-        rows="5" required placeholder="What the client said...">{{ old('content', $testimonial->content ?? '') }}</textarea>
-    @error('content')
-        <div class="invalid-feedback">{{ $message }}</div>
-    @enderror
-</div>
-
-<div class="row">
-    <div class="col-md-8">
+    <div class="col-md-4">
         <div class="mb-3">
             <label for="image" class="form-label fw-semibold">Image URL</label>
             <input id="image" name="image" type="text" class="form-control @error('image') is-invalid @enderror"

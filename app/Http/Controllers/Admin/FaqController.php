@@ -22,11 +22,17 @@ class FaqController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'question'  => 'required|string|max:500',
-            'answer'    => 'required|string',
-            'is_active' => 'boolean',
-            'order'     => 'integer|min:0',
+            'question_en'  => 'required|string|max:500',
+            'question_ar'  => 'nullable|string|max:500',
+            'answer_en'    => 'required|string',
+            'answer_ar'    => 'nullable|string',
+            'is_active'    => 'boolean',
+            'order'        => 'integer|min:0',
         ]);
+
+        // Copy English values to original fields for backward compatibility
+        $validated['question'] = $validated['question_en'];
+        $validated['answer'] = $validated['answer_en'];
 
         $validated['is_active'] = $request->boolean('is_active');
         $validated['order']     = $validated['order'] ?? 0;
@@ -45,11 +51,17 @@ class FaqController extends Controller
     public function update(Request $request, Faq $faq)
     {
         $validated = $request->validate([
-            'question'  => 'required|string|max:500',
-            'answer'    => 'required|string',
-            'is_active' => 'boolean',
-            'order'     => 'integer|min:0',
+            'question_en'  => 'required|string|max:500',
+            'question_ar'  => 'nullable|string|max:500',
+            'answer_en'    => 'required|string',
+            'answer_ar'    => 'nullable|string',
+            'is_active'    => 'boolean',
+            'order'        => 'integer|min:0',
         ]);
+
+        // Copy English values to original fields for backward compatibility
+        $validated['question'] = $validated['question_en'];
+        $validated['answer'] = $validated['answer_en'];
 
         $validated['is_active'] = $request->boolean('is_active');
         $validated['order']     = $validated['order'] ?? 0;

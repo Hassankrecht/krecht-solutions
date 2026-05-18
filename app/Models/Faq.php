@@ -11,7 +11,11 @@ class Faq extends Model
 
     protected $fillable = [
         'question',
+        'question_en',
+        'question_ar',
         'answer',
+        'answer_en',
+        'answer_ar',
         'is_active',
         'order',
     ];
@@ -19,6 +23,28 @@ class Faq extends Model
     protected $casts = [
         'is_active' => 'boolean',
     ];
+
+    public function getQuestionAttribute($value)
+    {
+        return $this->getLocalizedField('question', $value);
+    }
+
+    public function getAnswerAttribute($value)
+    {
+        return $this->getLocalizedField('answer', $value);
+    }
+
+    private function getLocalizedField($field, $value)
+    {
+        $locale = app()->getLocale();
+        $localizedField = $field . '_' . $locale;
+        
+        if ($this->attributes[$localizedField] ?? null) {
+            return $this->attributes[$localizedField];
+        }
+        
+        return $value;
+    }
 
     public function scopeActive($query)
     {

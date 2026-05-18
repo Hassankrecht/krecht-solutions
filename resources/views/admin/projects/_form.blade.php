@@ -1,55 +1,108 @@
 @csrf
 
-<div class="mb-3">
-    <label for="title" class="form-label fw-semibold">Title <span class="text-danger">*</span></label>
-    <input id="title" name="title" type="text" class="form-control @error('title') is-invalid @enderror"
-        value="{{ old('title', $project->title ?? '') }}" required placeholder="e.g. Albasha Restaurant">
-    @error('title')
-        <div class="invalid-feedback">{{ $message }}</div>
-    @enderror
-</div>
+<ul class="nav nav-tabs mb-3" id="languageTabs" role="tablist">
+    <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="en-tab" data-bs-toggle="tab" data-bs-target="#en" type="button" role="tab" aria-selected="true">English</button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="ar-tab" data-bs-toggle="tab" data-bs-target="#ar" type="button" role="tab" aria-selected="false">Arabic</button>
+    </li>
+</ul>
 
-<div class="row">
-    <div class="col-md-8">
+<div class="tab-content" id="languageTabsContent">
+    <div class="tab-pane fade show active" id="en" role="tabpanel">
         <div class="mb-3">
-            <label for="category" class="form-label fw-semibold">Category <span class="text-danger">*</span></label>
-            <input id="category" name="category" type="text" class="form-control @error('category') is-invalid @enderror"
-                value="{{ old('category', $project->category ?? '') }}" required placeholder="e.g. Web Development">
-            @error('category')
+            <label for="title_en" class="form-label fw-semibold">Title (English) <span class="text-danger">*</span></label>
+            <input id="title_en" name="title_en" type="text" class="form-control @error('title_en') is-invalid @enderror"
+                value="{{ old('title_en', $project->title_en ?? '') }}" required placeholder="e.g. Albasha Restaurant">
+            @error('title_en')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+        </div>
+
+        <div class="row">
+            <div class="col-md-8">
+                <div class="mb-3">
+                    <label for="category_en" class="form-label fw-semibold">Category (English) <span class="text-danger">*</span></label>
+                    <input id="category_en" name="category_en" type="text" class="form-control @error('category_en') is-invalid @enderror"
+                        value="{{ old('category_en', $project->category_en ?? '') }}" required placeholder="e.g. Web Development">
+                    @error('category_en')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label for="order" class="form-label fw-semibold">Sort Order</label>
+                    <input id="order" name="order" type="number" min="0" class="form-control @error('order') is-invalid @enderror"
+                        value="{{ old('order', $project->order ?? 0) }}">
+                    @error('order')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="technologies_en" class="form-label fw-semibold">Technologies (English)</label>
+            <input id="technologies_en" name="technologies_en" type="text" class="form-control @error('technologies_en') is-invalid @enderror"
+                value="{{ old('technologies_en', is_array($project->technologies_en) ? implode(', ', $project->technologies_en) : $project->technologies_en ?? '') }}"
+                placeholder="e.g. Laravel, Vue.js, MySQL">
+            <div class="form-text">Comma-separated list of technologies used.</div>
+            @error('technologies_en')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+        </div>
+
+        <div class="mb-3">
+            <label for="description_en" class="form-label fw-semibold">Description (English)</label>
+            <textarea id="description_en" name="description_en" class="form-control @error('description_en') is-invalid @enderror"
+                rows="4" placeholder="Project description...">{{ old('description_en', $project->description_en ?? '') }}</textarea>
+            @error('description_en')
                 <div class="invalid-feedback">{{ $message }}</div>
             @enderror
         </div>
     </div>
-    <div class="col-md-4">
+
+    <div class="tab-pane fade" id="ar" role="tabpanel">
         <div class="mb-3">
-            <label for="order" class="form-label fw-semibold">Sort Order</label>
-            <input id="order" name="order" type="number" min="0" class="form-control @error('order') is-invalid @enderror"
-                value="{{ old('order', $project->order ?? 0) }}">
-            @error('order')
+            <label for="title_ar" class="form-label fw-semibold">Title (Arabic)</label>
+            <input id="title_ar" name="title_ar" type="text" class="form-control @error('title_ar') is-invalid @enderror"
+                value="{{ old('title_ar', $project->title_ar ?? '') }}" placeholder="مثال: مطعم الباشا" dir="rtl">
+            @error('title_ar')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+        </div>
+
+        <div class="mb-3">
+            <label for="category_ar" class="form-label fw-semibold">Category (Arabic)</label>
+            <input id="category_ar" name="category_ar" type="text" class="form-control @error('category_ar') is-invalid @enderror"
+                value="{{ old('category_ar', $project->category_ar ?? '') }}" placeholder="مثال: تطوير الويب" dir="rtl">
+            @error('category_ar')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+        </div>
+
+        <div class="mb-3">
+            <label for="technologies_ar" class="form-label fw-semibold">Technologies (Arabic)</label>
+            <input id="technologies_ar" name="technologies_ar" type="text" class="form-control @error('technologies_ar') is-invalid @enderror"
+                value="{{ old('technologies_ar', is_array($project->technologies_ar) ? implode(', ', $project->technologies_ar) : $project->technologies_ar ?? '') }}"
+                placeholder="مثال: Laravel، Vue.js، MySQL" dir="rtl">
+            <div class="form-text">قائمة التقنيات المستخدمة مفصولة بفواصل.</div>
+            @error('technologies_ar')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+        </div>
+
+        <div class="mb-3">
+            <label for="description_ar" class="form-label fw-semibold">Description (Arabic)</label>
+            <textarea id="description_ar" name="description_ar" class="form-control @error('description_ar') is-invalid @enderror"
+                rows="4" placeholder="وصف المشروع..." dir="rtl">{{ old('description_ar', $project->description_ar ?? '') }}</textarea>
+            @error('description_ar')
                 <div class="invalid-feedback">{{ $message }}</div>
             @enderror
         </div>
     </div>
-</div>
-
-<div class="mb-3">
-    <label for="technologies" class="form-label fw-semibold">Technologies</label>
-    <input id="technologies" name="technologies" type="text" class="form-control @error('technologies') is-invalid @enderror"
-        value="{{ old('technologies', $project->technologies ?? '') }}"
-        placeholder="e.g. Laravel, Vue.js, MySQL">
-    <div class="form-text">Comma-separated list of technologies used.</div>
-    @error('technologies')
-        <div class="invalid-feedback">{{ $message }}</div>
-    @enderror
-</div>
-
-<div class="mb-3">
-    <label for="description" class="form-label fw-semibold">Description</label>
-    <textarea id="description" name="description" class="form-control @error('description') is-invalid @enderror"
-        rows="4" placeholder="Project description...">{{ old('description', $project->description ?? '') }}</textarea>
-    @error('description')
-        <div class="invalid-feedback">{{ $message }}</div>
-    @enderror
 </div>
 
 {{-- ── Featured Image ─────────────────────────────────────────── --}}

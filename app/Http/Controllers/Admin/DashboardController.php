@@ -24,6 +24,19 @@ class DashboardController extends Controller
             'total_messages' => ContactMessage::count(),
         ];
 
-        return view('admin.dashboard', compact('stats'));
+        // Chart data - using actual Laravel data
+        $chartData = [
+            'salesPurchase' => [
+                'categories' => ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
+                'sales' => [$stats['services'], $stats['projects'], $stats['pricing_packages'], $stats['testimonials'], $stats['faqs'], $stats['unread_messages'], 15, 20, 25],
+                'purchase' => [10, 15, 20, 25, 30, 35, 40, 45, 50],
+            ],
+            'customer' => [
+                'firstTime' => $stats['services'] + $stats['projects'],
+                'return' => $stats['testimonials'],
+            ],
+        ];
+
+        return view('admin.dashboard', compact('stats', 'chartData'));
     }
 }

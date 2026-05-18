@@ -11,12 +11,20 @@ class Project extends Model
 
     protected $fillable = [
         'title',
+        'title_en',
+        'title_ar',
         'description',
+        'description_en',
+        'description_ar',
         'category',
+        'category_en',
+        'category_ar',
         'image',
         'gallery_images',
         'video',
         'technologies',
+        'technologies_en',
+        'technologies_ar',
         'is_active',
         'order',
     ];
@@ -24,7 +32,49 @@ class Project extends Model
     protected $casts = [
         'is_active'      => 'boolean',
         'gallery_images' => 'array',
+        'technologies' => 'array',
+        'technologies_en' => 'array',
+        'technologies_ar' => 'array',
     ];
+
+    public function getTitleAttribute($value)
+    {
+        return $this->getLocalizedField('title', $value);
+    }
+
+    public function getDescriptionAttribute($value)
+    {
+        return $this->getLocalizedField('description', $value);
+    }
+
+    public function getCategoryAttribute($value)
+    {
+        return $this->getLocalizedField('category', $value);
+    }
+
+    public function getTechnologiesAttribute($value)
+    {
+        $locale = app()->getLocale();
+        $localizedField = 'technologies_' . $locale;
+        
+        if ($this->attributes[$localizedField] ?? null) {
+            return $this->attributes[$localizedField];
+        }
+        
+        return $value;
+    }
+
+    private function getLocalizedField($field, $value)
+    {
+        $locale = app()->getLocale();
+        $localizedField = $field . '_' . $locale;
+        
+        if ($this->attributes[$localizedField] ?? null) {
+            return $this->attributes[$localizedField];
+        }
+        
+        return $value;
+    }
 
     public function scopeActive($query)
     {

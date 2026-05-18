@@ -16,9 +16,15 @@ class PricingPackage extends Model
 
     protected $fillable = [
         'name',
+        'name_en',
+        'name_ar',
         'category',
+        'category_en',
+        'category_ar',
         'price',
         'features',
+        'features_en',
+        'features_ar',
         'is_featured',
         'is_active',
         'order',
@@ -26,9 +32,45 @@ class PricingPackage extends Model
 
     protected $casts = [
         'features' => 'array',
+        'features_en' => 'array',
+        'features_ar' => 'array',
         'is_featured' => 'boolean',
         'is_active' => 'boolean',
     ];
+
+    public function getNameAttribute($value)
+    {
+        return $this->getLocalizedField('name', $value);
+    }
+
+    public function getCategoryAttribute($value)
+    {
+        return $this->getLocalizedField('category', $value);
+    }
+
+    public function getFeaturesAttribute($value)
+    {
+        $locale = app()->getLocale();
+        $localizedField = 'features_' . $locale;
+        
+        if ($this->attributes[$localizedField] ?? null) {
+            return $this->attributes[$localizedField];
+        }
+        
+        return $value;
+    }
+
+    private function getLocalizedField($field, $value)
+    {
+        $locale = app()->getLocale();
+        $localizedField = $field . '_' . $locale;
+        
+        if ($this->attributes[$localizedField] ?? null) {
+            return $this->attributes[$localizedField];
+        }
+        
+        return $value;
+    }
 
     public function scopeActive($query)
     {

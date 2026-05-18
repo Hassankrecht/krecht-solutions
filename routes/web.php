@@ -19,6 +19,7 @@ use App\Http\Controllers\TestimonialSubmissionController;
 */
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::post('/language', [HomeController::class, 'switchLanguage'])->name('language.switch');
 Route::get('/about', [PageController::class, 'about'])->name('about');
 Route::get('/services', [PageController::class, 'services'])->name('services');
 Route::get('/pricing', [PageController::class, 'pricing'])->name('pricing');

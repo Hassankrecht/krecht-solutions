@@ -1,20 +1,31 @@
 
 
 
-
-import ApexCharts from 'apexcharts';
-
 document.addEventListener('DOMContentLoaded', () => {
+    // Get chart data from page data attributes
+    const container = document.querySelector('.container-fluid[data-chart-sales-purchase]');
+    let salesPurchaseData = null;
+    let customerData = null;
+
+    if (container) {
+        try {
+            salesPurchaseData = JSON.parse(container.dataset.chartSalesPurchase);
+            customerData = JSON.parse(container.dataset.chartCustomer);
+        } catch (e) {
+            console.warn('Failed to parse chart data from page attributes', e);
+        }
+    }
+
     if (document.getElementById('salesPurchaseChart')) {
          var options = {
       series: [
         {
           name: 'Sales',
-          data: [44, 55, 57, 56, 61, 58, 63, 60, 66],
+          data: salesPurchaseData ? salesPurchaseData.sales : [44, 55, 57, 56, 61, 58, 63, 60, 66],
         },
         {
           name: 'Purchase',
-          data: [76, 85, 101, 98, 87, 105, 91, 114, 94],
+          data: salesPurchaseData ? salesPurchaseData.purchase : [76, 85, 101, 98, 87, 105, 91, 114, 94],
         },
 
       ],
@@ -65,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
         colors: ['transparent'],
       },
       xaxis: {
-        categories: ['28 Jan', '29 Jan', '30 Jan', '31 Jan', '1 Feb', '2 Feb', '3 Feb', '4 Feb', '5 Feb'],
+        categories: salesPurchaseData ? salesPurchaseData.categories : ['28 Jan', '29 Jan', '30 Jan', '31 Jan', '1 Feb', '2 Feb', '3 Feb', '4 Feb', '5 Feb'],
         axisBorder: {
           show: false,
           color: "#e2e8f0",
@@ -112,7 +123,7 @@ chart.render();
     }
       if (document.getElementById('customerChart')) {
     var options = {
-      series: [44, 55],
+      series: customerData ? [customerData.firstTime, customerData.return] : [44, 55],
       chart: {
         height: 200,
         type: 'radialBar',
@@ -264,31 +275,37 @@ chart.render();
     }
 
     // Example control: Randomize data (for demo)
-    document.getElementById('btn-random').addEventListener('click', () => {
-      const rand = () => Math.round((Math.random() * 80 + 20) * 1000); // 20k - 100k
-      const newThisYear = Array.from({length: 12}, rand);
-      const newLastYear = Array.from({length: 12}, rand);
-      chart.updateSeries([
-        { name: 'This Year', data: newThisYear },
-        { name: 'Last Year', data: newLastYear }
-      ]);
-    });
+    const btnRandom = document.getElementById('btn-random');
+    if (btnRandom) {
+      btnRandom.addEventListener('click', () => {
+        const rand = () => Math.round((Math.random() * 80 + 20) * 1000); // 20k - 100k
+        const newThisYear = Array.from({length: 12}, rand);
+        const newLastYear = Array.from({length: 12}, rand);
+        chart.updateSeries([
+          { name: 'This Year', data: newThisYear },
+          { name: 'Last Year', data: newLastYear }
+        ]);
+      });
+    }
 
     // Example control: Toggle to show only This Year
     let showingBoth = true;
-    document.getElementById('btn-update').addEventListener('click', () => {
-      if (showingBoth) {
-        chart.updateSeries([{ name: 'This Year', data: salesThisYear }]);
-        document.getElementById('btn-update').textContent = 'Show Comparison';
-      } else {
-        chart.updateSeries([
-          { name: 'This Year', data: salesThisYear },
-          { name: 'Last Year', data: salesLastYear }
-        ]);
-        document.getElementById('btn-update').textContent = 'Show This Year Only';
-      }
-      showingBoth = !showingBoth;
-    });
+    const btnUpdate = document.getElementById('btn-update');
+    if (btnUpdate) {
+      btnUpdate.addEventListener('click', () => {
+        if (showingBoth) {
+          chart.updateSeries([{ name: 'This Year', data: salesThisYear }]);
+          btnUpdate.textContent = 'Show Comparison';
+        } else {
+          chart.updateSeries([
+            { name: 'This Year', data: salesThisYear },
+            { name: 'Last Year', data: salesLastYear }
+          ]);
+          btnUpdate.textContent = 'Show This Year Only';
+        }
+        showingBoth = !showingBoth;
+      });
+    }
 
     // Public function: update chart with new monthly sales data
     // call updateMonthlySales([arrayOf12], optionalCompareArrayOf12)

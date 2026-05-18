@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" dir="{{ app()->getLocale() === 'ar' ? 'rtl' : 'ltr' }}">
 
 <head>
   <meta charset="utf-8">
@@ -18,6 +18,27 @@
   <!-- Vendor CSS Files -->
   <link href="{{ asset('assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
   <link href="{{ asset('assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
+  @if(app()->getLocale() === 'ar')
+  <style>
+    [dir="rtl"] .navmenu ul {
+      padding-right: 0;
+    }
+    [dir="rtl"] .navmenu ul li {
+      margin-left: 10px;
+      margin-right: 0;
+    }
+    [dir="rtl"] .btn-getstarted {
+      margin-right: auto;
+      margin-left: 0;
+    }
+    [dir="rtl"] .footer-links ul {
+      padding-right: 0;
+    }
+    [dir="rtl"] .footer-links ul li {
+      padding-right: 0;
+    }
+  </style>
+  @endif
   <link href="{{ asset('assets/vendor/aos/aos.css') }}" rel="stylesheet">
   <link href="{{ asset('assets/vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
   <link href="{{ asset('assets/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
@@ -39,17 +60,42 @@
 
       <nav id="navmenu" class="navmenu">
         <ul>
-          <li><a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'active' : '' }}">Home</a></li>
-          <li><a href="{{ route('about') }}" class="{{ request()->routeIs('about') ? 'active' : '' }}">About</a></li>
-          <li><a href="{{ route('services') }}" class="{{ request()->routeIs('services') ? 'active' : '' }}">Services</a></li>
-          <li><a href="{{ route('pricing') }}" class="{{ request()->routeIs('pricing') ? 'active' : '' }}">Pricing</a></li>
-          <li><a href="{{ route('portfolio') }}" class="{{ request()->routeIs('portfolio') ? 'active' : '' }}">Portfolio</a></li>
-          <li><a href="{{ route('contact') }}" class="{{ request()->routeIs('contact') ? 'active' : '' }}">Contact</a></li>
+          <li><a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'active' : '' }}">{{ __('messages.nav_home') }}</a></li>
+          <li><a href="{{ route('about') }}" class="{{ request()->routeIs('about') ? 'active' : '' }}">{{ __('messages.nav_about') }}</a></li>
+          <li><a href="{{ route('services') }}" class="{{ request()->routeIs('services') ? 'active' : '' }}">{{ __('messages.nav_services') }}</a></li>
+          <li><a href="{{ route('pricing') }}" class="{{ request()->routeIs('pricing') ? 'active' : '' }}">{{ __('messages.nav_pricing') }}</a></li>
+          <li><a href="{{ route('portfolio') }}" class="{{ request()->routeIs('portfolio') ? 'active' : '' }}">{{ __('messages.nav_portfolio') }}</a></li>
+          <li><a href="{{ route('contact') }}" class="{{ request()->routeIs('contact') ? 'active' : '' }}">{{ __('messages.nav_contact') }}</a></li>
+          <li class="dropdown">
+            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="bi bi-globe"></i>
+            </a>
+            <ul class="dropdown-menu">
+              <li>
+                <form method="POST" action="{{ route('language.switch') }}">
+                  @csrf
+                  <input type="hidden" name="locale" value="en">
+                  <button type="submit" class="dropdown-item {{ app()->getLocale() === 'en' ? 'active' : '' }}">
+                {{ __('messages.lang_english') }}
+                  </button>
+                </form>
+              </li>
+              <li>
+                <form method="POST" action="{{ route('language.switch') }}">
+                  @csrf
+                  <input type="hidden" name="locale" value="ar">
+                  <button type="submit" class="dropdown-item {{ app()->getLocale() === 'ar' ? 'active' : '' }}">
+                {{ __('messages.lang_arabic') }}
+                  </button>
+                </form>
+              </li>
+            </ul>
+          </li>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
 
-      <a class="btn-getstarted" href="{{ route('contact') }}">Get Started</a>
+      <a class="btn-getstarted" href="{{ route('contact') }}">{{ __('messages.nav_get_started') }}</a>
 
     </div>
   </header>
@@ -65,7 +111,7 @@
           <a href="{{ route('home') }}" class="logo d-flex align-items-center">
             <img src="{{ asset('assets/img/logo/logo-solution.png') }}" alt="Krecht Solutions" style="max-height: 80px; height: auto; width: auto; filter: brightness(0) invert(1);">
           </a>
-          <p class="mt-3">Krecht Solutions builds modern software, mobile applications, dashboards, and business systems designed to help companies grow efficiently.</p>
+          <p class="mt-3">{{ __('messages.footer_about') }}</p>
           <div class="social-links d-flex mt-4">
             <a href="#"><i class="bi bi-twitter-x"></i></a>
             <a href="#"><i class="bi bi-facebook"></i></a>
@@ -74,38 +120,38 @@
           </div>
         </div>
         <div class="col-lg-2 col-6 footer-links">
-          <h4>Quick Links</h4>
+          <h4>{{ __('messages.footer_quick_links') }}</h4>
           <ul>
-            <li><a href="{{ route('home') }}">Home</a></li>
-            <li><a href="{{ route('about') }}">About Us</a></li>
-            <li><a href="{{ route('services') }}">Services</a></li>
-            <li><a href="{{ route('portfolio') }}">Portfolio</a></li>
-            <li><a href="{{ route('contact') }}">Contact</a></li>
+            <li><a href="{{ route('home') }}">{{ __('messages.footer_home') }}</a></li>
+            <li><a href="{{ route('about') }}">{{ __('messages.footer_about_us') }}</a></li>
+            <li><a href="{{ route('services') }}">{{ __('messages.footer_services') }}</a></li>
+            <li><a href="{{ route('portfolio') }}">{{ __('messages.footer_portfolio') }}</a></li>
+            <li><a href="{{ route('contact') }}">{{ __('messages.footer_contact') }}</a></li>
           </ul>
         </div>
         <div class="col-lg-2 col-6 footer-links">
-          <h4>Our Services</h4>
+          <h4>{{ __('messages.footer_our_services') }}</h4>
           <ul>
-            <li><a href="{{ route('services') }}">Laravel Dashboards</a></li>
-            <li><a href="{{ route('services') }}">Flutter Mobile Apps</a></li>
-            <li><a href="{{ route('services') }}">API Integration</a></li>
-            <li><a href="{{ route('services') }}">POS Systems</a></li>
-            <li><a href="{{ route('services') }}">Business Systems</a></li>
+            <li><a href="{{ route('services') }}">{{ __('messages.footer_service_laravel') }}</a></li>
+            <li><a href="{{ route('services') }}">{{ __('messages.footer_service_flutter') }}</a></li>
+            <li><a href="{{ route('services') }}">{{ __('messages.footer_service_api') }}</a></li>
+            <li><a href="{{ route('services') }}">{{ __('messages.footer_service_pos') }}</a></li>
+            <li><a href="{{ route('services') }}">{{ __('messages.footer_service_business') }}</a></li>
           </ul>
         </div>
         <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
-          <h4>Contact Us</h4>
+          <h4>{{ __('messages.footer_contact_us') }}</h4>
           <p>{{ \App\Models\SiteSetting::get('contact_address', 'Sour, Lebanon') }}</p>
-          <p class="mt-3"><strong>Phone:</strong> <span>{{ \App\Models\SiteSetting::get('contact_phone', '78768725') }}</span></p>
-          <p><strong>WhatsApp:</strong> <span>{{ \App\Models\SiteSetting::get('contact_whatsapp', 'Available') }}</span></p>
-          <p><strong>Hours:</strong> <span>{{ \App\Models\SiteSetting::get('footer_working_hours', 'Mon - Sun | 9 AM - 5 PM') }}</span></p>
-          <p><strong>Email:</strong> <span>{{ \App\Models\SiteSetting::get('contact_email', config('mail.from.address')) }}</span></p>
+          <p class="mt-3"><strong>{{ __('messages.footer_phone') }}</strong> <span>{{ \App\Models\SiteSetting::get('contact_phone', '78768725') }}</span></p>
+          <p><strong>{{ __('messages.footer_whatsapp') }}</strong> <span>{{ \App\Models\SiteSetting::get('contact_whatsapp', 'Available') }}</span></p>
+          <p><strong>{{ __('messages.footer_hours') }}</strong> <span>{{ \App\Models\SiteSetting::get('footer_working_hours', 'Mon - Sun | 9 AM - 5 PM') }}</span></p>
+          <p><strong>{{ __('messages.footer_email') }}</strong> <span>{{ \App\Models\SiteSetting::get('contact_email', config('mail.from.address')) }}</span></p>
         </div>
       </div>
     </div>
     <div class="container copyright text-center mt-4">
-      <p>© 2026 <strong class="px-1 sitename">Krecht Solutions</strong>. All Rights Reserved.</p>
-      <div class="credits">Built with Laravel &amp; Flutter</div>
+      <p>© 2026 <strong class="px-1 sitename">Krecht Solutions</strong>. {{ __('messages.footer_copyright') }}</p>
+      <div class="credits">{{ __('messages.footer_credits') }}</div>
     </div>
   </footer>
 

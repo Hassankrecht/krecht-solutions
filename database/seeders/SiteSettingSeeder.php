@@ -12,17 +12,26 @@ class SiteSettingSeeder extends Seeder
         $settings = [
             [
                 'key' => 'site_name',
-                'value' => 'Krecht Solutions',
+                'value' => [
+                    'en' => 'Krecht Solutions',
+                    'ar' => 'حلول كريخت',
+                ],
                 'type' => 'text',
             ],
             [
                 'key' => 'site_tagline',
-                'value' => 'Custom Software Solutions for Modern Businesses',
+                'value' => [
+                    'en' => 'Custom Software Solutions for Modern Businesses',
+                    'ar' => 'حلول برمجية مخصصة للأعمال الحديثة',
+                ],
                 'type' => 'text',
             ],
             [
                 'key' => 'site_description',
-                'value' => 'Professional software development and IT services including web development, mobile apps, dashboards, and business systems.',
+                'value' => [
+                    'en' => 'Professional software development and IT services including web development, mobile apps, dashboards, and business systems.',
+                    'ar' => 'تطوير برمجيات احترافي وخدمات تكنولوجيا المعلومات بما في ذلك تطوير الويب وتطبيقات الجوال ولوحات التحكم والأنظمة التجارية.',
+                ],
                 'type' => 'text',
             ],
             [
@@ -42,22 +51,34 @@ class SiteSettingSeeder extends Seeder
             ],
             [
                 'key' => 'contact_address',
-                'value' => 'Sour, Lebanon',
+                'value' => [
+                    'en' => 'Sour, Lebanon',
+                    'ar' => 'صور، لبنان',
+                ],
                 'type' => 'text',
             ],
             [
                 'key' => 'contact_whatsapp',
-                'value' => 'Available',
+                'value' => [
+                    'en' => 'Available',
+                    'ar' => 'متاح',
+                ],
                 'type' => 'text',
             ],
             [
                 'key' => 'contact_working_hours',
-                'value' => 'Monday - Sunday, 9:00 AM - 5:00 PM',
+                'value' => [
+                    'en' => 'Monday - Sunday, 9:00 AM - 5:00 PM',
+                    'ar' => 'الاثنين - الأحد، 9:00 صباحًا - 5:00 مساءً',
+                ],
                 'type' => 'text',
             ],
             [
                 'key' => 'footer_working_hours',
-                'value' => 'Mon - Sun | 9 AM - 5 PM',
+                'value' => [
+                    'en' => 'Mon - Sun | 9 AM - 5 PM',
+                    'ar' => 'الاثنين - الأحد | 9 ص - 5 م',
+                ],
                 'type' => 'text',
             ],
             [

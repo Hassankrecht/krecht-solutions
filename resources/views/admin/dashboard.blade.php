@@ -1,13 +1,15 @@
 @extends('layouts.admin')
 
 @section('content')
-<div class="container-fluid">
+<div class="container-fluid"
+     data-chart-sales-purchase="{{ json_encode($chartData['salesPurchase']) }}"
+     data-chart-customer="{{ json_encode($chartData['customer']) }}">
 
     <div class="row">
         <div class="col-12">
             <div class="mb-4">
                 <h1 class="fs-3 mb-1">Dashboard</h1>
-                <p class="mb-0 text-muted">Welcome back, {{ auth()->user()->name }}. Here's your overview.</p>
+                <p class="mb-0 text-muted">Welcome back, {{ auth()->user()?->name ?? 'Admin' }}. Here's your overview.</p>
             </div>
         </div>
     </div>
@@ -112,6 +114,83 @@
                         <h2 class="mb-1 fs-6 text-muted">Total Messages</h2>
                         <h3 class="fw-bold mb-0 fs-4">{{ $stats['total_messages'] }}</h3>
                         <a href="{{ route('admin.contact-messages.index') }}" class="small">View all →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Row 3 — Charts -->
+    <div class="row g-3 mb-3">
+        <div class="col-12 col-lg-6">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center bg-transparent px-4 py-3">
+                    <h3 class="h5 mb-0">Sales vs Purchase</h3>
+                    <div>
+                        <select class="form-select form-select-sm">
+                            <option selected>This Year</option>
+                            <option>This Month</option>
+                            <option>This Week</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="card-body p-4">
+                    <div id="salesPurchaseChart"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-lg-6">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center bg-transparent px-4 py-3">
+                    <h3 class="h5 mb-0">Overall Information</h3>
+                    <div>
+                        <select class="form-select form-select-sm">
+                            <option selected>Last 6 Months</option>
+                            <option>This Month</option>
+                            <option>This Week</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="card-body p-4">
+                    <h3 class="h6">Customers Overview</h3>
+                    <div class="row align-items-center">
+                        <div class="col-sm-6">
+                            <div id="customerChart"></div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="row">
+                                <div class="col-6 border-end">
+                                    <div class="text-center">
+                                        <h2 class="mb-1">5.5K</h2>
+                                        <p class="text-success mb-2">First Time</p>
+                                        <span class="badge bg-success"><i class="ti ti-arrow-up-left me-1"></i>25%</span>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="text-center">
+                                        <h2 class="mb-1">3.5K</h2>
+                                        <p class="text-warning mb-2">Return</p>
+                                        <span class="badge bg-success badge-xs d-inline-flex align-items-center"><i
+                                            class="ti ti-arrow-up-left me-1"></i>21%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row text-center border-top mt-4 pt-4">
+                        <div class="col-4 border-end">
+                            <h3 class="fw-bold mb-2">{{ $stats['services'] }}</h3>
+                            <small class="text-secondary">Services</small>
+                        </div>
+                        <div class="col-4 border-end">
+                            <h3 class="fw-bold mb-2">{{ $stats['projects'] }}</h3>
+                            <small class="text-secondary">Projects</small>
+                        </div>
+                        <div class="col-4">
+                            <h3 class="fw-bold mb-2">{{ $stats['pricing_packages'] }}</h3>
+                            <small class="text-secondary">Packages</small>
+                        </div>
                     </div>
                 </div>
             </div>
