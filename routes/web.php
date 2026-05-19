@@ -19,14 +19,14 @@ use App\Http\Controllers\SitemapController;
 |
 */
 
-Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/', [HomeController::class, 'index'])->middleware('track.visitor')->name('home');
 Route::post('/language', [HomeController::class, 'switchLanguage'])->name('language.switch');
-Route::get('/about', [PageController::class, 'about'])->name('about');
-Route::get('/services', [PageController::class, 'services'])->name('services');
-Route::get('/pricing', [PageController::class, 'pricing'])->name('pricing');
-Route::get('/portfolio', [PageController::class, 'portfolio'])->name('portfolio');
-Route::get('/portfolio/{project}', [PageController::class, 'portfolioShow'])->name('portfolio.show');
-Route::get('/contact', [ContactController::class, 'index'])->name('contact');
+Route::get('/about', [PageController::class, 'about'])->middleware('track.visitor')->name('about');
+Route::get('/services', [PageController::class, 'services'])->middleware('track.visitor')->name('services');
+Route::get('/pricing', [PageController::class, 'pricing'])->middleware('track.visitor')->name('pricing');
+Route::get('/portfolio', [PageController::class, 'portfolio'])->middleware('track.visitor')->name('portfolio');
+Route::get('/portfolio/{project}', [PageController::class, 'portfolioShow'])->middleware('track.visitor')->name('portfolio.show');
+Route::get('/contact', [ContactController::class, 'index'])->middleware('track.visitor')->name('contact');
 Route::post('/contact', [ContactController::class, 'store'])->middleware('throttle:5,1')->name('contact.store');
 Route::post('/testimonials', [TestimonialSubmissionController::class, 'store'])->middleware('throttle:3,1')->name('testimonials.store');
 

@@ -629,10 +629,11 @@ class FormButtonTest extends TestCase
     public function test_admin_project_create_form_works(): void
     {
         $admin = User::factory()->create(['is_admin' => true]);
+        $category = \App\Models\ProjectCategory::factory()->create();
 
         $response = $this->actingAs($admin)->post('/admin/projects', [
             'title_en' => 'Test Project',
-            'category_en' => 'Web',
+            'category_ids' => [$category->id],
             'description_en' => 'Project description',
             'is_active' => true,
             'order' => 1,
@@ -644,16 +645,19 @@ class FormButtonTest extends TestCase
 
         $this->assertDatabaseHas('projects', [
             'title' => 'Test Project',
-            'category' => 'Web',
+        ]);
+        $this->assertDatabaseHas('project_category_project', [
+            'project_category_id' => $category->id,
         ]);
     }
 
     public function test_admin_project_create_validation_fails_without_title(): void
     {
         $admin = User::factory()->create(['is_admin' => true]);
+        $category = \App\Models\ProjectCategory::factory()->create();
 
         $response = $this->actingAs($admin)->post('/admin/projects', [
-            'category_en' => 'Web',
+            'category_ids' => [$category->id],
             'description_en' => 'Project description',
         ]);
 
@@ -669,14 +673,16 @@ class FormButtonTest extends TestCase
             'description_en' => 'Project description',
         ]);
 
-        $response->assertSessionHasErrors('category_en');
+        $response->assertSessionHasErrors('category_ids');
     }
 
     public function test_admin_project_create_guest_cannot_access(): void
     {
+        $category = \App\Models\ProjectCategory::factory()->create();
+
         $response = $this->post('/admin/projects', [
             'title_en' => 'Test Project',
-            'category_en' => 'Web',
+            'category_ids' => [$category->id],
             'description_en' => 'Project description',
         ]);
 
@@ -686,11 +692,13 @@ class FormButtonTest extends TestCase
     public function test_admin_project_update_form_works(): void
     {
         $admin = User::factory()->create(['is_admin' => true]);
+        $category = \App\Models\ProjectCategory::factory()->create();
         $project = Project::factory()->create();
+        $project->categories()->attach($category->id);
 
         $response = $this->actingAs($admin)->put("/admin/projects/{$project->id}", [
             'title_en' => 'Updated Project',
-            'category_en' => 'Mobile',
+            'category_ids' => [$category->id],
             'description_en' => 'Updated description',
             'is_active' => true,
             'order' => 2,
@@ -708,11 +716,12 @@ class FormButtonTest extends TestCase
 
     public function test_admin_project_update_guest_cannot_access(): void
     {
+        $category = \App\Models\ProjectCategory::factory()->create();
         $project = Project::factory()->create();
 
         $response = $this->put("/admin/projects/{$project->id}", [
             'title_en' => 'Updated Project',
-            'category_en' => 'Mobile',
+            'category_ids' => [$category->id],
             'description_en' => 'Updated description',
         ]);
 
@@ -750,7 +759,6 @@ class FormButtonTest extends TestCase
 
         $response = $this->actingAs($admin)->post('/admin/pricing-packages', [
             'name_en' => 'Basic Plan',
-            'category_en' => 'Web',
             'price' => '99.99',
             'features_en' => "Feature 1\nFeature 2",
             'is_active' => true,
@@ -772,7 +780,6 @@ class FormButtonTest extends TestCase
         $admin = User::factory()->create(['is_admin' => true]);
 
         $response = $this->actingAs($admin)->post('/admin/pricing-packages', [
-            'category_en' => 'Web',
             'price' => '99.99',
         ]);
 
@@ -785,29 +792,15 @@ class FormButtonTest extends TestCase
 
         $response = $this->actingAs($admin)->post('/admin/pricing-packages', [
             'name_en' => 'Basic Plan',
-            'category_en' => 'Web',
         ]);
 
         $response->assertSessionHasErrors('price');
-    }
-
-    public function test_admin_pricing_package_create_validation_fails_without_category(): void
-    {
-        $admin = User::factory()->create(['is_admin' => true]);
-
-        $response = $this->actingAs($admin)->post('/admin/pricing-packages', [
-            'name_en' => 'Basic Plan',
-            'price' => '99.99',
-        ]);
-
-        $response->assertSessionHasErrors('category_en');
     }
 
     public function test_admin_pricing_package_create_guest_cannot_access(): void
     {
         $response = $this->post('/admin/pricing-packages', [
             'name_en' => 'Basic Plan',
-            'category_en' => 'Web',
             'price' => '99.99',
         ]);
 
@@ -821,7 +814,6 @@ class FormButtonTest extends TestCase
 
         $response = $this->actingAs($admin)->put("/admin/pricing-packages/{$pricingPackage->id}", [
             'name_en' => 'Updated Plan',
-            'category_en' => 'Mobile',
             'price' => '199.99',
             'features_en' => "Feature 1\nFeature 2",
             'is_active' => true,

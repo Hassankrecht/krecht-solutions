@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\ProjectController;
+use App\Http\Controllers\Admin\ProjectCategoryController;
 use App\Http\Controllers\Admin\PricingPackageController;
 use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\Admin\FaqController;
@@ -28,6 +29,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::resource('services', ServiceController::class)->except(['show']);
 
     Route::resource('projects', ProjectController::class)->except(['show']);
+    Route::resource('project-categories', ProjectCategoryController::class)->except(['show']);
 
     Route::resource('pricing-packages', PricingPackageController::class)->except(['show']);
 

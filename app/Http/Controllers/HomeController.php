@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Service;
 use App\Models\PricingPackage;
 use App\Models\Project;
+use App\Models\ProjectCategory;
 use App\Models\Testimonial;
 use App\Models\Faq;
 use App\Models\SiteSetting;
@@ -16,7 +17,8 @@ class HomeController extends Controller
     {
         $services = Service::active()->ordered()->get();
         $pricingPackages = PricingPackage::active()->ordered()->get();
-        $projects = Project::active()->ordered()->take(6)->get();
+        $projects = Project::active()->ordered()->with('categories')->take(6)->get();
+        $categories = ProjectCategory::active()->ordered()->get();
         $testimonials = Testimonial::approved()->active()->ordered()->get();
         $faqs = Faq::active()->ordered()->take(3)->get();
 
@@ -27,6 +29,7 @@ class HomeController extends Controller
             'services',
             'pricingPackages',
             'projects',
+            'categories',
             'testimonials',
             'faqs',
             'siteName',

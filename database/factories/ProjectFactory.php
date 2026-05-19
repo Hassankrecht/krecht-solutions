@@ -18,7 +18,7 @@ class ProjectFactory extends Factory
     public function definition(): array
     {
         $title = fake()->words(3, true);
-        
+
         return [
             'title' => $title,
             'title_en' => $title,
@@ -26,9 +26,6 @@ class ProjectFactory extends Factory
             'description' => fake()->paragraph(),
             'description_en' => fake()->paragraph(),
             'description_ar' => fake()->paragraph(),
-            'category' => fake()->randomElement(['Websites', 'Dashboards', 'POS Systems', 'Business Systems', 'Mobile Apps']),
-            'category_en' => fake()->randomElement(['Websites', 'Dashboards', 'POS Systems', 'Business Systems', 'Mobile Apps']),
-            'category_ar' => fake()->randomElement(['Websites', 'Dashboards', 'POS Systems', 'Business Systems', 'Mobile Apps']),
             'image' => null,
             'gallery_images' => [],
             'video' => null,

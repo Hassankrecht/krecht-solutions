@@ -12,7 +12,7 @@ class ProjectController extends Controller
 {
     public function index()
     {
-        $projects = Project::orderBy('order')->orderBy('id')->paginate(15);
+        $projects = Project::with('categories')->orderBy('order')->orderBy('id')->paginate(15);
         return view('admin.projects.index', compact('projects'));
     }
 
@@ -28,8 +28,8 @@ class ProjectController extends Controller
             'title_ar'            => 'nullable|string|max:255',
             'description_en'      => 'nullable|string',
             'description_ar'      => 'nullable|string',
-            'category_en'         => 'required|string|max:255',
-            'category_ar'         => 'nullable|string|max:255',
+            'category_ids'        => 'required|array|min:1',
+            'category_ids.*'      => 'exists:project_categories,id',
             'image'               => 'nullable|string|max:500',
             'image_upload'        => 'nullable|image|max:10240',
             'gallery_upload.*'    => 'nullable|image|max:10240',
@@ -44,11 +44,10 @@ class ProjectController extends Controller
         // Copy English values to original fields for backward compatibility
         $validated['title'] = $validated['title_en'];
         $validated['description'] = $validated['description_en'] ?? '';
-        $validated['category'] = $validated['category_en'];
         $validated['technologies'] = $this->parseTechnologies($request->input('technologies_en'));
         $validated['technologies_en'] = $this->parseTechnologies($request->input('technologies_en'));
         $validated['technologies_ar'] = $this->parseTechnologies($request->input('technologies_ar'));
-        
+
         $validated['is_active'] = $request->boolean('is_active');
         $validated['order']     = $validated['order'] ?? 0;
 
@@ -56,7 +55,11 @@ class ProjectController extends Controller
         $validated['gallery_images'] = $this->handleGalleryUpload($request, []);
         $validated['video']          = $this->handleVideoUpload($request, null);
 
-        Project::create($validated);
+        $categoryIds = $validated['category_ids'];
+        unset($validated['category_ids']);
+
+        $project = Project::create($validated);
+        $project->categories()->sync($categoryIds);
 
         return redirect()->route('admin.projects.index')
             ->with('success', 'Project created successfully.');
@@ -74,8 +77,8 @@ class ProjectController extends Controller
             'title_ar'            => 'nullable|string|max:255',
             'description_en'      => 'nullable|string',
             'description_ar'      => 'nullable|string',
-            'category_en'         => 'required|string|max:255',
-            'category_ar'         => 'nullable|string|max:255',
+            'category_ids'        => 'required|array|min:1',
+            'category_ids.*'      => 'exists:project_categories,id',
             'image'               => 'nullable|string|max:500',
             'image_upload'        => 'nullable|image|max:10240',
             'gallery_upload.*'    => 'nullable|image|max:10240',
@@ -90,11 +93,10 @@ class ProjectController extends Controller
         // Copy English values to original fields for backward compatibility
         $validated['title'] = $validated['title_en'];
         $validated['description'] = $validated['description_en'] ?? '';
-        $validated['category'] = $validated['category_en'];
         $validated['technologies'] = $this->parseTechnologies($request->input('technologies_en'));
         $validated['technologies_en'] = $this->parseTechnologies($request->input('technologies_en'));
         $validated['technologies_ar'] = $this->parseTechnologies($request->input('technologies_ar'));
-        
+
         $validated['is_active'] = $request->boolean('is_active');
         $validated['order']     = $validated['order'] ?? 0;
 
@@ -102,7 +104,11 @@ class ProjectController extends Controller
         $validated['gallery_images'] = $this->handleGalleryUpload($request, $project->gallery_images ?? []);
         $validated['video']          = $this->handleVideoUpload($request, $project->video);
 
+        $categoryIds = $validated['category_ids'];
+        unset($validated['category_ids']);
+
         $project->update($validated);
+        $project->categories()->sync($categoryIds);
 
         return redirect()->route('admin.projects.index')
             ->with('success', 'Project updated successfully.');

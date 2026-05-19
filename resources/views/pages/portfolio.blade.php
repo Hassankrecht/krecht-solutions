@@ -29,7 +29,7 @@
                 <li data-filter="*" class="filter-active">{{ __('messages.portfolio_filter_all') }}</li>
                 @if($categories && $categories->count() > 0)
                     @foreach($categories as $category)
-                        <li data-filter=".filter-{{ Str::slug($category) }}">{{ $category }}</li>
+                        <li data-filter=".filter-{{ $category->slug }}">{{ $category->name }}</li>
                     @endforeach
                 @endif
             </ul>
@@ -38,26 +38,27 @@
                 @if($projects && $projects->count() > 0)
                     @php
                         $categoryIcons = [
-                            'Websites'         => 'bi-globe2',
-                            'Dashboards'       => 'bi-speedometer2',
-                            'POS Systems'      => 'bi-receipt-cutoff',
-                            'Business Systems' => 'bi-briefcase',
-                            'Mobile Apps'      => 'bi-phone',
+                            'websites'         => 'bi-globe2',
+                            'business-systems' => 'bi-briefcase',
+                            'mobile-apps'      => 'bi-phone',
+                            'e-commerce'       => 'bi-cart',
                         ];
                         $categoryGradients = [
-                            'Websites'         => 'linear-gradient(135deg,#0f2027,#203a43,#2c5364)',
-                            'Dashboards'       => 'linear-gradient(135deg,#0d1b2a,#1b2838,#1b4f72)',
-                            'POS Systems'      => 'linear-gradient(135deg,#1a1a2e,#16213e,#0f3460)',
-                            'Business Systems' => 'linear-gradient(135deg,#0f1923,#1c2b3a,#274a6e)',
-                            'Mobile Apps'      => 'linear-gradient(135deg,#1a0533,#2d1157,#4a1b8c)',
+                            'websites'         => 'linear-gradient(135deg,#0f2027,#203a43,#2c5364)',
+                            'business-systems' => 'linear-gradient(135deg,#0f1923,#1c2b3a,#274a6e)',
+                            'mobile-apps'      => 'linear-gradient(135deg,#1a0533,#2d1157,#4a1b8c)',
+                            'e-commerce'       => 'linear-gradient(135deg,#1a1a2e,#16213e,#0f3460)',
                         ];
                     @endphp
                     @foreach($projects as $index => $project)
                         @php
-                            $icon     = $categoryIcons[$project->category]     ?? 'bi-code-square';
-                            $gradient = $categoryGradients[$project->category] ?? 'linear-gradient(135deg,#1a1a2e,#16213e,#0f3460)';
+                            $primaryCategory = $project->categories->first();
+                            $slug = $primaryCategory ? $primaryCategory->slug : 'all';
+                            $icon     = $categoryIcons[$slug] ?? 'bi-code-square';
+                            $gradient = $categoryGradients[$slug] ?? 'linear-gradient(135deg,#1a1a2e,#16213e,#0f3460)';
+                            $filterClasses = collect($project->categories)->map(fn($c) => 'filter-' . $c->slug)->implode(' ');
                         @endphp
-                        <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-{{ Str::slug($project->category) }}">
+                        <div class="col-lg-4 col-md-6 portfolio-item isotope-item {{ $filterClasses }}">
                             @if($project->image)
                                 <img src="{{ asset($project->image) }}" class="img-fluid" alt="{{ $project->title }}">
                             @else
@@ -70,7 +71,7 @@
                             @endif
                             <div class="portfolio-info">
                                 <h4>{{ $project->title }}</h4>
-                                <p>{{ $project->category }}</p>
+                                <p>{{ $primaryCategory ? $primaryCategory->name : '' }}</p>
                                 @if($project->image)
                                     <a href="{{ asset($project->image) }}" title="{{ $project->title }}" data-gallery="portfolio-gallery" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
                                 @endif

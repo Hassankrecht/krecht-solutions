@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Project extends Model
 {
@@ -16,9 +17,6 @@ class Project extends Model
         'description',
         'description_en',
         'description_ar',
-        'category',
-        'category_en',
-        'category_ar',
         'image',
         'gallery_images',
         'video',
@@ -84,6 +82,11 @@ class Project extends Model
     public function scopeOrdered($query)
     {
         return $query->orderBy('order', 'asc');
+    }
+
+    public function categories(): BelongsToMany
+    {
+        return $this->belongsToMany(ProjectCategory::class, 'project_category_project');
     }
 
     public function scopeByCategory($query, $category)

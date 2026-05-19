@@ -81,10 +81,12 @@ class AdminProtectionTest extends TestCase
 
     public function test_guest_cannot_create_project(): void
     {
+        $category = \App\Models\ProjectCategory::factory()->create();
+
         $response = $this->post('/admin/projects', [
-            'title' => 'Test Project',
-            'category' => 'Web',
-            'description' => 'Test description',
+            'title_en' => 'Test Project',
+            'category_ids' => [$category->id],
+            'description_en' => 'Test description',
         ]);
         $response->assertRedirect('/login');
     }
@@ -330,10 +332,11 @@ class AdminProtectionTest extends TestCase
     public function test_authenticated_user_can_create_project(): void
     {
         $user = User::factory()->create(['is_admin' => true]);
+        $category = \App\Models\ProjectCategory::factory()->create();
 
         $response = $this->actingAs($user)->post('/admin/projects', [
             'title_en' => 'Test Project',
-            'category_en' => 'Web',
+            'category_ids' => [$category->id],
             'description_en' => 'Test description',
             'is_active' => true,
             'order' => 0,
@@ -356,11 +359,13 @@ class AdminProtectionTest extends TestCase
     public function test_authenticated_user_can_update_project(): void
     {
         $user = User::factory()->create(['is_admin' => true]);
+        $category = \App\Models\ProjectCategory::factory()->create();
         $project = Project::factory()->create();
+        $project->categories()->attach($category->id);
 
         $response = $this->actingAs($user)->put("/admin/projects/{$project->id}", [
             'title_en' => 'Updated Project',
-            'category_en' => 'Mobile',
+            'category_ids' => [$category->id],
             'description_en' => 'Updated description',
             'is_active' => true,
             'order' => 1,

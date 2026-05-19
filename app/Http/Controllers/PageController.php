@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Service;
 use App\Models\PricingPackage;
 use App\Models\Project;
+use App\Models\ProjectCategory;
 use App\Models\SiteSetting;
 
 class PageController extends Controller
@@ -37,11 +38,11 @@ class PageController extends Controller
 
     public function portfolio()
     {
-        $projects = Project::active()->ordered()->get();
-        $categories = Project::active()->select('category')->distinct()->pluck('category');
+        $projects = Project::active()->ordered()->with('categories')->get();
+        $categories = ProjectCategory::active()->ordered()->get();
         $siteName = SiteSetting::get('site_name', 'Krecht Solutions');
         $siteTagline = SiteSetting::get('site_tagline', 'Software & IT Services');
-        
+
         return view('pages.portfolio', compact('projects', 'categories', 'siteName', 'siteTagline'));
     }
 

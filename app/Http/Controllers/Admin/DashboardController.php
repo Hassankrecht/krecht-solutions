@@ -9,6 +9,7 @@ use App\Models\PricingPackage;
 use App\Models\Testimonial;
 use App\Models\Faq;
 use App\Models\ContactMessage;
+use App\Models\Visitor;
 
 class DashboardController extends Controller
 {
@@ -22,6 +23,8 @@ class DashboardController extends Controller
             'faqs' => Faq::count(),
             'unread_messages' => ContactMessage::where('is_read', false)->count(),
             'total_messages' => ContactMessage::count(),
+            'total_visitors' => Visitor::getTotalVisitors(),
+            'today_visitors' => Visitor::getTodayVisitors(),
         ];
 
         // Chart data - using actual Laravel data

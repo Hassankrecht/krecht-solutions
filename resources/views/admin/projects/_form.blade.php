@@ -23,11 +23,25 @@
         <div class="row">
             <div class="col-md-8">
                 <div class="mb-3">
-                    <label for="category_en" class="form-label fw-semibold">Category (English) <span class="text-danger">*</span></label>
-                    <input id="category_en" name="category_en" type="text" class="form-control @error('category_en') is-invalid @enderror"
-                        value="{{ old('category_en', $project->category_en ?? '') }}" required placeholder="e.g. Web Development">
-                    @error('category_en')
-                        <div class="invalid-feedback">{{ $message }}</div>
+                    <label class="form-label fw-semibold">Category <span class="text-danger">*</span></label>
+                    <select class="form-select" name="category_ids[]" required>
+                        <option value="">Select a category</option>
+                        @php
+                            $categories = \App\Models\ProjectCategory::active()->ordered()->get();
+                            $selectedCategoryIds = old('category_ids', isset($project) ? $project->categories->pluck('id')->toArray() : []);
+                        @endphp
+                        @foreach($categories as $category)
+                            <option value="{{ $category->id }}"
+                                    @in_array($category->id, $selectedCategoryIds) ? 'selected' : '' ?>>
+                                {{ $category->name_en }}
+                            </option>
+                        @endforeach
+                    </select>
+                    @if($categories->isEmpty())
+                        <p class="text-muted small mt-1">No categories available. <a href="{{ route('admin.project-categories.create') }}" target="_blank">Create one first.</a></p>
+                    @endif
+                    @error('category_ids')
+                        <div class="invalid-feedback d-block">{{ $message }}</div>
                     @enderror
                 </div>
             </div>
@@ -74,14 +88,6 @@
             @enderror
         </div>
 
-        <div class="mb-3">
-            <label for="category_ar" class="form-label fw-semibold">Category (Arabic)</label>
-            <input id="category_ar" name="category_ar" type="text" class="form-control @error('category_ar') is-invalid @enderror"
-                value="{{ old('category_ar', $project->category_ar ?? '') }}" placeholder="مثال: تطوير الويب" dir="rtl">
-            @error('category_ar')
-                <div class="invalid-feedback">{{ $message }}</div>
-            @enderror
-        </div>
 
         <div class="mb-3">
             <label for="technologies_ar" class="form-label fw-semibold">Technologies (Arabic)</label>

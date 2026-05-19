@@ -9,9 +9,17 @@
                     <h1 class="fs-3 mb-1">Projects</h1>
                     <p class="mb-0 text-muted">Manage portfolio projects displayed on the website.</p>
                 </div>
-                <a href="{{ route('admin.projects.create') }}" class="btn btn-primary">
-                    <i class="ti ti-plus me-1"></i> Add Project
-                </a>
+                <div class="d-flex gap-2">
+                    <a href="{{ route('admin.project-categories.index') }}" class="btn btn-outline-secondary">
+                        <i class="ti ti-category me-1"></i> Manage Categories
+                    </a>
+                    <a href="{{ route('admin.project-categories.create') }}" class="btn btn-outline-primary">
+                        <i class="ti ti-plus me-1"></i> Add Category
+                    </a>
+                    <a href="{{ route('admin.projects.create') }}" class="btn btn-primary">
+                        <i class="ti ti-plus me-1"></i> Add Project
+                    </a>
+                </div>
             </div>
         </div>
     </div>
@@ -55,7 +63,15 @@
                                 <div class="small text-muted">{{ Str::limit($project->description, 70) }}</div>
                             @endif
                         </td>
-                        <td><span class="badge bg-secondary">{{ $project->category }}</span></td>
+                        <td>
+                            @if($project->categories && $project->categories->count() > 0)
+                                @foreach($project->categories as $category)
+                                    <span class="badge bg-secondary">{{ $category->name_en }}</span>
+                                @endforeach
+                            @else
+                                <span class="text-muted small">—</span>
+                            @endif
+                        </td>
                         <td class="small text-muted">{{ $project->technologies ? Str::limit($project->technologies, 50) : '—' }}</td>
                         <td>
                             <span class="badge {{ $project->is_active ? 'bg-success' : 'bg-secondary' }}">

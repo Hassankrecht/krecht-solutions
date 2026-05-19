@@ -74,9 +74,9 @@
         </div>
     </div>
 
-    <!-- Row 2 — 3 stat cards -->
+    <!-- Row 2 — 4 stat cards -->
     <div class="row g-3 mb-3">
-        <div class="col-lg-4 col-md-6">
+        <div class="col-lg-3 col-md-6">
             <div class="card p-4 bg-warning bg-opacity-10 border border-warning border-opacity-25 rounded-2">
                 <div class="d-flex gap-3">
                     <div class="icon-shape icon-md bg-warning text-white rounded-2">
@@ -90,7 +90,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-4 col-md-6">
+        <div class="col-lg-3 col-md-6">
             <div class="card p-4 bg-secondary bg-opacity-10 border border-secondary border-opacity-25 rounded-2">
                 <div class="d-flex gap-3">
                     <div class="icon-shape icon-md bg-secondary text-white rounded-2">
@@ -104,16 +104,30 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-4 col-md-6">
-            <div class="card p-4 bg-dark bg-opacity-10 border border-dark border-opacity-25 rounded-2">
+        <div class="col-lg-3 col-md-6">
+            <div class="card p-4 bg-info bg-opacity-10 border border-info border-opacity-25 rounded-2">
                 <div class="d-flex gap-3">
-                    <div class="icon-shape icon-md bg-dark text-white rounded-2">
-                        <i class="ti ti-inbox fs-4"></i>
+                    <div class="icon-shape icon-md bg-info text-white rounded-2">
+                        <i class="ti ti-users fs-4"></i>
                     </div>
                     <div>
-                        <h2 class="mb-1 fs-6 text-muted">Total Messages</h2>
-                        <h3 class="fw-bold mb-0 fs-4">{{ $stats['total_messages'] }}</h3>
-                        <a href="{{ route('admin.contact-messages.index') }}" class="small">View all →</a>
+                        <h2 class="mb-1 fs-6 text-muted">Total Visitors</h2>
+                        <h3 class="fw-bold mb-0 fs-4">{{ $stats['total_visitors'] }}</h3>
+                        <small class="text-info">All time</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="card p-4 bg-success bg-opacity-10 border border-success border-opacity-25 rounded-2">
+                <div class="d-flex gap-3">
+                    <div class="icon-shape icon-md bg-success text-white rounded-2">
+                        <i class="ti ti-calendar-event fs-4"></i>
+                    </div>
+                    <div>
+                        <h2 class="mb-1 fs-6 text-muted">Today's Visitors</h2>
+                        <h3 class="fw-bold mb-0 fs-4">{{ $stats['today_visitors'] }}</h3>
+                        <small class="text-success">{{ today()->format('M j, Y') }}</small>
                     </div>
                 </div>
             </div>
@@ -162,17 +176,17 @@
                             <div class="row">
                                 <div class="col-6 border-end">
                                     <div class="text-center">
-                                        <h2 class="mb-1">5.5K</h2>
-                                        <p class="text-success mb-2">First Time</p>
-                                        <span class="badge bg-success"><i class="ti ti-arrow-up-left me-1"></i>25%</span>
+                                        <h2 class="mb-1">{{ $stats['total_visitors'] }}</h2>
+                                        <p class="text-success mb-2">Total Visitors</p>
+                                        <span class="badge bg-success"><i class="ti ti-users me-1"></i>All Time</span>
                                     </div>
                                 </div>
                                 <div class="col-6">
                                     <div class="text-center">
-                                        <h2 class="mb-1">3.5K</h2>
-                                        <p class="text-warning mb-2">Return</p>
-                                        <span class="badge bg-success badge-xs d-inline-flex align-items-center"><i
-                                            class="ti ti-arrow-up-left me-1"></i>21%</span>
+                                        <h2 class="mb-1">{{ $stats['today_visitors'] }}</h2>
+                                        <p class="text-warning mb-2">Today</p>
+                                        <span class="badge bg-info badge-xs d-inline-flex align-items-center"><i
+                                            class="ti ti-calendar me-1"></i>{{ today()->format('M j') }}</span>
                                     </div>
                                 </div>
                             </div>
