@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@section('title', \App\Models\SiteSetting::get('site_name', 'Krecht Solutions') . ' - Home')
+@section('meta_description', 'Krecht Solutions - Professional software development services tailored to your business needs. We build custom web applications, mobile apps, and enterprise solutions.')
+@section('canonical_url', config('app.url'))
 @section('content')
 
  <section id="hero" class="hero section dark-background">
@@ -704,8 +707,8 @@
                       @enderror
                     </div>
                     <div class="col-12">
-                      <textarea name="content" class="form-control @error('content') is-invalid @enderror" rows="4" placeholder="{{ __('messages.testimonials_form_message') }}" required>{{ old('content') }}</textarea>
-                      @error('content')
+                      <textarea name="message" class="form-control @error('message') is-invalid @enderror" rows="4" placeholder="{{ __('messages.testimonials_form_message') }}" required>{{ old('message') }}</textarea>
+                      @error('message')
                         <div class="invalid-feedback">{{ $message }}</div>
                       @enderror
                     </div>

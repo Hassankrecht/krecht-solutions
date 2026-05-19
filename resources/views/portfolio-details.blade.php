@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@section('title', isset($project) ? $project->title . ' - Krecht Solutions' : 'Project Details - Krecht Solutions')
+@section('meta_description', isset($project) ? 'View details about ' . $project->title . ' project by Krecht Solutions. Learn about our approach, technologies used, and results delivered.' : 'View project details from Krecht Solutions portfolio.')
+@section('canonical_url', isset($project) ? config('app.url') . '/portfolio/' . $project->id : config('app.url') . '/portfolio')
 @section('content')
 
     <!-- Page Title -->

@@ -16,7 +16,8 @@ class PasswordConfirmationTest extends TestCase
 
         $response = $this->actingAs($user)->get('/confirm-password');
 
-        $response->assertStatus(200);
+        // Public auth routes are disabled, should redirect to admin login
+        $response->assertRedirect(route('admin.login'));
     }
 
     public function test_password_can_be_confirmed(): void
@@ -27,8 +28,8 @@ class PasswordConfirmationTest extends TestCase
             'password' => 'password',
         ]);
 
-        $response->assertRedirect();
-        $response->assertSessionHasNoErrors();
+        // Public auth routes are disabled, should redirect to admin login
+        $response->assertRedirect(route('admin.login'));
     }
 
     public function test_password_is_not_confirmed_with_invalid_password(): void
@@ -39,6 +40,7 @@ class PasswordConfirmationTest extends TestCase
             'password' => 'wrong-password',
         ]);
 
-        $response->assertSessionHasErrors();
+        // Public auth routes are disabled, should redirect to admin login
+        $response->assertRedirect(route('admin.login'));
     }
 }

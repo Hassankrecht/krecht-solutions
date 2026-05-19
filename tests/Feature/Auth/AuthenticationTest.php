@@ -15,7 +15,8 @@ class AuthenticationTest extends TestCase
     {
         $response = $this->get('/login');
 
-        $response->assertStatus(200);
+        // Public auth routes are disabled, should redirect to admin login
+        $response->assertRedirect(route('admin.login'));
     }
 
     public function test_users_can_authenticate_using_the_login_screen(): void
@@ -27,8 +28,8 @@ class AuthenticationTest extends TestCase
             'password' => 'password',
         ]);
 
-        $this->assertAuthenticated();
-        $response->assertRedirect(RouteServiceProvider::HOME);
+        // Public auth routes are disabled, should redirect to admin login
+        $response->assertRedirect(route('admin.login'));
     }
 
     public function test_users_can_not_authenticate_with_invalid_password(): void

@@ -290,13 +290,8 @@ class FormButtonTest extends TestCase
             'password_confirmation' => 'password',
         ]);
 
-        $response->assertSessionHasNoErrors();
-        $response->assertRedirect('/admin');
-
-        $this->assertDatabaseHas('users', [
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        // Public auth routes are disabled, should redirect to admin login
+        $response->assertRedirect(route('admin.login'));
     }
 
     public function test_login_form_works(): void
@@ -311,9 +306,8 @@ class FormButtonTest extends TestCase
             'password' => 'password',
         ]);
 
-        $response->assertSessionHasNoErrors();
-        $response->assertRedirect('/admin');
-        $this->assertAuthenticatedAs($user);
+        // Public auth routes are disabled, should redirect to admin login
+        $response->assertRedirect(route('admin.login'));
     }
 
     public function test_logout_button_works(): void
@@ -457,10 +451,8 @@ class FormButtonTest extends TestCase
             'password_confirmation' => 'new-password',
         ]);
 
-        $response->assertSessionHasNoErrors();
-        $response->assertRedirect('/');
-
-        $this->assertTrue(Hash::check('new-password', $user->fresh()->password));
+        // Public auth routes are disabled, should redirect to admin login
+        $response->assertRedirect(route('admin.login'));
     }
 
     public function test_password_confirmation_form_works(): void
@@ -471,8 +463,8 @@ class FormButtonTest extends TestCase
             'password' => 'password',
         ]);
 
-        $response->assertSessionHasNoErrors();
-        $response->assertRedirect();
+        // Public auth routes are disabled, should redirect to admin login
+        $response->assertRedirect(route('admin.login'));
     }
 
     // ==================== Admin - Services ====================
@@ -1253,8 +1245,8 @@ class FormButtonTest extends TestCase
             'email' => $user->email,
         ]);
 
-        $response->assertSessionHasNoErrors();
-        $response->assertSessionHas('status');
+        // Public auth routes are disabled, should redirect to admin login
+        $response->assertRedirect(route('admin.login'));
     }
 
     public function test_email_verification_resend_button_works(): void
@@ -1263,7 +1255,7 @@ class FormButtonTest extends TestCase
 
         $response = $this->actingAs($user)->post('/email/verification-notification');
 
-        $response->assertSessionHasNoErrors();
-        $response->assertRedirect('/');
+        // Public auth routes are disabled, should redirect to admin login
+        $response->assertRedirect(route('admin.login'));
     }
 }

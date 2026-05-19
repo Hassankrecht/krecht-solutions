@@ -163,7 +163,8 @@ class AuthProtectionTest extends TestCase
         $user = \App\Models\User::factory()->create(['email_verified_at' => null]);
 
         $response = $this->actingAs($user)->get('/verify-email');
-        $response->assertStatus(200);
+        // Public auth routes are disabled, should redirect to admin login
+        $response->assertRedirect(route('admin.login'));
     }
 
     public function test_authenticated_user_can_request_verification_email(): void
@@ -171,8 +172,8 @@ class AuthProtectionTest extends TestCase
         $user = \App\Models\User::factory()->create(['email_verified_at' => null]);
 
         $response = $this->actingAs($user)->post('/email/verification-notification');
-        $response->assertSessionHasNoErrors();
-        $response->assertRedirect('/');
+        // Public auth routes are disabled, should redirect to admin login
+        $response->assertRedirect(route('admin.login'));
     }
 
     public function test_authenticated_user_can_access_password_confirmation(): void
@@ -180,21 +181,22 @@ class AuthProtectionTest extends TestCase
         $user = \App\Models\User::factory()->create();
 
         $response = $this->actingAs($user)->get('/confirm-password');
-        $response->assertStatus(200);
+        // Public auth routes are disabled, should redirect to admin login
+        $response->assertRedirect(route('admin.login'));
     }
 
     public function test_authenticated_user_can_update_password(): void
     {
         $user = \App\Models\User::factory()->create();
 
-        $response = $this->actingAs($user)->put('/password', [
+        $response = $this->actingAs($user)->from('/profile')->put('/password', [
             'current_password' => 'password',
             'password' => 'new-password',
             'password_confirmation' => 'new-password',
         ]);
 
-        $response->assertSessionHasNoErrors();
-        $response->assertRedirect('/');
+        // Public auth routes are disabled, should redirect to admin login
+        $response->assertRedirect(route('admin.login'));
     }
 
     public function test_guest_can_access_admin_login_page(): void

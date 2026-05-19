@@ -144,11 +144,12 @@ class SeoTest extends TestCase
     }
 
     /**
-     * Test that sitemap.xml file exists
+     * Test that sitemap.xml route works
      */
-    public function test_sitemap_xml_file_exists(): void
+    public function test_sitemap_xml_route_works(): void
     {
-        $this->assertFileExists(public_path('sitemap.xml'));
+        $response = $this->get('/sitemap.xml');
+        $response->assertStatus(200);
     }
 
     /**

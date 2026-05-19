@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@section('title', 'Our Services - Krecht Solutions')
+@section('meta_description', 'Discover Krecht Solutions comprehensive software development services including web development, mobile apps, cloud solutions, and custom enterprise software.')
+@section('canonical_url', config('app.url') . '/services')
 @section('content')
 
 <!-- Hero Section -->

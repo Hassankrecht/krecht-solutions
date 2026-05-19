@@ -108,7 +108,8 @@ class SecurityTest extends TestCase
             'password_confirmation' => 'new-password',
         ]);
 
-        $response->assertSessionHasErrors();
+        // Public auth routes are disabled, should redirect to admin login
+        $response->assertRedirect(route('admin.login'));
     }
 
     public function test_profile_deletion_requires_password(): void
@@ -157,8 +158,8 @@ class SecurityTest extends TestCase
         );
 
         $response = $this->actingAs($user)->get($url);
-        $response->assertRedirect('/admin?verified=1');
-        $this->assertNotNull($user->fresh()->email_verified_at);
+        // Public auth routes are disabled, should redirect to admin login
+        $response->assertRedirect(route('admin.login'));
     }
 
     public function test_email_verification_with_invalid_signature_fails(): void
@@ -169,7 +170,8 @@ class SecurityTest extends TestCase
         $url = route('verification.verify', ['id' => $user->id, 'hash' => sha1($user->email)]);
 
         $response = $this->actingAs($user)->get($url);
-        $response->assertStatus(403);
+        // Public auth routes are disabled, should redirect to admin login
+        $response->assertRedirect(route('admin.login'));
     }
 
     public function test_password_reset_link_is_rate_limited(): void
@@ -177,37 +179,22 @@ class SecurityTest extends TestCase
         // Create a user first
         User::factory()->create(['email' => 'test@example.com']);
 
-        // Attempt to request password reset multiple times
-        // Eventually it should be rate limited
-        $rateLimited = false;
-        for ($i = 0; $i < 6; $i++) {
-            $response = $this->post('/forgot-password', [
-                'email' => 'test@example.com',
-            ]);
+        // Public auth routes are disabled, should redirect to admin login
+        $response = $this->post('/forgot-password', [
+            'email' => 'test@example.com',
+        ]);
 
-            if ($response->status() === 429) {
-                $rateLimited = true;
-                break;
-            }
-        }
-
-        $this->assertTrue($rateLimited, 'Password reset should be rate limited');
+        $response->assertRedirect(route('admin.login'));
     }
 
     public function test_email_verification_notification_is_rate_limited(): void
     {
         $user = User::factory()->create(['email_verified_at' => null]);
 
-        // Attempt to resend verification more than allowed
-        for ($i = 0; $i < 7; $i++) {
-            $response = $this->actingAs($user)->post('/email/verification-notification');
+        // Public auth routes are disabled, should redirect to admin login
+        $response = $this->actingAs($user)->post('/email/verification-notification');
 
-            if ($i < 6) {
-                $response->assertSessionHasNoErrors();
-            } else {
-                $response->assertStatus(429);
-            }
-        }
+        $response->assertRedirect(route('admin.login'));
     }
 
     public function test_language_switch_validates_locale(): void

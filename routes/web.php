@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\TestimonialSubmissionController;
+use App\Http\Controllers\SitemapController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +29,8 @@ Route::get('/portfolio/{project}', [PageController::class, 'portfolioShow'])->na
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 Route::post('/contact', [ContactController::class, 'store'])->middleware('throttle:5,1')->name('contact.store');
 Route::post('/testimonials', [TestimonialSubmissionController::class, 'store'])->middleware('throttle:3,1')->name('testimonials.store');
+
+Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

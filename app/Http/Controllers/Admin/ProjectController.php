@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Project;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class ProjectController extends Controller
@@ -133,8 +134,8 @@ class ProjectController extends Controller
             $file     = $request->file('image_upload');
             $filename = time() . '_' . Str::slug(pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME))
                         . '.' . $file->getClientOriginalExtension();
-            $file->move(public_path('assets/projects'), $filename);
-            return 'assets/projects/' . $filename;
+            $path = $file->storeAs('projects', $filename, 'public');
+            return 'storage/' . $path;
         }
 
         $path = trim($request->input('image', ''));
@@ -152,8 +153,8 @@ class ProjectController extends Controller
                     $filename = time() . '_' . uniqid() . '_'
                                 . Str::slug(pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME))
                                 . '.' . $file->getClientOriginalExtension();
-                    $file->move(public_path('assets/projects'), $filename);
-                    $gallery[] = 'assets/projects/' . $filename;
+                    $path = $file->storeAs('projects', $filename, 'public');
+                    $gallery[] = 'storage/' . $path;
                 }
             }
         }
@@ -171,8 +172,8 @@ class ProjectController extends Controller
             $file     = $request->file('video_upload');
             $filename = time() . '_' . Str::slug(pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME))
                         . '.' . $file->getClientOriginalExtension();
-            $file->move(public_path('assets/projects'), $filename);
-            return 'assets/projects/' . $filename;
+            $path = $file->storeAs('projects', $filename, 'public');
+            return 'storage/' . $path;
         }
 
         $path = trim($request->input('video', ''));

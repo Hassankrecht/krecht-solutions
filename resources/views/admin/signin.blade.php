@@ -26,7 +26,7 @@
 
       </div>
 
-      <form action="{{ route('login') }}" method="POST" class="needs-validation mt-3">
+      <form action="{{ route('admin.login.post') }}" method="POST" class="needs-validation mt-3">
         @csrf
         <div class="mb-3">
           <label for="email" class="form-label">Email address</label>

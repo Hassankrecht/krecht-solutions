@@ -11,34 +11,65 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('login', function () {
-    return redirect()->route('admin.login');
-})->name('login');
-
+// Disable all public auth routes - redirect to admin login
 Route::middleware('guest')->group(function () {
-    Route::post('login', [AuthenticatedSessionController::class, 'store']);
+    Route::get('register', function () {
+        return redirect()->route('admin.login');
+    })->name('register');
 
-    Route::get('forgot-password', [PasswordResetLinkController::class, 'create'])
-                ->name('password.request');
+    Route::post('register', function () {
+        return redirect()->route('admin.login');
+    });
 
-    Route::post('forgot-password', [PasswordResetLinkController::class, 'store'])
-                ->middleware('throttle:5,1')
-                ->name('password.email');
+    Route::get('login', function () {
+        return redirect()->route('admin.login');
+    })->name('login');
 
-    Route::get('reset-password/{token}', [NewPasswordController::class, 'create'])
-                ->name('password.reset');
+    Route::post('login', function () {
+        return redirect()->route('admin.login');
+    });
 
-    Route::post('reset-password', [NewPasswordController::class, 'store'])
-                ->name('password.store');
+    Route::get('forgot-password', function () {
+        return redirect()->route('admin.login');
+    })->name('password.request');
+
+    Route::post('forgot-password', function () {
+        return redirect()->route('admin.login');
+    })->name('password.email');
+
+    Route::get('reset-password/{token}', function () {
+        return redirect()->route('admin.login');
+    })->name('password.reset');
+
+    Route::post('reset-password', function () {
+        return redirect()->route('admin.login');
+    })->name('password.store');
 });
 
 Route::middleware('auth')->group(function () {
-    Route::get('confirm-password', [ConfirmablePasswordController::class, 'show'])
-                ->name('password.confirm');
+    Route::get('verify-email', function () {
+        return redirect()->route('admin.login');
+    })->name('verification.notice');
 
-    Route::post('confirm-password', [ConfirmablePasswordController::class, 'store']);
+    Route::get('verify-email/{id}/{hash}', function () {
+        return redirect()->route('admin.login');
+    })->name('verification.verify');
 
-    Route::put('password', [PasswordController::class, 'update'])->name('password.update');
+    Route::post('email/verification-notification', function () {
+        return redirect()->route('admin.login');
+    })->name('verification.send');
+
+    Route::get('confirm-password', function () {
+        return redirect()->route('admin.login');
+    })->name('password.confirm');
+
+    Route::post('confirm-password', function () {
+        return redirect()->route('admin.login');
+    });
+
+    Route::put('password', function () {
+        return redirect()->route('admin.login');
+    })->name('password.update');
 
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
                 ->name('logout');

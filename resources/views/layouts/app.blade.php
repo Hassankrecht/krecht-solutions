@@ -5,7 +5,9 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <title>@yield('title', \App\Models\SiteSetting::get('site_name', 'Krecht Solutions'))</title>
+  <meta name="description" content="@yield('meta_description', 'Krecht Solutions - Professional software development services tailored to your business needs. We build custom web applications, mobile apps, and enterprise solutions.')">
   <meta name="csrf-token" content="{{ csrf_token() }}">
+  <link rel="canonical" href="@yield('canonical_url', config('app.url') . request()->getRequestUri())">
 
   <!-- Favicons -->
   <link href="{{ asset('assets/img/logo/logo-solution.png') }}" rel="icon" type="image/png">

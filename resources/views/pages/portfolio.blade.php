@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@section('title', 'Our Portfolio - Krecht Solutions')
+@section('meta_description', 'Explore Krecht Solutions portfolio of successful software development projects. See how we help businesses transform with custom technology solutions.')
+@section('canonical_url', config('app.url') . '/portfolio')
 @section('content')
 
 <!-- Hero Section -->

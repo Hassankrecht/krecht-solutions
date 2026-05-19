@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@section('title', 'Pricing - Krecht Solutions')
+@section('meta_description', 'Transparent pricing plans for Krecht Solutions software development services. Choose the package that fits your business needs and budget.')
+@section('canonical_url', config('app.url') . '/pricing')
 @section('content')
 
 <!-- Hero Section -->

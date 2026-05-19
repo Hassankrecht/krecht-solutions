@@ -11,11 +11,16 @@ use App\Http\Controllers\Admin\ContactMessageController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\Admin\SiteSettingController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
 // Admin login route (no auth required)
 Route::get('/admin/login', function () {
     return view('admin.signin');
 })->name('admin.login');
+
+Route::post('/admin/login', [AuthenticatedSessionController::class, 'store'])
+    ->middleware('throttle:5,1')
+    ->name('admin.login.post');
 
 // Admin routes with auth middleware
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
