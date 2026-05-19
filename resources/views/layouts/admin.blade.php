@@ -153,8 +153,7 @@
       <li><a class="nav-link {{ request()->routeIs('admin.services.index') ? 'active' : '' }}" href="{{ route('admin.services.index') }}"><i class="ti ti-box-seam"></i><span
             class="nav-text">Services</span></a></li>
       <li><a class="nav-link {{ request()->routeIs('admin.projects.index') ? 'active' : '' }}" href="{{ route('admin.projects.index') }}"><i class="ti ti-plus"></i><span class="nav-text">Projects</span></a></li>
-    <li><a class="nav-link {{ request()->routeIs('admin.pricing-packages.index') ? 'active' : '' }}" href="{{ route('admin.pricing-packages.index') }}"><i class="ti ti-receipt"></i><span class="nav-text">Pricing</span></a>
-      </li>
+    <li><a class="nav-link {{ request()->routeIs('admin.pricing-packages.index') ? 'active' : '' }}" href="{{ route('admin.pricing-packages.index') }}"><i class="ti ti-receipt"></i><span class="nav-text">Pricing</span></a></li>
     <li><a class="nav-link {{ request()->routeIs('admin.testimonials.index') ? 'active' : '' }}" href="{{ route('admin.testimonials.index') }}"><i class="ti ti-alert-circle"></i><span class="nav-text">Testimonials</span></a>
       </li>
       <li><a class="nav-link {{ request()->routeIs('admin.faqs.index') ? 'active' : '' }}" href="{{ route('admin.faqs.index') }}"><i class="ti ti-file-text"></i><span class="nav-text">FAQs</span></a></li>

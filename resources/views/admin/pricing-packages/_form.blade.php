@@ -37,15 +37,16 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="mb-3">
-                    <label for="category_en" class="form-label fw-semibold">Category (English) <span class="text-danger">*</span></label>
-                    <select id="category_en" name="category_en" class="form-select @error('category_en') is-invalid @enderror" required>
-                        @foreach($categories ?? \App\Models\PricingPackage::categories() as $category)
-                            <option value="{{ $category }}" @selected(old('category_en', $pricingPackage->category_en ?? '') === $category)>
-                                {{ $category }}
+                    <label for="pricing_category_id" class="form-label fw-semibold">Category <span class="text-danger">*</span></label>
+                    <select id="pricing_category_id" name="pricing_category_id" class="form-select @error('pricing_category_id') is-invalid @enderror" required>
+                        <option value="">Select a category</option>
+                        @foreach($categories ?? \App\Models\PricingCategory::active()->ordered()->get() as $category)
+                            <option value="{{ $category->id }}" @selected(old('pricing_category_id', $pricingPackage->pricing_category_id ?? '') == $category->id)>
+                                {{ $category->name_en }}
                             </option>
                         @endforeach
                     </select>
-                    @error('category_en')
+                    @error('pricing_category_id')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
@@ -83,14 +84,6 @@
             @enderror
         </div>
 
-        <div class="mb-3">
-            <label for="category_ar" class="form-label fw-semibold">Category (Arabic)</label>
-            <input id="category_ar" name="category_ar" type="text" class="form-control @error('category_ar') is-invalid @enderror"
-                value="{{ old('category_ar', $pricingPackage->category_ar ?? '') }}" placeholder="مثال: حلول الويب" dir="rtl">
-            @error('category_ar')
-                <div class="invalid-feedback">{{ $message }}</div>
-            @enderror
-        </div>
 
         <div class="mb-3">
             <label for="features_ar" class="form-label fw-semibold">Features (Arabic)</label>

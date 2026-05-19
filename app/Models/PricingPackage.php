@@ -28,6 +28,7 @@ class PricingPackage extends Model
         'is_featured',
         'is_active',
         'order',
+        'pricing_category_id',
     ];
 
     protected $casts = [
@@ -38,29 +39,32 @@ class PricingPackage extends Model
         'is_active' => 'boolean',
     ];
 
-    public function getNameAttribute($value)
+    public function getNameAttribute(mixed $value): mixed
     {
         return $this->getLocalizedField('name', $value);
     }
 
-    public function getCategoryAttribute($value)
+    public function pricingCategory()
     {
+        return $this->belongsTo(PricingCategory::class);
+    }
+
+    public function getCategoryAttribute(mixed $value): mixed
+    {
+        if ($this->pricingCategory) {
+            return $this->pricingCategory->name;
+        }
         return $this->getLocalizedField('category', $value);
     }
 
-    public function getFeaturesAttribute($value)
+    public function getFeaturesAttribute(mixed $value): mixed
     {
-        $locale = app()->getLocale();
-        $localizedField = 'features_' . $locale;
-        
-        if ($this->attributes[$localizedField] ?? null) {
-            return $this->attributes[$localizedField];
-        }
-        
+        // The cast has already converted JSON to array
+        // Just return the original value from the cast
         return $value;
     }
 
-    private function getLocalizedField($field, $value)
+    private function getLocalizedField(string $field, mixed $value): mixed
     {
         $locale = app()->getLocale();
         $localizedField = $field . '_' . $locale;
@@ -72,17 +76,17 @@ class PricingPackage extends Model
         return $value;
     }
 
-    public function scopeActive($query)
+    public function scopeActive(\Illuminate\Database\Eloquent\Builder $query): \Illuminate\Database\Eloquent\Builder
     {
         return $query->where('is_active', true);
     }
 
-    public function scopeFeatured($query)
+    public function scopeFeatured(\Illuminate\Database\Eloquent\Builder $query): \Illuminate\Database\Eloquent\Builder
     {
         return $query->where('is_featured', true);
     }
 
-    public function scopeOrdered($query)
+    public function scopeOrdered(\Illuminate\Database\Eloquent\Builder $query): \Illuminate\Database\Eloquent\Builder
     {
         return $query->orderBy('order', 'asc');
     }

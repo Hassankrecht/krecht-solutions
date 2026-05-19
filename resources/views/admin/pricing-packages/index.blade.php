@@ -9,9 +9,14 @@
                     <h1 class="fs-3 mb-1">Pricing Packages</h1>
                     <p class="mb-0 text-muted">Manage pricing plans displayed on the website.</p>
                 </div>
-                <a href="{{ route('admin.pricing-packages.create') }}" class="btn btn-primary">
-                    <i class="ti ti-plus me-1"></i> Add Package
-                </a>
+                <div class="d-flex gap-2">
+                    <a href="{{ route('admin.pricing-categories.index') }}" class="btn btn-outline-primary">
+                        <i class="ti ti-category me-1"></i> Manage Categories
+                    </a>
+                    <a href="{{ route('admin.pricing-packages.create') }}" class="btn btn-primary">
+                        <i class="ti ti-plus me-1"></i> Add Package
+                    </a>
+                </div>
             </div>
         </div>
     </div>
@@ -46,7 +51,7 @@
                         <td>{{ $package->category }}</td>
                         <td>{{ $package->price }}</td>
                         <td class="small text-muted">
-                            {{ is_array($package->features) ? count($package->features) . ' feature(s)' : '—' }}
+                            {{ is_array($package->features_en) ? count($package->features_en) . ' feature(s)' : '—' }}
                         </td>
                         <td>
                             @if($package->is_featured)

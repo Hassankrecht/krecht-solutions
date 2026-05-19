@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\ProjectCategoryController;
 use App\Http\Controllers\Admin\PricingPackageController;
+use App\Http\Controllers\Admin\PricingCategoryController;
 use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\ContactMessageController;
@@ -32,6 +33,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::resource('project-categories', ProjectCategoryController::class)->except(['show']);
 
     Route::resource('pricing-packages', PricingPackageController::class)->except(['show']);
+    Route::resource('pricing-categories', PricingCategoryController::class)->except(['show']);
 
     Route::patch('testimonials/{testimonial}/approve', [TestimonialController::class, 'approve'])->name('testimonials.approve');
     Route::patch('testimonials/{testimonial}/reject', [TestimonialController::class, 'reject'])->name('testimonials.reject');

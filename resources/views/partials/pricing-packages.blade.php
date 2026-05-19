@@ -1,7 +1,7 @@
 @php
   $pricingPackages = $pricingPackages ?? $packages ?? collect();
-  $pricingCategories = collect($pricingCategories ?? \App\Models\PricingPackage::categories())
-    ->filter(fn ($category) => $pricingPackages->where('category', $category)->count() > 0)
+  $pricingCategories = collect($pricingCategories ?? \App\Models\PricingCategory::active()->ordered()->get())
+    ->filter(fn ($category) => $pricingPackages->where('pricing_category_id', $category->id)->count() > 0)
     ->values();
 @endphp
 
@@ -11,15 +11,15 @@
       <li class="nav-item" role="presentation">
         <button
           class="nav-link {{ $index === 0 ? 'active' : '' }}"
-          id="pricing-tab-{{ Str::slug($category) }}"
+          id="pricing-tab-{{ Str::slug($category->name_en) }}"
           data-bs-toggle="pill"
-          data-bs-target="#pricing-panel-{{ Str::slug($category) }}"
+          data-bs-target="#pricing-panel-{{ Str::slug($category->name_en) }}"
           type="button"
           role="tab"
-          aria-controls="pricing-panel-{{ Str::slug($category) }}"
+          aria-controls="pricing-panel-{{ Str::slug($category->name_en) }}"
           aria-selected="{{ $index === 0 ? 'true' : 'false' }}"
         >
-          {{ $category }}
+          {{ $category->name }}
         </button>
       </li>
     @endforeach
@@ -28,19 +28,19 @@
   <div class="tab-content pricing-category-content">
   @foreach($pricingCategories as $categoryIndex => $category)
     @php
-      $categoryPackages = $pricingPackages->where('category', $category)->sortBy('order');
+      $categoryPackages = $pricingPackages->where('pricing_category_id', $category->id)->sortBy('order');
     @endphp
 
     @if($categoryPackages->count() > 0)
       <div
         class="tab-pane fade {{ $categoryIndex === 0 ? 'show active' : '' }}"
-        id="pricing-panel-{{ Str::slug($category) }}"
+        id="pricing-panel-{{ Str::slug($category->name_en) }}"
         role="tabpanel"
-        aria-labelledby="pricing-tab-{{ Str::slug($category) }}"
+        aria-labelledby="pricing-tab-{{ Str::slug($category->name_en) }}"
         tabindex="0"
       >
       <div class="category-section mb-5">
-        <h3 class="category-title text-center mb-4">{{ $category }}</h3>
+        <h3 class="category-title text-center mb-4">{{ $category->name }}</h3>
         <div class="row gy-4">
           @foreach($categoryPackages as $index => $package)
             @php
@@ -54,16 +54,23 @@
                 <h3>{{ $package->name }}</h3>
                 <h4 class="{{ $isPriceLabel ? 'price-label' : '' }}">
                   @if($startsFrom)
-                    <span>{{ __('messages.pricing_choose_plan') }}</span>{{ $amount }}
+                    <span class="starting-from">Starting from</span> {{ $amount }}
                   @else
                     {{ $isComingSoon ? __('messages.portfolio_coming_soon') : $package->price }}
                   @endif
                 </h4>
 
-                @if(is_array($package->features) && count($package->features) > 0)
-                  <ul>
-                    @foreach($package->features as $feature)
-                      <li><i class="bi bi-check"></i> <span>{{ $feature }}</span></li>
+                @if(is_array($package->features_en) && count($package->features_en) > 0)
+                  @if(count($package->features_en) > 5)
+                  <button class="show-more-features btn btn-sm btn-outline-secondary w-100 mb-2">
+                    <span class="show-text">Show More Features</span>
+                    <span class="hide-text d-none">Show Less</span>
+                    <i class="bi bi-chevron-down ms-1"></i>
+                  </button>
+                  @endif
+                  <ul class="features-list">
+                    @foreach($package->features_en as $index => $feature)
+                      <li class="{{ $index >= 5 ? 'feature-hidden' : '' }}"><i class="bi bi-check"></i> <span>{{ $feature }}</span></li>
                     @endforeach
                   </ul>
                 @endif
@@ -84,6 +91,44 @@
       <em>{{ __('messages.pricing_support_note') }}</em>
     </p>
   </div>
+
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const showMoreButtons = document.querySelectorAll('.show-more-features');
+
+    showMoreButtons.forEach(button => {
+      button.addEventListener('click', function() {
+        const featuresList = this.nextElementSibling;
+        const allFeatures = featuresList.querySelectorAll('li');
+        const showText = this.querySelector('.show-text');
+        const hideText = this.querySelector('.hide-text');
+        const icon = this.querySelector('.bi-chevron-down');
+
+        if (this.classList.contains('expanded')) {
+          // Show less - hide features after 5th
+          allFeatures.forEach((feature, index) => {
+            if (index >= 5) {
+              feature.classList.add('feature-hidden');
+            }
+          });
+          showText.classList.remove('d-none');
+          hideText.classList.add('d-none');
+          this.classList.remove('expanded');
+          icon.style.transform = 'rotate(0deg)';
+        } else {
+          // Show more - show all features
+          allFeatures.forEach(feature => {
+            feature.classList.remove('feature-hidden');
+          });
+          showText.classList.add('d-none');
+          hideText.classList.remove('d-none');
+          this.classList.add('expanded');
+          icon.style.transform = 'rotate(180deg)';
+        }
+      });
+    });
+  });
+  </script>
 @else
   <div class="row">
     <div class="col-12 text-center">

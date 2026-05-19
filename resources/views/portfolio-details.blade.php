@@ -2,6 +2,66 @@
 @section('title', isset($project) ? $project->title . ' - Krecht Solutions' : 'Project Details - Krecht Solutions')
 @section('meta_description', isset($project) ? 'View details about ' . $project->title . ' project by Krecht Solutions. Learn about our approach, technologies used, and results delivered.' : 'View project details from Krecht Solutions portfolio.')
 @section('canonical_url', isset($project) ? config('app.url') . '/portfolio/' . $project->id : config('app.url') . '/portfolio')
+@push('styles')
+<style>
+.lightbox {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    justify-content: center;
+    align-items: center;
+}
+
+.lightbox.active {
+    display: flex;
+}
+
+.lightbox img {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: white;
+    font-size: 40px;
+    cursor: pointer;
+    z-index: 10000;
+}
+
+.lightbox-prev, .lightbox-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: white;
+    font-size: 50px;
+    cursor: pointer;
+    z-index: 10000;
+    padding: 20px;
+    user-select: none;
+}
+
+.lightbox-prev {
+    left: 20px;
+}
+
+.lightbox-next {
+    right: 20px;
+}
+
+.lightbox-prev:hover, .lightbox-next:hover {
+    color: #ccc;
+}
+</style>
+@endpush
 @section('content')
 
     <!-- Page Title -->
@@ -34,13 +94,17 @@
                     @endphp
 
                     @if(count($slides) > 0)
-                        <div class="portfolio-details-slider swiper init-swiper">
+                        <div class="portfolio-details-slider swiper init-swiper position-relative">
                             <script type="application/json" class="swiper-config">
                             {
                                 "loop": {{ count($slides) > 1 ? 'true' : 'false' }},
                                 "speed": 600,
                                 "autoplay": { "delay": 5000 },
                                 "slidesPerView": "auto",
+                                "navigation": {
+                                    "nextEl": ".swiper-button-next",
+                                    "prevEl": ".swiper-button-prev"
+                                },
                                 "pagination": {
                                     "el": ".swiper-pagination",
                                     "type": "bullets",
@@ -49,13 +113,20 @@
                             }
                             </script>
                             <div class="swiper-wrapper align-items-center">
-                                @foreach($slides as $slide)
+                                @foreach($slides as $index => $slide)
                                     <div class="swiper-slide">
                                         <img src="{{ asset($slide) }}" alt="{{ $project->title }}"
-                                             style="width:100%;max-height:480px;object-fit:cover;">
+                                             style="width:100%;max-height:480px;object-fit:cover;cursor:pointer;"
+                                             data-index="{{ $index }}"
+                                             data-src="{{ asset($slide) }}"
+                                             class="gallery-image">
                                     </div>
                                 @endforeach
                             </div>
+                            @if(count($slides) > 1)
+                            <div class="swiper-button-prev"></div>
+                            <div class="swiper-button-next"></div>
+                            @endif
                             <div class="swiper-pagination"></div>
                         </div>
                     @endif
@@ -126,4 +197,79 @@
         </div>
     </section><!-- /Portfolio Details Section -->
 
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <span class="lightbox-close">&times;</span>
+        <span class="lightbox-prev">&#10094;</span>
+        <img src="" alt="Full size image" id="lightbox-img">
+        <span class="lightbox-next">&#10095;</span>
+    </div>
+
+@push('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxClose = document.querySelector('.lightbox-close');
+    const lightboxPrev = document.querySelector('.lightbox-prev');
+    const lightboxNext = document.querySelector('.lightbox-next');
+    const galleryImages = document.querySelectorAll('.gallery-image');
+
+    let currentIndex = 0;
+    const images = [];
+
+    // Collect all gallery images
+    galleryImages.forEach((img, index) => {
+        images.push(img.dataset.src);
+        img.addEventListener('click', function() {
+            currentIndex = parseInt(this.dataset.index);
+            openLightbox(images[currentIndex]);
+        });
+    });
+
+    function openLightbox(src) {
+        lightboxImg.src = src;
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+        lightbox.classList.remove('active');
+        document.body.style.overflow = 'auto';
+    }
+
+    function showNext() {
+        currentIndex = (currentIndex + 1) % images.length;
+        lightboxImg.src = images[currentIndex];
+    }
+
+    function showPrev() {
+        currentIndex = (currentIndex - 1 + images.length) % images.length;
+        lightboxImg.src = images[currentIndex];
+    }
+
+    lightboxClose.addEventListener('click', closeLightbox);
+    lightboxNext.addEventListener('click', showNext);
+    lightboxPrev.addEventListener('click', showPrev);
+
+    lightbox.addEventListener('click', function(e) {
+        if (e.target === lightbox) {
+            closeLightbox();
+        }
+    });
+
+    document.addEventListener('keydown', function(e) {
+        if (!lightbox.classList.contains('active')) return;
+
+        if (e.key === 'Escape') {
+            closeLightbox();
+        } else if (e.key === 'ArrowRight') {
+            showNext();
+        } else if (e.key === 'ArrowLeft') {
+            showPrev();
+        }
+    });
+});
+</script>
+@endpush
 @endsection
