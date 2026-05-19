@@ -14,7 +14,7 @@
         <div class="mb-3">
             <label for="title_en" class="form-label fw-semibold">Title (English) <span class="text-danger">*</span></label>
             <input id="title_en" name="title_en" type="text" class="form-control @error('title_en') is-invalid @enderror"
-                value="{{ old('title_en', $project->title_en ?? '') }}" required placeholder="e.g. Albasha Restaurant">
+                value="{{ old('title_en', isset($project) ? $project->title_en : '') }}" required placeholder="e.g. Albasha Restaurant">
             @error('title_en')
                 <div class="invalid-feedback">{{ $message }}</div>
             @enderror
@@ -28,11 +28,10 @@
                         <option value="">Select a category</option>
                         @php
                             $categories = \App\Models\ProjectCategory::active()->ordered()->get();
-                            $selectedCategoryIds = old('category_ids', isset($project) ? $project->categories->pluck('id')->toArray() : []);
+                            $selectedCategoryIds = old('category_ids', isset($project) && $project ? $project->categories->pluck('id')->toArray() : []);
                         @endphp
                         @foreach($categories as $category)
-                            <option value="{{ $category->id }}"
-                                    @in_array($category->id, $selectedCategoryIds) ? 'selected' : '' ?>>
+                            <option value="{{ $category->id }}" {{ in_array($category->id, $selectedCategoryIds) ? 'selected' : '' }}>
                                 {{ $category->name_en }}
                             </option>
                         @endforeach
@@ -49,7 +48,7 @@
                 <div class="mb-3">
                     <label for="order" class="form-label fw-semibold">Sort Order</label>
                     <input id="order" name="order" type="number" min="0" class="form-control @error('order') is-invalid @enderror"
-                        value="{{ old('order', $project->order ?? 0) }}">
+                        value="{{ old('order', isset($project) ? $project->order : 0) }}">
                     @error('order')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -60,7 +59,7 @@
         <div class="mb-3">
             <label for="technologies_en" class="form-label fw-semibold">Technologies (English)</label>
             <input id="technologies_en" name="technologies_en" type="text" class="form-control @error('technologies_en') is-invalid @enderror"
-                value="{{ old('technologies_en', is_array($project->technologies_en) ? implode(', ', $project->technologies_en) : $project->technologies_en ?? '') }}"
+                value="{{ old('technologies_en', isset($project) && is_array($project->technologies_en) ? implode(', ', $project->technologies_en) : (isset($project) ? $project->technologies_en : '')) }}"
                 placeholder="e.g. Laravel, Vue.js, MySQL">
             <div class="form-text">Comma-separated list of technologies used.</div>
             @error('technologies_en')
@@ -71,7 +70,7 @@
         <div class="mb-3">
             <label for="description_en" class="form-label fw-semibold">Description (English)</label>
             <textarea id="description_en" name="description_en" class="form-control @error('description_en') is-invalid @enderror"
-                rows="4" placeholder="Project description...">{{ old('description_en', $project->description_en ?? '') }}</textarea>
+                rows="4" placeholder="Project description...">{{ old('description_en', isset($project) ? $project->description_en : '') }}</textarea>
             @error('description_en')
                 <div class="invalid-feedback">{{ $message }}</div>
             @enderror
@@ -82,7 +81,7 @@
         <div class="mb-3">
             <label for="title_ar" class="form-label fw-semibold">Title (Arabic)</label>
             <input id="title_ar" name="title_ar" type="text" class="form-control @error('title_ar') is-invalid @enderror"
-                value="{{ old('title_ar', $project->title_ar ?? '') }}" placeholder="مثال: مطعم الباشا" dir="rtl">
+                value="{{ old('title_ar', isset($project) ? $project->title_ar : '') }}" placeholder="مثال: مطعم الباشا" dir="rtl">
             @error('title_ar')
                 <div class="invalid-feedback">{{ $message }}</div>
             @enderror
@@ -92,7 +91,7 @@
         <div class="mb-3">
             <label for="technologies_ar" class="form-label fw-semibold">Technologies (Arabic)</label>
             <input id="technologies_ar" name="technologies_ar" type="text" class="form-control @error('technologies_ar') is-invalid @enderror"
-                value="{{ old('technologies_ar', is_array($project->technologies_ar) ? implode(', ', $project->technologies_ar) : $project->technologies_ar ?? '') }}"
+                value="{{ old('technologies_ar', isset($project) && is_array($project->technologies_ar) ? implode(', ', $project->technologies_ar) : (isset($project) ? $project->technologies_ar : '')) }}"
                 placeholder="مثال: Laravel، Vue.js، MySQL" dir="rtl">
             <div class="form-text">قائمة التقنيات المستخدمة مفصولة بفواصل.</div>
             @error('technologies_ar')
@@ -103,7 +102,7 @@
         <div class="mb-3">
             <label for="description_ar" class="form-label fw-semibold">Description (Arabic)</label>
             <textarea id="description_ar" name="description_ar" class="form-control @error('description_ar') is-invalid @enderror"
-                rows="4" placeholder="وصف المشروع..." dir="rtl">{{ old('description_ar', $project->description_ar ?? '') }}</textarea>
+                rows="4" placeholder="وصف المشروع..." dir="rtl">{{ old('description_ar', isset($project) ? $project->description_ar : '') }}</textarea>
             @error('description_ar')
                 <div class="invalid-feedback">{{ $message }}</div>
             @enderror
@@ -142,7 +141,7 @@
             <label class="form-label small text-muted mb-1">— or enter relative path from <code>public/</code></label>
             <input name="image" type="text"
                    class="form-control form-control-sm @error('image') is-invalid @enderror"
-                   value="{{ old('image', isset($project) ? ($project->image ?? '') : '') }}"
+                   value="{{ old('image', isset($project) ? $project->image : '') }}"
                    placeholder="assets/projects/Albasha restaurant/hero.png">
             <div class="form-text">Uploaded file takes priority over the path field.</div>
             @error('image')
@@ -215,7 +214,7 @@
             <label class="form-label small text-muted mb-1">— or enter relative path / external URL</label>
             <input name="video" type="text"
                    class="form-control form-control-sm @error('video') is-invalid @enderror"
-                   value="{{ old('video', isset($project) ? ($project->video ?? '') : '') }}"
+                   value="{{ old('video', isset($project) ? $project->video : '') }}"
                    placeholder="assets/projects/Albasha restaurant/Albasha videos show.mp4">
             <div class="form-text">Uploaded file takes priority over the path field.</div>
             @error('video')
@@ -227,7 +226,7 @@
 
 <div class="form-check form-switch mb-4">
     <input id="is_active" name="is_active" class="form-check-input" type="checkbox" value="1"
-        @checked(old('is_active', $project->is_active ?? true))>
+        @checked(old('is_active', isset($project) ? $project->is_active : true))>
     <label class="form-check-label" for="is_active">Active (visible on the website)</label>
 </div>
 
