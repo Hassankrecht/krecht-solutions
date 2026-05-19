@@ -14,7 +14,7 @@ class SiteSettingSeeder extends Seeder
                 'key' => 'site_name',
                 'value' => [
                     'en' => 'Krecht Solutions',
-                    'ar' => 'حلول كريخت',
+                    'ar' => 'حلول كرشت',
                 ],
                 'type' => 'text',
             ],

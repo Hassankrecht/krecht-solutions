@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\ContactMessageController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\AdminUserController;
+use App\Http\Controllers\Admin\SiteSettingController;
 
 // Admin login route (no auth required)
 Route::get('/admin/login', function () {
@@ -46,8 +47,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::get('/admin-users/{user}/edit', [AdminUserController::class, 'edit'])->name('admin-users.edit');
     Route::put('/admin-users/{user}', [AdminUserController::class, 'update'])->name('admin-users.update');
 
-    // Site Settings (placeholder)
-    Route::get('/settings', function () {
-        return view('admin.docs');
-    })->name('settings.index');
+    // Site Settings
+    Route::get('/settings', [SiteSettingController::class, 'index'])->name('settings.index');
+    Route::put('/settings', [SiteSettingController::class, 'update'])->name('settings.update');
 });

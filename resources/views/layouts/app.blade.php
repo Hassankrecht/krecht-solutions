@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>@yield('title', 'Krecht Solutions')</title>
+  <title>@yield('title', \App\Models\SiteSetting::get('site_name', 'Krecht Solutions'))</title>
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
   <!-- Favicons -->
@@ -55,7 +55,7 @@
     <div class="container-fluid container-xl position-relative d-flex align-items-center">
 
       <a href="{{ route('home') }}" class="logo d-flex align-items-center me-auto">
-        <img src="{{ asset('assets/img/logo/logo-solution.png') }}" alt="Krecht Solutions">
+        <img src="{{ asset('assets/img/logo/logo-solution.png') }}" alt="{{ \App\Models\SiteSetting::get('site_name', 'Krecht Solutions') }}">
       </a>
 
       <nav id="navmenu" class="navmenu">
@@ -109,14 +109,15 @@
       <div class="row gy-4">
         <div class="col-lg-5 col-md-12 footer-about">
           <a href="{{ route('home') }}" class="logo d-flex align-items-center">
-            <img src="{{ asset('assets/img/logo/logo-solution.png') }}" alt="Krecht Solutions" style="max-height: 80px; height: auto; width: auto; filter: brightness(0) invert(1);">
+            <img src="{{ asset('assets/img/logo/logo-solution.png') }}" alt="{{ \App\Models\SiteSetting::get('site_name', 'Krecht Solutions') }}" style="max-height: 80px; height: auto; width: auto; filter: brightness(0) invert(1);">
           </a>
           <p class="mt-3">{{ __('messages.footer_about') }}</p>
           <div class="social-links d-flex mt-4">
-            <a href="#"><i class="bi bi-twitter-x"></i></a>
-            <a href="#"><i class="bi bi-facebook"></i></a>
-            <a href="#"><i class="bi bi-instagram"></i></a>
-            <a href="#"><i class="bi bi-linkedin"></i></a>
+            @php $socialLinks = \App\Models\SiteSetting::get('social_links', []); @endphp
+            @if(!empty($socialLinks['twitter']))<a href="{{ $socialLinks['twitter'] }}" target="_blank"><i class="bi bi-twitter-x"></i></a>@else<a href="#"><i class="bi bi-twitter-x"></i></a>@endif
+            @if(!empty($socialLinks['facebook']))<a href="{{ $socialLinks['facebook'] }}" target="_blank"><i class="bi bi-facebook"></i></a>@else<a href="#"><i class="bi bi-facebook"></i></a>@endif
+            @if(!empty($socialLinks['instagram']))<a href="{{ $socialLinks['instagram'] }}" target="_blank"><i class="bi bi-instagram"></i></a>@else<a href="#"><i class="bi bi-instagram"></i></a>@endif
+            @if(!empty($socialLinks['linkedin']))<a href="{{ $socialLinks['linkedin'] }}" target="_blank"><i class="bi bi-linkedin"></i></a>@else<a href="#"><i class="bi bi-linkedin"></i></a>@endif
           </div>
         </div>
         <div class="col-lg-2 col-6 footer-links">
@@ -150,7 +151,7 @@
       </div>
     </div>
     <div class="container copyright text-center mt-4">
-      <p>© 2026 <strong class="px-1 sitename">Krecht Solutions</strong>. {{ __('messages.footer_copyright') }}</p>
+      <p>© 2026 <strong class="px-1 sitename">{{ \App\Models\SiteSetting::get('site_name', 'Krecht Solutions') }}</strong>. {{ __('messages.footer_copyright') }}</p>
       <div class="credits">{{ __('messages.footer_credits') }}</div>
     </div>
   </footer>
