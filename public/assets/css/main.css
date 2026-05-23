@@ -72,6 +72,11 @@ body {
   font-family: var(--default-font);
 }
 
+/* Feature hidden class for show more/show less functionality */
+.feature-hidden {
+  display: none;
+}
+
 a {
   color: var(--accent-color);
   text-decoration: none;
@@ -207,13 +212,30 @@ h6 {
   }
 
   .header .btn-getstarted {
-    order: 2;
-    margin: 0 15px 0 0;
-    padding: 6px 15px;
+    display: none !important;
   }
 
   .header .navmenu {
     order: 3;
+  }
+}
+
+@media (max-width: 991px) {
+  .header .btn-getstarted {
+    display: none !important;
+  }
+
+  .navmenu .mobile-nav-toggle {
+    display: inline-flex !important;
+    color: var(--nav-color);
+    font-size: 28px;
+    line-height: 0;
+    margin-right: 10px;
+    cursor: pointer;
+    transition: color 0.3s;
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: relative !important;
   }
 }
 
@@ -231,6 +253,31 @@ h6 {
   --background-color: rgba(40, 58, 90, 0.9);
 }
 
+/* Mobile Navigation - Hide Get Started button on mobile */
+@media (max-width: 991px) {
+  .header .btn-getstarted {
+    display: none !important;
+  }
+
+  .navmenu .mobile-nav-toggle {
+    display: inline-flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .header .btn-getstarted {
+    display: none !important;
+  }
+
+  .navmenu .mobile-nav-toggle {
+    display: inline-flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+}
+
 /*--------------------------------------------------------------
 # Navigation Menu
 --------------------------------------------------------------*/
@@ -238,6 +285,10 @@ h6 {
 @media (min-width: 1200px) {
   .navmenu {
     padding: 0;
+  }
+
+  .navmenu .mobile-nav-toggle {
+    display: none !important;
   }
 
   .navmenu ul {
@@ -391,13 +442,21 @@ h6 {
 
 /* Mobile Navigation */
 @media (max-width: 1199px) {
-  .mobile-nav-toggle {
+  .header .btn-getstarted {
+    display: none !important;
+  }
+
+  .navmenu .mobile-nav-toggle {
+    display: inline-flex !important;
     color: var(--nav-color);
     font-size: 28px;
     line-height: 0;
     margin-right: 10px;
     cursor: pointer;
     transition: color 0.3s;
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: relative !important;
   }
 
   .navmenu {

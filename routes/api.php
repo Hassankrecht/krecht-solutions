@@ -2,6 +2,10 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\ProjectController;
+use App\Http\Controllers\Api\ServiceController;
+use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\ContactController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +18,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Flutter App API - Public endpoints
+Route::get('/services',             [ServiceController::class, 'index']);
+Route::get('/services/{id}',        [ServiceController::class, 'show']);
+
+Route::get('/projects',             [ProjectController::class, 'index']);
+Route::get('/projects/{id}',        [ProjectController::class, 'show']);
+
+Route::get('/project-categories',   [CategoryController::class, 'index']);
+
+Route::get('/pricing-categories',   [CategoryController::class, 'pricingCategories']);
+Route::get('/pricing-packages',     [CategoryController::class, 'pricingPackages']);
+Route::get('/pricing-packages/{id}', [CategoryController::class, 'pricingPackageDetails']);
+
+Route::get('/contact',              [ContactController::class, 'index']);
+Route::post('/contact',             [ContactController::class, 'store']);

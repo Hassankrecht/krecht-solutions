@@ -94,10 +94,10 @@
             </ul>
           </li>
         </ul>
-        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+        <i class="mobile-nav-toggle bi bi-list"></i>
       </nav>
 
-      <a class="btn-getstarted" href="{{ route('contact') }}">{{ __('messages.nav_get_started') }}</a>
+      <a class="btn-getstarted d-none d-md-block" href="{{ route('contact') }}">{{ __('messages.nav_get_started') }}</a>
 
     </div>
   </header>
