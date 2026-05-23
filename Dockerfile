@@ -12,8 +12,10 @@ RUN apt-get update \
         libpng-dev \
         libjpeg62-turbo-dev \
         libfreetype6-dev \
+        sqlite3 \
+        libsqlite3-dev \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install -j"$(nproc)" pdo_mysql zip gd \
+    && docker-php-ext-install -j"$(nproc)" pdo_sqlite zip gd \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 

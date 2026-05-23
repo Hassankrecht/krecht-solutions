@@ -42,12 +42,7 @@ APP_TIMEZONE=UTC
 LOG_CHANNEL=stack
 LOG_LEVEL=debug
 
-DB_CONNECTION=mysql
-DB_HOST=
-DB_PORT=3306
-DB_DATABASE=
-DB_USERNAME=
-DB_PASSWORD=
+DB_CONNECTION=sqlite
 
 CACHE_DRIVER=file
 FILESYSTEM_DISK=local
@@ -68,17 +63,17 @@ php artisan key:generate --show
 
 Then paste the shown value into Render as `APP_KEY`.
 
-## MySQL Notes
+## SQLite Notes
 
-This project remains on MySQL. Render free web services can connect only to a MySQL server that is reachable from Render over the public internet and allows Render outbound connections.
+This project uses SQLite for Render deployment. The SQLite database file is stored at `database/database.sqlite` and is created automatically during deployment.
 
-If Render cannot connect to your current MySQL host, use one of these options:
+Advantages of SQLite for Render:
+- No external database service required
+- No database connection configuration needed
+- Database file persists in the application storage
+- Zero additional cost for database hosting
 
-- Use a managed external MySQL provider and copy its host, database, username, and password into Render.
-- Keep MySQL on another VPS/server and allow remote MySQL connections securely.
-- Move to PostgreSQL only if you decide to change the database later.
-
-Do not use `127.0.0.1` or `localhost` for `DB_HOST` on Render unless MySQL runs in the same container, which this deployment does not do.
+The database is automatically migrated and seeded during the first deployment using existing migration and seeder files.
 
 ## Local Verification Commands
 
