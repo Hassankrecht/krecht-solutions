@@ -19,7 +19,13 @@ return new class extends Migration
 
         Schema::table('projects', function (Blueprint $table) {
             $table->json('category')->nullable()->change();
+        });
+
+        Schema::table('projects', function (Blueprint $table) {
             $table->json('category_en')->nullable()->change();
+        });
+
+        Schema::table('projects', function (Blueprint $table) {
             $table->json('category_ar')->nullable()->change();
         });
     }
@@ -31,7 +37,13 @@ return new class extends Migration
     {
         Schema::table('projects', function (Blueprint $table) {
             $table->string('category')->nullable()->change();
+        });
+
+        Schema::table('projects', function (Blueprint $table) {
             $table->string('category_en')->nullable()->change();
+        });
+
+        Schema::table('projects', function (Blueprint $table) {
             $table->string('category_ar')->nullable()->change();
         });
     }

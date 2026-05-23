@@ -19,7 +19,19 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('faqs', function (Blueprint $table) {
-            $table->dropColumn(['question_en', 'question_ar', 'answer_en', 'answer_ar']);
+            $table->dropColumn('question_en');
+        });
+
+        Schema::table('faqs', function (Blueprint $table) {
+            $table->dropColumn('question_ar');
+        });
+
+        Schema::table('faqs', function (Blueprint $table) {
+            $table->dropColumn('answer_en');
+        });
+
+        Schema::table('faqs', function (Blueprint $table) {
+            $table->dropColumn('answer_ar');
         });
     }
 };

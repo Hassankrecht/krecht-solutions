@@ -12,7 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('projects', function (Blueprint $table) {
-            $table->dropColumn(['category', 'category_en', 'category_ar']);
+            $table->dropColumn('category');
+        });
+
+        Schema::table('projects', function (Blueprint $table) {
+            $table->dropColumn('category_en');
+        });
+
+        Schema::table('projects', function (Blueprint $table) {
+            $table->dropColumn('category_ar');
         });
     }
 

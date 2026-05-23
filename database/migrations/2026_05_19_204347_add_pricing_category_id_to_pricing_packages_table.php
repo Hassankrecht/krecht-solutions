@@ -23,6 +23,9 @@ return new class extends Migration
     {
         Schema::table('pricing_packages', function (Blueprint $table) {
             $table->dropForeign(['pricing_category_id']);
+        });
+
+        Schema::table('pricing_packages', function (Blueprint $table) {
             $table->dropColumn('pricing_category_id');
         });
     }

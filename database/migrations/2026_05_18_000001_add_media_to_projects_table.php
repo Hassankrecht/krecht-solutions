@@ -17,7 +17,11 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('projects', function (Blueprint $table) {
-            $table->dropColumn(['gallery_images', 'video']);
+            $table->dropColumn('gallery_images');
+        });
+
+        Schema::table('projects', function (Blueprint $table) {
+            $table->dropColumn('video');
         });
     }
 };

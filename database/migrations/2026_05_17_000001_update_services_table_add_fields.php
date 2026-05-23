@@ -10,6 +10,9 @@ return new class extends Migration
     {
         Schema::table('services', function (Blueprint $table) {
             $table->renameColumn('name', 'title');
+        });
+
+        Schema::table('services', function (Blueprint $table) {
             $table->renameColumn('order', 'sort_order');
         });
 

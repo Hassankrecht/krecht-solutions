@@ -21,7 +21,27 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('testimonials', function (Blueprint $table) {
-            $table->dropColumn(['position_en', 'position_ar', 'company_en', 'company_ar', 'content_en', 'content_ar']);
+            $table->dropColumn('position_en');
+        });
+
+        Schema::table('testimonials', function (Blueprint $table) {
+            $table->dropColumn('position_ar');
+        });
+
+        Schema::table('testimonials', function (Blueprint $table) {
+            $table->dropColumn('company_en');
+        });
+
+        Schema::table('testimonials', function (Blueprint $table) {
+            $table->dropColumn('company_ar');
+        });
+
+        Schema::table('testimonials', function (Blueprint $table) {
+            $table->dropColumn('content_en');
+        });
+
+        Schema::table('testimonials', function (Blueprint $table) {
+            $table->dropColumn('content_ar');
         });
     }
 };
