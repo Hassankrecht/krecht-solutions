@@ -48,5 +48,10 @@ package-lock.json
 # Public media assets (images, videos, uploads)
 ###################################
 /public/assets/img/
-/public/assets/projects/
 /public/uploads/
+*.mp4
+*.avi
+*.mov
+*.mkv
+*.webm
+*.flv
