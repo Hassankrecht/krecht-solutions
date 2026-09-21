@@ -161,6 +161,7 @@ return [
     'footer_services' => 'خدماتنا',
     'footer_portfolio' => 'أعمالنا',
     'footer_contact' => 'اتصل بنا',
+    'footer_privacy_policy' => 'سياسة الخصوصية',
     'footer_our_services' => 'خدماتنا',
     'footer_service_laravel' => 'لوحات تحكم لارافل',
     'footer_service_flutter' => 'تطبيقات جوال فلاتر',

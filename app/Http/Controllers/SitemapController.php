@@ -49,6 +49,12 @@ class SitemapController extends Controller
                 'changefreq' => 'monthly',
                 'priority' => '0.6',
             ],
+            [
+                'loc' => $baseUrl . '/privacy-policy',
+                'lastmod' => $lastmod,
+                'changefreq' => 'yearly',
+                'priority' => '0.3',
+            ],
         ];
 
         // Add active portfolio projects

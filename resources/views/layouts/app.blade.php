@@ -130,6 +130,7 @@
             <li><a href="{{ route('services') }}">{{ __('messages.footer_services') }}</a></li>
             <li><a href="{{ route('portfolio') }}">{{ __('messages.footer_portfolio') }}</a></li>
             <li><a href="{{ route('contact') }}">{{ __('messages.footer_contact') }}</a></li>
+            <li><a href="{{ route('privacy-policy') }}">{{ __('messages.footer_privacy_policy') }}</a></li>
           </ul>
         </div>
         <div class="col-lg-2 col-6 footer-links">

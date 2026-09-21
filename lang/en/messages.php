@@ -161,6 +161,7 @@ return [
     'footer_services' => 'Services',
     'footer_portfolio' => 'Portfolio',
     'footer_contact' => 'Contact',
+    'footer_privacy_policy' => 'Privacy Policy',
     'footer_our_services' => 'Our Services',
     'footer_service_laravel' => 'Laravel Dashboards',
     'footer_service_flutter' => 'Flutter Mobile Apps',

@@ -27,6 +27,7 @@ Route::get('/pricing', [PageController::class, 'pricing'])->middleware('track.vi
 Route::get('/portfolio', [PageController::class, 'portfolio'])->middleware('track.visitor')->name('portfolio');
 Route::get('/portfolio/{project}', [PageController::class, 'portfolioShow'])->middleware('track.visitor')->name('portfolio.show');
 Route::get('/contact', [ContactController::class, 'index'])->middleware('track.visitor')->name('contact');
+Route::get('/privacy-policy', [PageController::class, 'privacyPolicy'])->middleware('track.visitor')->name('privacy-policy');
 Route::post('/contact', [ContactController::class, 'store'])->middleware('throttle:5,1')->name('contact.store');
 Route::post('/testimonials', [TestimonialSubmissionController::class, 'store'])->middleware('throttle:3,1')->name('testimonials.store');
 

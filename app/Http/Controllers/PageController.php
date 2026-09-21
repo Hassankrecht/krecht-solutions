@@ -46,6 +46,14 @@ class PageController extends Controller
         return view('pages.portfolio', compact('projects', 'categories', 'siteName', 'siteTagline'));
     }
 
+    public function privacyPolicy()
+    {
+        $siteName = SiteSetting::get('site_name', 'Krecht Solutions');
+        $contactEmail = SiteSetting::get('contact_email', config('mail.from.address'));
+
+        return view('pages.privacy-policy', compact('siteName', 'contactEmail'));
+    }
+
     public function portfolioShow(Project $project)
     {
         abort_unless($project->is_active, 404);
